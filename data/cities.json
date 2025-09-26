@@ -1,0 +1,11 @@
+[
+  { "id": "Monterrey", "name": "Monterrey" },
+  { "id": "CDMX", "name": "Ciudad de México" },
+  { "id": "Guadalajara", "name": "Guadalajara" },
+  { "id": "Mérida", "name": "Mérida" },
+  { "id": "Cancún", "name": "Cancún" },
+  { "id": "Puebla", "name": "Puebla" },
+  { "id": "León", "name": "León" },
+  { "id": "Querétaro", "name": "Querétaro" },
+  { "id": "Tijuana", "name": "Tijuana" }
+]

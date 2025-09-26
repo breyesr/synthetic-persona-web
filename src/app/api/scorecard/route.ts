@@ -1,9 +1,8 @@
-// app/api/scorecard/route.ts
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getPersona } from "@/lib/personaProvider";
+import { getIndustry } from "@/lib/industryProvider";
 
-// Gentle channel weighting (same as UI options)
 const CHANNEL_WEIGHTS: Record<string, number> = {
   instagram: 0.9,
   facebook: 0.85,
@@ -11,121 +10,291 @@ const CHANNEL_WEIGHTS: Record<string, number> = {
   google: 1.0,
   whatsapp: 0.95,
   referidos: 1.1,
+  doctoralia: 1.0,
   otros: 0.75,
 };
-const normChannel = (raw?: string) =>
-  (raw ?? "").toLowerCase().trim() in CHANNEL_WEIGHTS
-    ? (raw ?? "").toLowerCase().trim()
-    : "otros";
+const norm = (raw?: string) => (raw ?? "").toLowerCase().trim();
+const normChannel = (raw?: string) => (norm(raw) in CHANNEL_WEIGHTS ? norm(raw) : "otros");
 
 const Body = z.object({
   personaType: z.string(),
+  businessType: z.string().min(1),
   city: z.string(),
-  patientsPerMonth: z.number(),
-  avgTicket: z.number(),
-  mainChannel: z.string(),           // we normalize it ourselves
-  adSpend: z.number(),
-  returnRate: z.string(),            // "0-2" | "3-4" | "5-6" | "7-8" | "9-10"
+  patientsPerMonth: z.number().nonnegative(),
+  avgTicket: z.number().nonnegative(),
+  mainChannel: z.string(),
+  adSpend: z.number().nonnegative(),
+  returnRate: z.string(),
+  supportChannels: z.array(z.string()).optional(),
 });
 
-// Compute scores using persona.bench with safe defaults if missing
-function scoreEfficiencyFromBench(input: {
+type Bench = {
   cplTargetMXN: [number, number];
-  adSpend: number;
-  patientsPerMonth: number;
-  mainChannel?: string;
-}) {
-  const [lo, hi] = input.cplTargetMXN ?? [120, 200];
-  const leads = Math.max(1, Math.round(input.patientsPerMonth * 1.2));
-  const cpl = input.adSpend > 0 ? Math.round(input.adSpend / leads) : lo;
-
-  let s = 10 - ((cpl - lo) / Math.max(1, hi - lo)) * 5; // base from earlier logic
-  const w = CHANNEL_WEIGHTS[normChannel(input.mainChannel)];
-  s = s * w;
-
-  s = Math.max(0, Math.min(10, Math.round(s)));
-  return { approxLeads: leads, approxCPL: cpl, score: s };
-}
-
-function scoreConversionFromBench(input: {
   retentionP50: number;
-  returnRateBucket: string;
-  mainChannel?: string;
-}) {
-  const bucketMap: Record<string, number> = {
-    "0-2": 2, "3-4": 4, "5-6": 6, "7-8": 8, "9-10": 9, nose: 5,
+  noShowRangePct?: [number, number];
+  channelCPL?: Record<string, [number, number]>;
+  roasTarget?: number;
+};
+
+const bucketMidpoint = (bucket: string): number => {
+  const map: Record<string, number> = {
+    "0-2": 1, "3-4": 3.5, "5-6": 5.5, "7-8": 7.5, "9-10": 9.5,
   };
-  let s = Math.round(bucketMap[input.returnRateBucket] ?? 5);
+  if (bucket.toLowerCase().includes("no")) return 5;
+  return map[bucket] ?? 5;
+};
 
-  if (s >= 6 && input.retentionP50 >= 60) s = Math.min(9, s + 1);
-  if (s <= 4 && input.retentionP50 >= 60) s = Math.min(6, s + 1);
+const fmt = (mx: number) => `MX$${Math.round(mx).toLocaleString("es-MX")}`;
+const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
 
-  const w = CHANNEL_WEIGHTS[normChannel(input.mainChannel)];
-  s = Math.round(s * (w >= 1 ? 1.05 : 0.95));
-
-  s = Math.max(1, Math.min(9, s));
-  return s;
+function resolveBenchForChannel(bench: Bench, ch: string): [number, number] {
+  const n = normChannel(ch);
+  const byChannel = bench.channelCPL?.[n];
+  return byChannel ?? bench.cplTargetMXN ?? [120, 200];
 }
-
-// Very light, deterministic objections/suggestions (keep your version if you already have one)
-function basicObjections(mainChannel: string) {
-  const ch = normChannel(mainChannel);
-  return [
-    ch === "tiktok" ? "Baja intención, hay que filtrar mejor" : "Validar intención desde el anuncio",
-    "No prometas resultados irreales (evita claims médicos)",
-    "Refuerza prueba social: testimonios/antes-después legales",
-  ];
+function normalizeSupportChannels(raw?: string[], main?: string) {
+  const mainN = normChannel(main);
+  const set = new Set<string>();
+  for (const r of raw ?? []) {
+    const n = normChannel(r);
+    if (!n || n === "otros" || n === mainN) continue;
+    set.add(n);
+  }
+  return Array.from(set);
 }
-function basicSuggestions(mainChannel: string) {
+function supportBonuses(support: string[]) {
+  const highIntent = new Set(["google", "whatsapp", "referidos", "doctoralia"]);
+  const trustHelpers = new Set(["whatsapp", "referidos", "google"]);
+  const hiCount = support.filter((c) => highIntent.has(c)).length;
+  const trustCount = support.filter((c) => trustHelpers.has(c)).length;
+  const effBonus = Math.min(1, hiCount >= 2 ? 1 : hiCount * 0.5);
+  const convBonus = Math.min(1, trustCount >= 2 ? 1 : trustCount * 0.5);
+  return { effBonus, convBonus };
+}
+function resolveChannelFit(mainChannel: string, persona?: any) {
   const ch = normChannel(mainChannel);
-  return [
-    ch === "referidos" ? "Activa programa de referidos (10–15%)" : "Instala botón WhatsApp con respuestas rápidas",
-    "Ofrece paquete de 3–5 consultas (mejora retención)",
-    "Agenda recordatorios 24h y 2h antes para bajar no-shows",
-  ];
+  const top: string[] | undefined = Array.isArray(persona?.topChannels)
+    ? (persona.topChannels as string[]).map(normChannel)
+    : undefined;
+  if (top && top.length) {
+    const good = top.includes(ch);
+    return { channelFit: good ? "GOOD" : "POOR", betterChannels: good ? [] : top.slice(0, 2) };
+  }
+  const w = CHANNEL_WEIGHTS[ch] ?? 0.75;
+  const goodHeuristic = w >= 0.95;
+  const betterChannels = Object.entries(CHANNEL_WEIGHTS)
+    .sort((a, b) => b[1] - a[1])
+    .map(([name]) => name)
+    .filter((name) => name !== ch)
+    .slice(0, 2);
+  return { channelFit: goodHeuristic ? "GOOD" : "POOR", betterChannels };
 }
 
 export async function POST(req: Request) {
   try {
     const body = Body.parse(await req.json());
-    // 1) Load persona to get file-backed bench (if available)
+
     const persona = await getPersona(body.personaType);
-    const bench = persona?.bench ?? {
-      cplTargetMXN: [120, 200] as [number, number],
-      retentionP50: 60,
-      noShowRangePct: [15, 25] as [number, number],
+    const industry = await getIndustry(body.businessType);
+
+    const bench: Bench = {
+      cplTargetMXN: industry?.bench?.cplTargetMXN ?? persona?.bench?.cplTargetMXN ?? [120, 200],
+      retentionP50: industry?.bench?.retentionP50 ?? persona?.bench?.retentionP50 ?? 60,
+      noShowRangePct: industry?.bench?.noShowRangePct ?? persona?.bench?.noShowRangePct,
+      channelCPL: industry?.bench?.channelCPL ?? persona?.bench?.channelCPL ?? undefined,
+      roasTarget: industry?.bench?.roasTarget ?? persona?.bench?.roasTarget ?? 3,
     };
 
-    // 2) Compute scores using bench
-    const eff = scoreEfficiencyFromBench({
-      cplTargetMXN: bench.cplTargetMXN,
-      adSpend: body.adSpend,
-      patientsPerMonth: body.patientsPerMonth,
-      mainChannel: body.mainChannel,
-    });
-    const conv = scoreConversionFromBench({
-      retentionP50: bench.retentionP50,
-      returnRateBucket: body.returnRate,
-      mainChannel: body.mainChannel,
-    });
+    const mainCh = normChannel(body.mainChannel);
+    const support = normalizeSupportChannels(body.supportChannels, mainCh);
+    const { effBonus } = supportBonuses(support);
 
-    // 3) Deterministic objections/suggestions (replace with your existing ones if you already had them)
-    const objections = basicObjections(body.mainChannel);
-    const suggestions = basicSuggestions(body.mainChannel);
+    // Core math
+    const clientes = Math.max(1, Math.round(body.patientsPerMonth));
+    const leads = Math.max(1, Math.round(clientes * 1.2));
 
+    const [loMain, hiMain] = resolveBenchForChannel(bench, mainCh);
+    const approxCPL = body.adSpend > 0 ? Math.round(body.adSpend / leads) : loMain;
+
+    const ingresosEst = clientes * body.avgTicket;
+    const roas = body.adSpend > 0 ? ingresosEst / body.adSpend : 0;
+    const roasTarget = bench.roasTarget ?? 3;
+
+    // Scores
+    const cplMainNorm = clamp01((hiMain - approxCPL) / Math.max(1, hiMain - loMain));
+    let cplMainScore = Math.round(cplMainNorm * 10);
+    cplMainScore = Math.max(0, Math.min(10, Math.round(cplMainScore + effBonus)));
+
+    let cplSupportScore = support.length
+      ? Math.round(
+          support.reduce((acc, sc) => {
+            const [lo, hi] = resolveBenchForChannel(bench, sc);
+            const n = clamp01((hi - approxCPL) / Math.max(1, hi - lo));
+            return acc + n * 10;
+          }, 0) / support.length
+        )
+      : Math.round((cplMainScore * 0.9) || 7);
+
+    const cplMidMain = (loMain + hiMain) / 2;
+    const spendTargetMain = Math.max(1, Math.round(leads * cplMidMain));
+    const spendRatio = body.adSpend / spendTargetMain;
+    const underInvestingMain = spendRatio < 0.8;
+    const overInvestingMain  = spendRatio > 1.2;
+
+    let spendMainScore: number;
+    if (spendRatio >= 0.8 && spendRatio <= 1.2) {
+      const delta = Math.abs(1 - spendRatio) / 0.2;
+      spendMainScore = Math.round(10 - 2 * delta);
+    } else if (spendRatio < 0.8) {
+      const t = clamp01((spendRatio - 0.3) / (0.8 - 0.3));
+      spendMainScore = Math.round(0 + t * 8);
+    } else {
+      const t = clamp01((2.0 - spendRatio) / (2.0 - 1.2));
+      spendMainScore = Math.round(6 * t + 8 * (1 - t));
+      spendMainScore = Math.max(6, Math.min(8, spendMainScore));
+    }
+
+    const roasScore = Math.round(clamp01(roas / roasTarget) * 10);
+
+    const efficiencyScore = Math.round(
+      0.30 * cplMainScore +
+      0.15 * cplSupportScore +
+      0.20 * spendMainScore +
+      0.20 * roasScore +
+      0.15 * 7
+    );
+
+    const { channelFit, betterChannels } = resolveChannelFit(mainCh, persona);
+
+    const noSeRepeat = body.returnRate.toLowerCase().includes("no");
+    const returnOutOf10 = bucketMidpoint(body.returnRate);
+    const retentionTargetPct = Math.round(bench.retentionP50 ?? 60);
+    const typicalOutOf10 = Math.round((retentionTargetPct ?? 60) / 10);
+
+    // --- New statuses & deltas ---
+    type CplStatus = "LOW" | "ON" | "HIGH";
+    const cplStatus: CplStatus =
+      approxCPL < loMain ? "LOW" : approxCPL > hiMain ? "HIGH" : "ON";
+
+    // Over-investing savings (if current > target)
+    const overspendMXN = Math.max(0, body.adSpend - spendTargetMain);
+
+    // “Clientes caros” overage vs hiMain
+    const perClientOverage = Math.max(0, approxCPL - hiMain);
+    const monthlyOverageMXN = perClientOverage * leads; // approx “pago de más” este mes
+
+    // Extra clients if we raise spend to target (under-investing)
+    const extraSpend = Math.max(0, spendTargetMain - body.adSpend);
+    const extraLeads = extraSpend > 0 ? Math.round(extraSpend / Math.max(1, approxCPL)) : 0;
+    const extraClients = extraLeads > 0 ? Math.round(extraLeads / 1.2) : 0;
+
+    // ROAS shortfall vs target, expressed in pesos
+    const roasGap = Math.max(0, roasTarget - roas);
+    const roasShortfallMXN = Math.round(roasGap * body.adSpend);
+
+    // ---- Narratives (precise & layman) ----
+    const narratives: string[] = [];
+
+    // CPL exact
+    narratives.push(
+      `Hoy cada cliente nuevo te cuesta aproximadamente ${fmt(approxCPL)}; ` +
+      `en negocios como el tuyo lo normal es entre ${fmt(loMain)} y ${fmt(hiMain)}.`
+    );
+
+    // Under / Over investing
+    if (underInvestingMain) {
+      narratives.push(
+        `Con la inversión actual (${fmt(body.adSpend)}) podrías estar quedándote corto en alcance; ` +
+        `lo recomendable sería invertir ${fmt(spendTargetMain)}, lo que te traería ~${extraClients} clientes más.`
+      );
+    } else if (overInvestingMain) {
+      narratives.push(
+        `Estás invirtiendo por encima de lo típico; si ajustas hacia ${fmt(spendTargetMain)} ` +
+        `podrías ahorrar ~${fmt(overspendMXN)} este mes sin perder mucho alcance.`
+      );
+      if (betterChannels.length) {
+        narratives.push(
+          `Sugerencia: prueba reasignar parte de ese ahorro a ${betterChannels[0]}${betterChannels[1] ? ` o ${betterChannels[1]}` : ""} para mejorar la intención.`
+        );
+      }
+    } else {
+      narratives.push(`Tu inversión total está dentro de un rango sano para aprovechar mejor el canal principal.`);
+    }
+
+    // Clientes “caros” (CPL por arriba del benchmark)
+    if (cplStatus === "HIGH") {
+      narratives.push(
+        `Tus clientes nuevos están saliendo caros para ${mainCh} (${fmt(approxCPL)} vs tope típico ${fmt(hiMain)}). ` +
+        `Podrías estar pagando ~${fmt(monthlyOverageMXN)} de más este mes. Revisa segmentación, anuncio/oferta y seguimiento.`
+      );
+    }
+
+    // Canales de apoyo
+    if (support.length) {
+      narratives.push(`Además de ${mainCh}, tus clientes también te encuentran por ${support.join(", ")}.`);
+    }
+
+    // ROAS + shortfall
+    if (body.adSpend > 0) {
+      const roasRounded = Math.max(0, Math.round(roas * 10) / 10);
+      const base = `Por cada peso que inviertes, recuperas aprox. ${roasRounded}. El promedio esperado es ${roasTarget}×.`;
+      narratives.push(roasShortfallMXN > 0 ? `${base} Podrías estar perdiendo ${fmt(roasShortfallMXN)} en ventas potenciales.` : base);
+    }
+
+    // Repetición
+    if (noSeRepeat) {
+      narratives.push(`Si no tienes el dato de repetición, lo normal en negocios como el tuyo es ~${typicalOutOf10} de cada 10. Podemos ayudarte a medirlo.`);
+    } else {
+      narratives.push(`De cada 10 clientes nuevos, regresan ~${Math.round(returnOutOf10)}; lo normal es ~${typicalOutOf10}.`);
+    }
+
+    // Fit de canal
+    if (channelFit === "POOR") {
+      narratives.push(
+        `Estás invirtiendo en ${mainCh}, pero tus clientes suelen buscar más en ${betterChannels[0]}${betterChannels[1] ? ` o ${betterChannels[1]}` : ""}.`
+      );
+    }
+
+    type Focus = "optimize_spend" | "improve_sales" | "change_channel" | "choose";
+    let suggestedFocus: Focus = "choose";
+    const convBad = (returnOutOf10 < (retentionTargetPct / 10)) || (support.length === 0);
+
+    if (channelFit === "POOR") {
+      const supportHasHighIntent = support.some((c) => ["google", "whatsapp", "referidos", "doctoralia"].includes(c));
+      suggestedFocus = supportHasHighIntent ? "choose" : "change_channel";
+      if (underInvestingMain) suggestedFocus = "choose";
+    } else {
+      if (underInvestingMain || overInvestingMain) suggestedFocus = "optimize_spend";
+      else if (cplStatus === "HIGH") suggestedFocus = "optimize_spend";
+      else if (convBad) suggestedFocus = "improve_sales";
+      else suggestedFocus = "choose";
+    }
+
+    // DEBUG (keep while validating)
     return NextResponse.json({
-      efficiencyScore: eff.score,
-      conversionScore: conv,
-      approxLeads: eff.approxLeads,
-      approxCPL: eff.approxCPL,
-      objections,
-      suggestions,
-      usedBench: bench, // debug visibility
+      efficiencyScore,
+      narratives,
+      suggestedFocus,
+      debug: {
+        inputs: {
+          patientsPerMonth: body.patientsPerMonth,
+          avgTicket: body.avgTicket,
+          adSpend: body.adSpend,
+          mainChannel: mainCh,
+          supportChannels: support,
+        },
+        benchUsed: { loMain, hiMain, roasTarget },
+        computed: {
+          clientes, leads, approxCPL,
+          spendTargetMain, spendRatio: Number(spendRatio.toFixed(2)),
+          overspendMXN, perClientOverage, monthlyOverageMXN,
+          extraClients,
+          roas: Number((Math.round(roas * 100) / 100).toFixed(2)),
+        },
+        statuses: { cplStatus, underInvestingMain, overInvestingMain },
+      },
     });
   } catch (err: any) {
-    return NextResponse.json(
-      { error: err?.message ?? "Bad request" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: err?.message ?? "Bad request" }, { status: 400 });
   }
 }

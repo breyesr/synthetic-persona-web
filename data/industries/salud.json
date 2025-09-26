@@ -1,0 +1,18 @@
+{
+  "id": "salud",
+  "name": "Servicios de salud",
+  "bench": {
+    "cplTargetMXN": [100, 180],
+    "retentionP50": 65,
+    "roasTarget": 3,
+    "channelCPL": {
+      "instagram": [80, 120],
+      "google": [100, 150],
+      "whatsapp": [90, 120],
+      "referidos": [60, 100],
+      "facebook": [90, 130],
+      "tiktok": [100, 160],
+      "doctoralia": [100, 150]
+    }
+  }
+}

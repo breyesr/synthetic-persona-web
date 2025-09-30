@@ -1,105 +1,114 @@
-// src/app/api/persona/route.ts
+// app/api/persona/route.ts
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getPersona } from "@/lib/personaProvider";
+import { getIndustry } from "@/lib/industryProvider";
 import OpenAI from "openai";
 
 export const runtime = "nodejs";
 
 const Body = z.object({
   personaType: z.string(),
+  businessType: z.string().min(1), // business/industry of the user
   city: z.string().optional(),
   question: z.string().optional(),
-  // NEW: "insight" to learn needs/fears/motivators
   focus: z.enum(["efficiency", "conversion", "insight"]).optional(),
   personaContext: z.string().optional(),
 });
 
 const PersonaQA = z.object({
   reaction: z.string(),
-  dudasCliente: z.array(z.string()),
-  sugerencias: z.array(z.string()),
+  dudasCliente: z.array(z.string()).min(1).max(5),
+  sugerencias: z.array(z.string()).min(1).max(5),
   conversionLikelihood: z.number().min(0).max(10),
 });
 
-const openai = process.env.OPENAI_API_KEY
-  ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-  : null;
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export async function POST(req: Request) {
   try {
     const body = Body.parse(await req.json());
-    const persona = await getPersona(body.personaType, body.personaContext);
-    if (!persona) return NextResponse.json({ error: "Persona not found" }, { status: 404 });
 
+    const persona = await getPersona(body.personaType, body.personaContext);
+    if (!persona) {
+      return NextResponse.json({ error: "Persona not found" }, { status: 404 });
+    }
+
+    const industry = await getIndustry(body.businessType);
+    const industryName = industry?.name ?? body.businessType;
+    const city = body.city ?? "tu ciudad";
+
+    // If no question → just metadata
     if (!body.question) {
       return NextResponse.json({
         ok: true,
         persona: persona.name,
+        industry: industryName,
         contextPreview: persona.context.slice(0, 120),
         bench: persona.bench ?? null,
       });
     }
 
-    const guidance =
-      body.focus === "efficiency"
-        ? "Concéntrate en precio percibido, claridad de oferta y fricciones para decidir. No hables de plataformas o campañas."
-        : body.focus === "conversion"
-        ? "Concéntrate en confianza, pruebas sociales, garantías, proceso post-compra/visita y seguimiento."
-        : "Habla de necesidades, miedos, motivadores, preferencias de comunicación y objeciones típicas. Nada de jerga de marketing.";
-
+    // ✅ Persona voice: first-person, WhatsApp-y, no consultant/marketing jargon.
+    //    Suggestions must be phrased as things *I (cliente) necesitaría/vería*,
+    //    not instructions for the business.
     const systemPrompt = `
-Eres ${persona.name}, un cliente potencial en ${body.city ?? "tu ciudad"}.
-Responde en primera persona como si fueras ese cliente, con lenguaje claro y sencillo.
-${guidance}
+Eres ${persona.name}, un cliente ideal del negocio del usuario.
+Hablas como si me escribieras por WhatsApp: breve, natural y en PRIMERA PERSONA.
+Contexto: yo tengo un negocio de "${industryName}" en ${city}.
 
-Devuelve SOLO un JSON válido exactamente con este formato:
+Muy importante:
+- Responde como CLIENTE, no como consultor ni marketer.
+- No des "consejos" al negocio. En su lugar, expresa lo que YO necesitaría/vería/esperaría para decidirme.
+- Evita jerga de marketing (CPM, creatividades, funnels, segmentación, etc.).
+- Sé empático y directo, como una persona real.
+
+Devuelve SOLO un JSON válido con este formato exacto:
 {
-  "reaction": "frase corta en primera persona",
-  "dudasCliente": ["3 dudas concretas que tendría este cliente"],
-  "sugerencias": ["3 acciones simples que aumentarían mi confianza o interés"],
-  "conversionLikelihood": 0-10
+  "reaction": "reacción corta en primera persona (máx. 25 palabras, tono WhatsApp)",
+  "dudasCliente": ["3 a 5 dudas reales que tendría antes de comprar/contratar"],
+  "sugerencias": ["3 a 5 cosas que ME darían confianza y me harían decidirme (en primera persona)"],
+  "conversionLikelihood": 0-10 número entero (qué tan probable es que te compre ahora)
 }
-    `.trim();
+`.trim();
 
-    if (openai) {
-      const completion = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        temperature: 0.4,
-        response_format: { type: "json_object" },
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: `Pregunta: ${body.question}\nEnfoque: ${body.focus ?? "insight"}` },
-        ],
-      });
+    const userMsg = `
+Pregunta del negocio (${industryName} en ${city}):
+- ${body.question}
 
-      const raw = completion.choices[0]?.message?.content ?? "{}";
-      try {
-        const parsed = PersonaQA.parse(JSON.parse(raw));
-        return NextResponse.json({ ok: true, persona: persona.name, ...parsed });
-      } catch {
-        // fall through to deterministic fallback
-      }
+Enfoque: ${body.focus ?? "insight"}
+Recuerda: habla como cliente (yo), en primera persona. Nada de lenguaje de agencia ni instrucciones al negocio.
+`.trim();
+
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      temperature: 0.5,
+      response_format: { type: "json_object" },
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userMsg },
+      ],
+    });
+
+    const raw = completion.choices[0]?.message?.content ?? "{}";
+    const parsed = PersonaQA.safeParse(JSON.parse(raw));
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: "Malformed model output", details: parsed.error.format() },
+        { status: 500 }
+      );
     }
 
-    // Deterministic fallback
     return NextResponse.json({
       ok: true,
-      persona: persona.name,
-      reaction: "Necesito entender mejor qué obtengo y si se ajusta a mi situación.",
-      dudasCliente: [
-        "¿Qué resultados puedo esperar y en cuánto tiempo?",
-        "¿Cuál es el costo total y qué incluye exactamente?",
-        "¿Cómo me daré cuenta de que voy por buen camino?"
-      ],
-      sugerencias: [
-        "Muéstrame ejemplos reales de clientes como yo",
-        "Explícame el paso a paso y tiempos estimados",
-        "Ofrece una forma de probar con bajo riesgo"
-      ],
-      conversionLikelihood: 5
+      persona: persona.name,     // friendly persona name
+      industry: industryName,    // friendly industry name
+      ...parsed.data,
     });
   } catch (err: any) {
-    return NextResponse.json({ error: err?.message ?? "Bad request" }, { status: 400 });
+    return NextResponse.json(
+      { error: err?.message ?? "Bad request" },
+      { status: 400 }
+    );
   }
 }

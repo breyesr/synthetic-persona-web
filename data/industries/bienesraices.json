@@ -1,0 +1,17 @@
+{
+  "id": "bienesraices",
+  "name": "Bienes raíces",
+  "bench": {
+    "cplTargetMXN": [200, 600],
+    "retentionP50": 30,
+    "roasTarget": 5,
+    "channelCPL": {
+      "instagram": [220, 450],
+      "google": [300, 600],
+      "whatsapp": [200, 400],
+      "referidos": [150, 350],
+      "facebook": [220, 500],
+      "tiktok": [200, 420]
+    }
+  }
+}

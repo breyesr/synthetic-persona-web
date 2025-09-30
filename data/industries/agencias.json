@@ -1,0 +1,17 @@
+{
+  "id": "agencias",
+  "name": "Agencias de Marketing",
+  "bench": {
+    "cplTargetMXN": [120, 250],
+    "retentionP50": 65,
+    "roasTarget": 4,
+    "channelCPL": {
+      "instagram": [120, 200],
+      "google": [150, 250],
+      "whatsapp": [100, 180],
+      "referidos": [60, 120],
+      "facebook": [110, 190],
+      "tiktok": [100, 170]
+    }
+  }
+}

@@ -25,16 +25,16 @@ export default function IndustrySelect({ value, onChange, labelText = "¿Qué ti
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data: IndustryOption[] = await res.json();
 
-        // sanitize: drop empties/dupes
+        // sanitize: drop empties/dupes, normalize id
         const seen = new Set<string>();
-        const clean = data.filter(d => {
-          const id = (d?.id ?? "").trim();
-          const name = (d?.name ?? "").trim() || id;
-          if (!id || seen.has(id)) return false;
-          seen.add(id);
-          (d as any).name = name;
-          return true;
-        });
+        const clean = data
+          .map(d => ({ id: (d?.id ?? "").trim().toLowerCase(), name: (d?.name ?? "").trim() }))
+          .filter(d => d.id)
+          .filter(d => {
+            if (seen.has(d.id)) return false;
+            seen.add(d.id);
+            return true;
+          });
 
         if (mounted) setOpts(clean);
       } catch (e: any) {
@@ -46,10 +46,11 @@ export default function IndustrySelect({ value, onChange, labelText = "¿Qué ti
     return () => { mounted = false; };
   }, []);
 
-  // keep selected in sync with options
+  // keep selected in sync with options (prefer first option if current is invalid/empty)
   useEffect(() => {
-    if (!value && opts[0]?.id) onChange(opts[0].id);
-    if (value && !opts.find(o => o.id === value) && opts[0]?.id) onChange(opts[0].id);
+    const first = opts[0]?.id ?? "";
+    if (!value && first) onChange(first);
+    if (value && !opts.find(o => o.id === value) && first) onChange(first);
   }, [opts, value, onChange]);
 
   const list = useMemo(() => opts, [opts]);
@@ -66,9 +67,12 @@ export default function IndustrySelect({ value, onChange, labelText = "¿Qué ti
         {loading && <option>Cargando…</option>}
         {error && <option>Error al cargar</option>}
         {!loading && !error && list.length === 0 && <option>Sin opciones</option>}
-        {!loading && !error && list.map((opt) => (
-          <option key={opt.id} value={opt.id}>{opt.name}</option>
-        ))}
+        {!loading && !error &&
+          list.map((opt) => (
+            <option key={opt.id} value={opt.id}>
+              {opt.name || opt.id}
+            </option>
+          ))}
       </select>
       {error && <p className="text-xs text-red-600">{error}</p>}
     </label>

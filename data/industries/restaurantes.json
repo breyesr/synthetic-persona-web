@@ -1,0 +1,17 @@
+{
+  "id": "restaurantes",
+  "name": "Restaurantes",
+  "bench": {
+    "cplTargetMXN": [40, 100],
+    "retentionP50": 45,
+    "roasTarget": 3,
+    "channelCPL": {
+      "instagram": [45, 90],
+      "google": [60, 100],
+      "whatsapp": [40, 80],
+      "referidos": [30, 70],
+      "facebook": [45, 90],
+      "tiktok": [40, 85]
+    }
+  }
+}

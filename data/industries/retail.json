@@ -1,0 +1,17 @@
+{
+  "id": "comercio",
+  "name": "Comercio al detalle",
+  "bench": {
+    "cplTargetMXN": [50, 120],
+    "retentionP50": 40,
+    "roasTarget": 3,
+    "channelCPL": {
+      "instagram": [60, 110],
+      "google": [70, 120],
+      "whatsapp": [50, 90],
+      "referidos": [30, 70],
+      "facebook": [55, 100],
+      "tiktok": [50, 95]
+    }
+  }
+}

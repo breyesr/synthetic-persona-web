@@ -13,16 +13,24 @@ type Scorecard = {
 
 type PersonaReply = {
   reaction: string;
+  answerToQuestion: string;
   dudasCliente: string[];
   sugerencias: string[];
   conversionLikelihood: number;
   personaName?: string;
   industryName?: string;
+  askedQuestion?: string;
+  insights?: {
+    whatClientWantsSummary: string;
+    whatToDoThisWeek: string[];
+    expectedImpact: string[];
+    howToKnow: string[];
+    howToTalk: string[];
+  } | null;
 };
 
 type Props = { personas?: PersonaOption[] };
 
-// Channels (no Doctoralia)
 const CHANNEL_OPTIONS = [
   { value: "instagram", label: "Instagram" },
   { value: "facebook", label: "Facebook" },
@@ -42,11 +50,12 @@ const toInt = (v: string, fallback = 0) => {
 const digitsOnly = (s: string) => s.replace(/[^\d]/g, "");
 function isAllowedKey(e: React.KeyboardEvent<HTMLInputElement>) {
   const code = e.key;
-  const allowed = ["Backspace", "Delete", "Tab", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"];
+  const allowed = ["Backspace","Delete","Tab","ArrowLeft","ArrowRight","ArrowUp","ArrowDown","Home","End"];
   if (allowed.includes(code)) return true;
   if ((e.ctrlKey || e.metaKey) && /^[acvxyz]$/i.test(code)) return true;
   return /^[0-9]$/.test(code);
 }
+const preventWheel = (e: React.WheelEvent<HTMLInputElement>) => (e.currentTarget as any).blur();
 
 export default function IntakeForm({ personas = [] }: Props) {
   // Persona
@@ -58,17 +67,16 @@ export default function IntakeForm({ personas = [] }: Props) {
     }
   }, [personas, personaType]);
 
-  // Industry
+  // Industry & City
   const [businessType, setBusinessType] = useState<string>("");
+  const [city, setCity] = useState("Monterrey");
 
   // UI state
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<Scorecard | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // ----- FORM -----
-  const [city, setCity] = useState("Monterrey");
-
+  // Numeric inputs (start empty)
   const [customersPerMonth, setCustomersPerMonth] = useState("");
   const [avgTicket, setAvgTicket] = useState("");
   const [adSpend, setAdSpend] = useState("");
@@ -76,12 +84,12 @@ export default function IntakeForm({ personas = [] }: Props) {
   const [mainDiscovery, setMainDiscovery] = useState("instagram");
   const [supportChannels, setSupportChannels] = useState<string[]>([]);
   const toggleSupportChannel = (v: string) =>
-    setSupportChannels((prev) => (prev.includes(v) ? prev.filter((x) => x !== v) : [...prev, v]));
+    setSupportChannels(prev => prev.includes(v) ? prev.filter(x => x !== v) : [...prev, v]);
 
   const [repeatUnknown, setRepeatUnknown] = useState(false);
-  const [repeatCount, setRepeatCount] = useState("0"); // 0..10
+  const [repeatCount, setRepeatCount] = useState("0");
 
-  function numberToBucket(n: number): "0-2" | "3-4" | "5-6" | "7-8" | "9-10" {
+  function numberToBucket(n: number): "0-2"|"3-4"|"5-6"|"7-8"|"9-10" {
     const x = clamp(Math.round(n), 0, 10);
     if (x <= 2) return "0-2";
     if (x <= 4) return "3-4";
@@ -89,16 +97,14 @@ export default function IntakeForm({ personas = [] }: Props) {
     if (x <= 8) return "7-8";
     return "9-10";
   }
-  const preventWheel = (e: React.WheelEvent<HTMLInputElement>) => (e.currentTarget as any).blur();
 
-  // Q&A focus buckets
+  // Q&A
   const [focus, setFocus] = useState<"efficiency" | "conversion" | "insight" | null>(null);
   const [question, setQuestion] = useState("");
   const [qnaLoading, setQnaLoading] = useState(false);
   const [qnaError, setQnaError] = useState<string | null>(null);
   const [personaAns, setPersonaAns] = useState<PersonaReply | null>(null);
 
-  // Starter questions (customer POV)
   const starterQs = useMemo(() => {
     const medios = [
       "¿Dónde sueles buscar primero cuando necesitas algo como lo mío?",
@@ -118,19 +124,14 @@ export default function IntakeForm({ personas = [] }: Props) {
     return { medios, regreso, conocer };
   }, []);
 
-  // Validation
+  // Validation / blocking
   const customersNum = toInt(customersPerMonth || "0", 0);
   const ticketNum = toInt(avgTicket || "0", 0);
   const spendNum = toInt(adSpend || "0", 0);
   const blockSubmit =
-    !personaType ||
-    !businessType ||
-    customersPerMonth === "" ||
-    avgTicket === "" ||
-    adSpend === "" ||
-    customersNum <= 0 ||
-    ticketNum <= 0 ||
-    spendNum <= 0;
+    !personaType || !businessType ||
+    customersPerMonth === "" || avgTicket === "" || adSpend === "" ||
+    customersNum <= 0 || ticketNum <= 0 || spendNum <= 0;
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -138,20 +139,16 @@ export default function IntakeForm({ personas = [] }: Props) {
       setError("Completa los campos con valores mayores a 0.");
       return;
     }
-    const customers = clamp(customersNum, 0, 100000);
-    const ticket = clamp(ticketNum, 0, 10_000_000);
-    const spend = clamp(spendNum, 0, 10_000_000);
-    const repeatVal = repeatUnknown ? "No sé" : numberToBucket(clamp(toInt(repeatCount, 0), 0, 10));
 
     const payload = {
       personaType,
       businessType,
       city,
-      patientsPerMonth: customers,
-      avgTicket: ticket,
+      patientsPerMonth: clamp(customersNum, 0, 100000),
+      avgTicket: clamp(ticketNum, 0, 10_000_000),
       mainChannel: mainDiscovery,
-      adSpend: spend,
-      returnRate: repeatVal,
+      adSpend: clamp(spendNum, 0, 10_000_000),
+      returnRate: repeatUnknown ? "No sé" : numberToBucket(clamp(toInt(repeatCount, 0), 0, 10)),
       supportChannels,
     };
 
@@ -194,6 +191,7 @@ export default function IntakeForm({ personas = [] }: Props) {
     setQnaLoading(true);
     setQnaError(null);
     setPersonaAns(null);
+
     try {
       const res = await fetch("/api/persona", {
         method: "POST",
@@ -203,18 +201,28 @@ export default function IntakeForm({ personas = [] }: Props) {
           businessType,
           city,
           question: q,
-          focus: focus === "efficiency" ? "efficiency" : focus === "conversion" ? "conversion" : "insight",
+          focus: focus ?? "insight",
+          patientsPerMonth: toInt(customersPerMonth || "0", 0),
+          avgTicket: toInt(avgTicket || "0", 0),
+          adSpend: toInt(adSpend || "0", 0),
+          mainChannel: mainDiscovery,
+          supportChannels,
+          returnRate: repeatUnknown ? "No sé" : numberToBucket(clamp(toInt(repeatCount, 0), 0, 10)),
         }),
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
+
       const ans: PersonaReply = {
         reaction: json.reaction,
+        answerToQuestion: json.answerToQuestion,
         dudasCliente: json.dudasCliente,
         sugerencias: json.sugerencias,
         conversionLikelihood: json.conversionLikelihood,
         personaName: json.persona,
         industryName: json.industry,
+        askedQuestion: json.askedQuestion,
+        insights: json.insights ?? null,
       };
       setPersonaAns(ans);
     } catch (err: any) {
@@ -225,7 +233,7 @@ export default function IntakeForm({ personas = [] }: Props) {
   }
 
   function handleStarterClick(s: string) {
-    setQuestion(s); // select only
+    setQuestion(s); // select only; send on "Preguntar"
   }
 
   const noPersonas = personas.length === 0;
@@ -247,10 +255,14 @@ export default function IntakeForm({ personas = [] }: Props) {
           onChange={setBusinessType}
           labelText="¿Qué tipo de negocio tienes?"
         />
-        <CitySelect value={city} onChange={setCity} labelText="Ciudad" />
+        <CitySelect
+          value={city}
+          onChange={setCity}
+          labelText="Ciudad"
+        />
       </div>
 
-      {/* Form */}
+      {/* Métricas y canales */}
       <form onSubmit={onSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* Clientes/mes */}
         <label className="space-y-1">
@@ -274,7 +286,7 @@ export default function IntakeForm({ personas = [] }: Props) {
           )}
         </label>
 
-        {/* Ticket */}
+        {/* Ticket promedio */}
         <label className="space-y-1">
           <span className="text-sm">Ticket promedio (MX$)</span>
           <input
@@ -296,7 +308,7 @@ export default function IntakeForm({ personas = [] }: Props) {
           )}
         </label>
 
-        {/* Main channel */}
+        {/* ¿Dónde te encuentran más? */}
         <label className="space-y-1 sm:col-span-2">
           <span className="text-sm">¿Dónde te encuentran más?</span>
           <select
@@ -310,7 +322,7 @@ export default function IntakeForm({ personas = [] }: Props) {
           </select>
         </label>
 
-        {/* Support channels */}
+        {/* Canales de apoyo */}
         <div className="sm:col-span-2 space-y-2">
           <p className="text-sm">¿Dónde más tienes presencia? (canales de apoyo)</p>
           <div className="flex flex-wrap gap-3">
@@ -328,7 +340,7 @@ export default function IntakeForm({ personas = [] }: Props) {
           </div>
         </div>
 
-        {/* Spend */}
+        {/* Inversión mensual */}
         <label className="space-y-1">
           <span className="text-sm">Inversión mensual en anuncios (MX$)</span>
           <input
@@ -350,7 +362,7 @@ export default function IntakeForm({ personas = [] }: Props) {
           )}
         </label>
 
-        {/* Repeat */}
+        {/* Repetición */}
         <div className="space-y-1">
           <span className="text-sm block">De 10 clientes nuevos, ¿cuántos vuelven / compran otra vez?</span>
           <div className="flex items-center gap-3">
@@ -370,7 +382,7 @@ export default function IntakeForm({ personas = [] }: Props) {
                 if (!/^\d+$/.test(text)) e.preventDefault();
               }}
               onWheel={preventWheel}
-              disabled={repeatUnknown}
+              disabled={false}
               placeholder="0–10"
             />
             <label className="inline-flex items-center gap-2 text-sm">
@@ -401,32 +413,30 @@ export default function IntakeForm({ personas = [] }: Props) {
         </div>
       </form>
 
+      {/* Errors */}
       {error && <p className="text-sm text-red-600">Error: {error}</p>}
 
-      {/* Results */}
+      {/* SCORECARD */}
       {result && (
         <div className="mt-6 rounded-2xl border border-gray-200 bg-white p-5 text-gray-800 space-y-5">
           <h2 className="text-xl font-semibold">Tu resultado</h2>
-          <div className="space-y-1">
-            <p className="text-base">
-              <span className="font-semibold">Eficiencia general:</span> {result.efficiencyScore}/10
-            </p>
-          </div>
-          {!!result.narratives?.length && (
+          <p className="text-base">
+            <span className="font-semibold">Eficiencia general:</span> {result.efficiencyScore}/10
+          </p>
+          {Array.isArray(result.narratives) && result.narratives.length > 0 && (
             <ul className="list-disc ml-5 text-sm text-gray-700 space-y-1">
               {result.narratives.map((line, i) => <li key={`narr-${i}`}>{line}</li>)}
             </ul>
           )}
 
-          {/* Focus buttons (renamed per your wording) */}
           <div className="pt-2 border-t">
-            <p className="text-sm mb-2">¿Qué quieres hacer ahora?</p>
+            <p className="text-sm mb-2">¿Qué quieres mejorar primero?</p>
             <div className="flex flex-wrap gap-2">
               <button
                 className={`px-3 py-1.5 rounded-xl text-sm border ${focus === "efficiency" ? "bg-indigo-600 text-white border-indigo-600" : "bg-white text-gray-800"}`}
                 onClick={() => setFocus("efficiency")}
               >
-                Mejorar mi estrategia de publicidad
+                Mejorar mi estrategia de medios
               </button>
               <button
                 className={`px-3 py-1.5 rounded-xl text-sm border ${focus === "conversion" ? "bg-indigo-600 text-white border-indigo-600" : "bg-white text-gray-800"}`}
@@ -442,83 +452,137 @@ export default function IntakeForm({ personas = [] }: Props) {
               </button>
             </div>
           </div>
+        </div>
+      )}
 
-          {/* Q&A */}
-          <div className="space-y-3">
-            {focus && (
-              <>
-                <p className="text-sm text-gray-900">
-                  Pregunta a {personaAns?.personaName ?? personas.find(p => p.id === personaType)?.name ?? "tu cliente"}
-                </p>
-                <div className="flex flex-col gap-2">
-                  {(focus === "efficiency" ? starterQs.medios
-                    : focus === "conversion" ? starterQs.regreso
-                    : starterQs.conocer
-                  ).map((s, idx) => (
-                    <button
-                      key={`sq-${idx}`}
-                      className="text-left text-sm px-3 py-2 rounded-xl border hover:bg-gray-50"
-                      onClick={() => handleStarterClick(s)}
-                    >
-                      {s}
-                    </button>
-                  ))}
-                </div>
+      {/* Q&A */}
+      <div className="space-y-3">
+        {focus && (
+          <>
+            <p className="text-sm text-gray-900">
+              Pregunta a {personaAns?.personaName ?? "tu cliente"}
+            </p>
 
-                <div className="flex gap-2">
-                  <input
-                    value={question}
-                    onChange={(e) => setQuestion(e.target.value)}
-                    placeholder="Escribe tu pregunta…"
-                    className="flex-1 rounded-xl border p-2 text-sm"
-                  />
-                  <button
-                    onClick={() => askPersona(question)}
-                    disabled={!question || qnaLoading}
-                    className="rounded-xl bg-indigo-600 text-white px-4 py-2 text-sm disabled:opacity-60"
-                  >
-                    {qnaLoading ? "Preguntando…" : "Preguntar"}
-                  </button>
-                </div>
-                {qnaError && <p className="text-sm text-red-600">Error: {qnaError}</p>}
-              </>
+            <div className="flex flex-col gap-2">
+              {(focus === "efficiency" ? starterQs.medios
+                : focus === "conversion" ? starterQs.regreso
+                : starterQs.conocer
+              ).map((s, idx) => (
+                <button
+                  key={`sq-${idx}`}
+                  className="text-left text-sm px-3 py-2 rounded-xl border hover:bg-gray-50"
+                  onClick={() => handleStarterClick(s)}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex gap-2">
+              <input
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                placeholder="Escribe tu pregunta…"
+                className="flex-1 rounded-xl border p-2 text-sm"
+              />
+              <button
+                onClick={() => askPersona(question)}
+                disabled={!question || qnaLoading}
+                className="rounded-xl bg-indigo-600 text-white px-4 py-2 text-sm disabled:opacity-60"
+              >
+                {qnaLoading ? "Preguntando…" : "Preguntar"}
+              </button>
+            </div>
+
+            {qnaError && <p className="text-sm text-red-600">Error: {qnaError}</p>}
+          </>
+        )}
+
+        {personaAns && (
+          <div className="mt-2 rounded-2xl border border-gray-200 bg-white p-5 space-y-4">
+            <h3 className="text-lg font-semibold text-gray-900">
+              Respuestas de {personaAns.personaName ?? "tu cliente"} — {personaAns.industryName ?? businessType} en {city}
+            </h3>
+
+            {/* Echo the asked question and a direct answer */}
+            
+            {personaAns.answerToQuestion && (
+              <p className="text-sm text-gray-900">
+                {personaAns.answerToQuestion}
+              </p>
             )}
 
-            {personaAns && (
-              <div className="mt-2 rounded-2xl border border-gray-200 bg-white p-5 space-y-4">
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Respuestas de {personaAns.personaName ?? "tu cliente"} tu cliente de {personaAns.industryName ?? businessType} en {city}
-                </h3>
+            <div className="space-y-3">
+              <div>
+                <p className="font-medium text-sm text-gray-900">
+                  Dudas de {personaAns.personaName ?? "la persona"}
+                </p>
+                <ul className="list-disc ml-5 text-sm text-gray-700 space-y-1">
+                  {personaAns.dudasCliente.map((d, i) => <li key={`duda-${i}`}>{d}</li>)}
+                </ul>
+              </div>
 
-                <div className="space-y-3">
-                  <div>
-                    <p className="font-medium text-sm text-gray-900">
-                      Dudas de {personaAns.personaName ?? "la persona"}
-                    </p>
-                    <ul className="list-disc ml-5 text-sm text-gray-700 space-y-1">
-                      {personaAns.dudasCliente.map((d, i) => <li key={`duda-${i}`}>{d}</li>)}
-                    </ul>
-                  </div>
+              <div>
+                <p className="font-medium text-sm text-gray-900">
+                  Qué le daría confianza a {personaAns.personaName ?? "la persona"}
+                </p>
+                <ul className="list-disc ml-5 text-sm text-gray-700 space-y-1">
+                  {personaAns.sugerencias.map((s, i) => <li key={`sug-${i}`}>{s}</li>)}
+                </ul>
+              </div>
 
-                  <div>
-                    <p className="font-medium text-sm text-gray-900">
-                      Qué le daría confianza a {personaAns.personaName ?? "la persona"}
-                    </p>
-                    <ul className="list-disc ml-5 text-sm text-gray-700 space-y-1">
-                      {personaAns.sugerencias.map((s, i) => <li key={`sug-${i}`}>{s}</li>)}
-                    </ul>
-                  </div>
+              <div>
+                <p className="font-medium text-sm text-gray-900">Probabilidad de comprar</p>
+                <p className="text-sm text-gray-900">{personaAns.conversionLikelihood}/10</p>
+              </div>
+            </div>
 
-                  <div>
-                    <p className="font-medium text-sm text-gray-900">Probabilidad de comprar</p>
-                    <p className="text-sm text-gray-900">{personaAns.conversionLikelihood}/10</p>
-                  </div>
+            {/* INSIGHTS */}
+            {personaAns.insights && (
+              <div className="mt-3 border-t pt-3 space-y-3">
+                <h4 className="text-base font-semibold text-gray-900">
+                  Insight accionable (con tus números + lo que dice {personaAns.personaName ?? "tu cliente"})
+                </h4>
+
+                <div>
+                  <p className="font-medium text-sm text-gray-900">Lo que {personaAns.personaName ?? "tu cliente"} está pidiendo</p>
+                  <p className="text-sm text-gray-700">{personaAns.insights.whatClientWantsSummary}</p>
+                </div>
+
+                <div>
+                  <p className="font-medium text-sm text-gray-900">Qué podrías accionar (pasos simples)</p>
+                  <ul className="list-disc ml-5 text-sm text-gray-700 space-y-1">
+                    {personaAns.insights.whatToDoThisWeek.map((l, i) => <li key={`do-${i}`}>{l}</li>)}
+                  </ul>
+                </div>
+
+                <div>
+                  <p className="font-medium text-sm text-gray-900">Impacto esperado (aproximado)</p>
+                  <ul className="list-disc ml-5 text-sm text-gray-700 space-y-1">
+                    {personaAns.insights.expectedImpact.map((l, i) => <li key={`impact-${i}`}>{l}</li>)}
+                  </ul>
+                </div>
+
+                <div>
+                  <p className="font-medium text-sm text-gray-900">Cómo sabrás que funciona (2–3 semanas)</p>
+                  <ul className="list-disc ml-5 text-sm text-gray-700 space-y-1">
+                    {personaAns.insights.howToKnow.map((l, i) => <li key={`know-${i}`}>{l}</li>)}
+                  </ul>
+                </div>
+
+                <div>
+                  <p className="font-medium text-sm text-gray-900">
+                    Cómo hablarle a {personaAns.personaName ?? "tu cliente"}
+                  </p>
+                  <ul className="list-disc ml-5 text-sm text-gray-700 space-y-1">
+                    {personaAns.insights.howToTalk.map((l, i) => <li key={`talk-${i}`}>{l}</li>)}
+                  </ul>
                 </div>
               </div>
             )}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

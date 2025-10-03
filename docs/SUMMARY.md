@@ -1,31 +1,25 @@
-Summary of Documentation
+# Documentation Summary
 
-This repository includes a complete set of documentation files to support development, deployment, and future contributions to the Synthetic Persona Web project.
+## 📖 General Project Docs
+- [README](README.md) — Intro & quickstart
+- [SUMMARY](SUMMARY.md) — This index
+- [ARCHITECTURE](ARCHITECTURE.md) — System overview & flows
+- [CONTRIBUTING](CONTRIBUTING.md) — How to contribute
+- [DEPLOYMENT](DEPLOYMENT.md) — Deploying locally & on Vercel
+- [ENVIRONMENT](ENVIRONMENT.md) — Env vars & secrets
+- [API](API.md) — Endpoints reference
+- [TESTING](TESTING.md) — Testing guidelines
+- [CHANGELOG](CHANGELOG.md) — Version history
+- [ROADMAP](ROADMAP.md) — Planned features
 
-Index of Documentation
-  • README.md
-Overview of the project, quickstart guide, and key files.
-  • ARCHITECTURE.md
-System design, file structure, components, and flow of data.
-  • CONTRIBUTING.md
-Guidelines for contributing code, opening issues, style conventions, and pull request process.
-  • DEPLOYMENT.md
-Instructions for deploying the app locally and on Vercel, including build setup and environment variables.
-  • ENVIRONMENT.md
-Details on environment variables, required API keys, and local configuration.
-  • API.md
-Documentation of available API routes (/scorecard, /persona, etc.), request/response formats, and examples.
-  • TESTING.md
-Testing approach, tools used, and steps for running and writing tests.
-  • CHANGELOG.md
-Version history and summary of changes across iterations.
+## 🎨 Design Docs
+- [STYLEGUIDE](design/STYLEGUIDE.md) — Typography, colors, components
+- [DESIGN_SYSTEM](design/DESIGN_SYSTEM.md) — Design tokens & reusable patterns
+- [UX Wireframes](design/Ux%20Wireframes.md) — Step-by-step flow (intake → scorecard → persona Q&A → insights)
 
-Suggested Additional Files (Future)
-  • LICENSE.md – licensing terms.
-  • SECURITY.md – reporting and handling security issues.
-  • ROADMAP.md – future feature plans.
-  • GLOSSARY.md – definitions of key terms.
-
-⸻
-
-This SUMMARY.md acts as the entry point for navigating the documentation set. Each file is meant to be standalone but interconnected for clarity and completeness
+## ⚖️ Governance / Community (repo root)
+- [LICENSE](../LICENSE.md)
+- [CODE_OF_CONDUCT](../CODE_OF_CONDUCT.md)
+- [SECURITY](../SECURITY.md)
+- [SUPPORT](../SUPPORT.md)
+- [GOVERNANCE](../GOVERNANCE.md)

@@ -41,6 +41,16 @@ PORT=3001 npm run dev
   - Envía los datos al backend (`/api/scorecard` y `/api/persona`).  
   - Renderiza las secciones: Scorecard, Q&A y Insights.  
 
+- **`src/app/consultas/page.tsx`**  
+  Página nueva para explorar la voz de las personas sin datos numéricos.  
+  - Permite seleccionar una **persona** y una **industria**, luego escribir cualquier pregunta libre.  
+  - Llama a `/api/persona` en modo simplificado (sin métricas de scorecard).  
+  - Devuelve una respuesta en tono humano (WhatsApp) con:
+    - **answerToQuestion**: respuesta directa y contextual.  
+    - **dudasCliente** y **sugerencias**: señales de confianza o inquietudes.  
+    - **conversionLikelihood**: 0–10.  
+  - Ideal para validar nuevas ideas, ofertas, mensajes o conceptos antes de invertir en anuncios.  
+  
 ---
 
 ## Flujo general

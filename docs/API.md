@@ -124,6 +124,49 @@ Status Codes
 
 ⸻
 
+Usage in /consultas (Open Feedback Mode)
+
+The `/consultas` page uses `/api/persona` in a simplified "conversation mode" — 
+it sends only the persona, the user's industry, and a freeform question to simulate client feedback.
+
+Request Example
+
+{
+  "personaType": "nutriologa",
+  "businessType": "bienesraices",
+  "question": "¿Crees que un curso corto de inversión en propiedades te llamaría la atención?"
+}
+
+Response Example
+
+{
+  "ok": true,
+  "persona": "Lic. Mariana la Nutrióloga",
+  "industry": "Bienes Raíces",
+  "askedQuestion": "¿Crees que un curso corto de inversión en propiedades te llamaría la atención?",
+  "reaction": "Sí, si fuera práctico y con ejemplos reales.",
+  "answerToQuestion": "Me interesaría un curso que me enseñe cómo invertir poco a poco, sin tecnicismos. 
+  Si veo testimonios reales y alguien que explique con claridad, lo tomaría.",
+  "dudasCliente": [
+    "¿Cuánto cuesta el curso y cuánto dura?",
+    "¿Necesito experiencia previa?",
+    "¿Hay soporte o asesoría incluida?"
+  ],
+  "sugerencias": [
+    "Explica beneficios con ejemplos reales.",
+    "Muestra testimonios de alumnos anteriores.",
+    "Ofrece una sesión introductoria gratuita."
+  ],
+  "conversionLikelihood": 8
+}
+
+Notes
+  • This mode ignores numeric fields (clients/month, adSpend, etc.).
+  • No Insights are generated here — only conversational feedback.
+  • Used for ideation and quick validation of new offers, messages, or products.
+  
+⸻
+
 GET /api/industries
 
 List available industries (id, name, and any known benchmarks).

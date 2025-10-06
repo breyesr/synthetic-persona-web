@@ -82,6 +82,24 @@ This document explains how the app works end-to-end: components, data flow, cont
   • Produces whatToDoThisWeek, expectedImpact, howToKnow, howToTalk.
   • Adds question-aware extra steps & KPIs (e.g., if question mentions “clic/anuncio”, inject ad-specific actions).
 
+  3.5 src/app/consultas/page.tsx
+  • Purpose: open-ended conversation page for persona testing (“Consultas”).
+  • UI:
+    - Persona selector (uses /api/personas for dynamic list).
+    - Industry selector (same component as IntakeForm).
+    - Freeform question box with contextual placeholder (“Soy {Persona}. Pregúntame algo…”).
+    - Button: “Preguntarle a {Persona}”.
+  • Behavior:
+    - Calls POST /api/persona with { personaType, businessType, question, focus: "insight" }.
+    - Displays persona response in structured format:
+        • answerToQuestion (main message, WhatsApp tone)
+        • dudasCliente (bullets)
+        • sugerencias (bullets)
+        • conversionLikelihood (0–10 bar)
+    - Does not require numeric inputs (patientsPerMonth, adSpend, etc.).
+  • Use case:
+    - Ideal for brainstorming ideas, testing new offers, and getting first-person qualitative feedback from personas.
+
 ⸻
 
 4) Data Contracts

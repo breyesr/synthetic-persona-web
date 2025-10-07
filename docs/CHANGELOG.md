@@ -11,6 +11,33 @@ This project adheres to Semantic Versioning and follows a simplified Keep a Chan
   • Export results to PDF and CSV.
   • Admin dashboard for benchmark management.
 
+
+⸻
+
+[0.3.0] - 2025-10-06
+
+Added
+  • **/consultas page:** new standalone interface for persona Q&A.
+    - Persona selector connected to `/api/personas`.
+    - Industry dropdown (“Tu industria”) for context-aware replies.
+    - Input field with guided prompt (“Soy [Persona]. Pregúntame algo…”).
+    - Server-side POST `/api/persona` integration returning structured responses (reaction, answer, doubts, trust signals, conversion likelihood).
+    - Clean, responsive UI (rounded cards, indigo primary button, minimal layout).
+
+  • **Documentation Expansion:** 
+    - Added `docs/CONSULTAS.md` with endpoint, UI, and dev notes.
+    - Added `docs/UX Wireframes.md` and `docs/Design System.md` for design clarity.
+    - Updated `README.md`, `ARCHITECTURE.md`, and `API.md` to reflect new page and endpoints.
+
+Changed
+  • Unified naming conventions for industry fields (`businessType` → “Tu industria”).
+  • Minor UI polish (padding, text hierarchy, card consistency).
+  • Persona answer rendering now respects Markdown line breaks for clarity.
+
+Notes
+  • The `/consultas` page uses the same OpenAI backend as Scorecard and Insights.
+  • Planned next: multi-turn persona memory and conversation history export.
+
 ⸻
 
 [0.2.0] - 2025-10-01

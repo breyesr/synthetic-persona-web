@@ -1,0 +1,79 @@
+Synthetic Persona Web — Technical Documentation
+==============================================
+
+1. Product Overview
+-------------------
+- Goal: help SMB owners simulate conversations with synthetic buyer personas, quantify their marketing efficiency, and receive actionable guidance without hiring an analyst.
+- Stack: Next.js 15 (app router) with React 19 client components, Tailwind CSS via `@import "tailwindcss"` in `src/app/globals.css`.
+- Data inputs: local JSON fixtures under `data/` (personas, industries, cities) plus OpenAI APIs for reasoning, narratives, and small-scale RAG enrichment.
+
+2. UX Entry Points
+------------------
+- `/` (`src/app/page.tsx`): renders `IntakeForm` with persona dropdown, business metrics, acquisition channels, and repeat rate. Submitting hits `/api/scorecard` to build the numeric score + narrative. Post-submit focus buttons unlock the persona Q&A workflow.
+- `/consultas` (`src/app/consultas/page.tsx`): lightweight playground to ask a persona an arbitrary question without filling the full intake.
+- Shared components: `PersonaSelect`, `IndustrySelect`, `CitySelect`, and the large `IntakeForm` orchestrate all form logic, validation, preset starter questions, and Q&A rendering.
+
+3. Data + AI Flow
+-----------------
+1. **Persona metadata** (name, context, benchmark ranges) lives in `data/personas/*.json` and is loaded server-side (file system) in both `/api/scorecard` and `/api/persona`.
+2. **Industry benchmarks** live in `data/industries/*.json` and provide CPL/ROAS/retention targets per industry via `src/lib/industryProvider.ts`.
+3. **Scorecard pipeline** (`src/app/api/scorecard/route.ts`):
+   - Validates request body with Zod, normalizes main/support channels, and blends persona + industry bench data.
+   - Computes derived metrics (approx leads, CPL, ROAS, spend targets) and produces `efficiencyScore`, focus hints, and a narrative using `buildAIDiagnostic` (LLM fallback to deterministic text).
+4. **Persona Q&A pipeline** (`src/app/api/persona/route.ts`):
+   - Fetches persona + industry context, builds a system/user prompt pair, and asks `gpt-4o-mini` for JSON containing reaction, answer, doubts, suggestions, and conversion likelihood.
+   - Guards output with `zod` and a domain check (`looksOffDomain`), retrying once if health-related leakage is detected.
+   - When the intake payload includes numbers, it also calls `buildActionableInsights` to merge persona bullets + business math into “what to do this week”, KPIs, and tone guidance.
+5. **Action card generator** (`src/app/api/action-card/route.ts`):
+   - Accepts the scorecard + persona reply and asks OpenAI (model configurable via `OPENAI_MODEL`) for DIY steps, agency-ready handoff bullets, a “why now”, and an impact score. Not yet wired into the UI but ready for integrations/automations.
+6. **Cities & industries** (`/api/cities`, `/api/industries`) are simple file-backed endpoints used by the selects. `/api/personas` lists locally available personas for the `/consultas` view.
+7. **RAG enrichment** (`src/lib/ragSource.ts`): optional Markdown persona notes are chunked, embedded via `text-embedding-3-small`, and re-injected into prompts to keep answers aligned with custom uploads (`uploadedContext`).
+
+4. Key Modules
+--------------
+- `src/components/IntakeForm.tsx`: client-side hub for validation, controlled numeric inputs, focus toggles, and orchestrating API calls for scorecards + persona Q&A.
+- `src/lib/aiNarrative.ts`: shared math helpers + dual-purpose narrative builders (scorecard bullet list + actionable insights). Contains deterministic fallbacks to keep the product stable without API access.
+- `src/lib/personaProvider.ts`: loads personas from JSON/Markdown, stitches fallback defaults, and merges RAG output with stored context.
+- `src/lib/benchmarks.ts`: legacy scoring helpers (still used by other surfaces) with channel weighting logic.
+- `src/prompts/*.ts`: string builders for OpenAI prompts (`persona-qna` moved inline; `action-card` defines system + user prompt builders).
+
+5. Configuration & Environment
+------------------------------
+Required runtime variables (set in `.env.local` for Next.js):
+- `OPENAI_API_KEY` — mandatory for `/api/persona`, `/api/action-card`, RAG embeddings, and AI narratives.
+- `OPENAI_MODEL` — optional override for the action-card route (defaults to `gpt-4o-mini`).
+- `OPENAI_EMBEDDING_MODEL` — optional; defaults to `text-embedding-3-small`.
+- `RAG_TOP_K` — optional integer limiting how many persona chunks feed prompts (default 4).
+- `NODE_ENV` — influences industry list caching.
+No third-party databases are used; everything else is file-backed.
+
+6. Local Development
+--------------------
+1. Install deps: `npm install`.
+2. Copy `.env.example` → `.env.local` (create if missing) and set the OpenAI variables above.
+3. Run `npm run dev` (Turbopack) and visit http://localhost:3000.
+4. Run `npm run lint` to keep the repo consistent (TypeScript + Next lint rules).
+
+7. Extending the System
+-----------------------
+- **Add a persona**: drop a `{persona_id}.json` (or `.md`) file into `data/personas/` with the fields used in `personaProvider`. Include `bench` data to customize CPL/retention ranges for that persona.
+- **Add an industry**: add a JSON file to `data/industries/` with `{ id, name, bench }`. Channel-specific CPL ranges greatly improve scorecard accuracy.
+- **Custom cities list**: edit `data/cities.json`. `/api/cities` dedupes IDs and falls back to a short default list if parsing fails.
+- **Surface the action card**: call `/api/action-card` after a persona Q&A to display DIY vs agency recommendations inside the UI. The handler already expects persona + scorecard payloads.
+- **Internationalization**: update `src/app/layout.tsx` metadata + fonts, extend persona/industry files with `locale`, and adjust copy in `IntakeForm`/`ConsultasPage`.
+
+8. Known Limitations & Risks
+----------------------------
+- Scorecard calculations assume 1.2 leads per client; if a business differs wildly, efficiency scores may mislead. Consider exposing this ratio as configurable.
+- Persona answers rely on GPT JSON mode; malformed responses are handled but still produce 500s if retries also fail.
+- The RAG module loads entire Markdown files into memory and embeds on-demand — acceptable for a handful of personas but not yet optimized for dozens.
+- There is no persistence for user submissions; everything runs statelessly per request.
+- UI copy/labels remain Spanish-only and metadata in `src/app/layout.tsx` is still the Next.js default.
+
+9. Reference Commands
+---------------------
+- `npm run dev` — local development server.
+- `npm run build && npm start` — production build/start.
+- `npm run lint` — ESLint across the repo.
+
+This document should give new contributors enough context to navigate the codebase, wire new data, and understand how the AI-assisted flows fit together.

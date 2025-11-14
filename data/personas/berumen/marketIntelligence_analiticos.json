@@ -1,0 +1,90 @@
+{
+  "name": "Lic. Alejandro González",
+  "role": "Estrategas Analíticos",
+  "city": "Monterrey",
+  "demographics": [
+    "38–45 años",
+    "NSE medio–medio alto",
+    "Formación en administración/marketing con especialización en investigación y analítica",
+    "Más de 10–15 años en marketing, investigación de mercados y customer insights",
+    "Experiencia en corporativos grandes (cemento/construcción, educación, consumo masivo, bebidas)",
+    "Padre de familia, casado con 3 hijos"
+  ],
+  "business": [
+    "Rol corporativo en marketing/data/planeación dentro de empresa grande (ej. Cemex, Electrolit, UDEM)",
+    "Gestiona portafolio de estudios cuantitativos y cualitativos durante el año",
+    "Presupuesto anual de investigación con umbral clave en ~USD 10K por estudio",
+    "Proyectos típicos: estudios de audiencia, satisfacción, pruebas de concepto, tracking de marca, estudios ad-hoc",
+    "Trabaja casi todo con agencias externas (Berumen y otras), sin gran equipo interno de investigación",
+    "Clientes internos: directores de producto/carrera, marketing, e-commerce, trade marketing, ventas y dirección"
+  ],
+  "goals": [
+    "Traducir necesidades de negocio en objetivos claros de investigación y analítica",
+    "Convertir datos en decisiones accionables para marketing, producto y ventas",
+    "Asegurar que los estudios lleguen a tiempo para influir cierres comerciales o decisiones académicas",
+    "Elevar el nivel estratégico de la investigación dentro de la organización (que los datos se sienten en la mesa directiva)",
+    "Trabajar con agencias que funcionen como aliados estratégicos y no sólo como proveedores operativos",
+    "Aprovechar IA, modelos predictivos y big data para pasar de research descriptivo a analytics avanzado",
+    "Mantener un flujo de trabajo ágil sin perder rigor metodológico"
+  ],
+  "pains": [
+    "Briefs poco claros o poco trabajados que obligan a retrabajar objetivos y alcances",
+    "Propuestas que no entienden el requerimiento (cotizan todo México cuando pidió sólo Monterrey, etc.)",
+    "Entregables superficiales, de tipo pregunta-respuesta, sin suficientes insights ni interpretación estratégica",
+    "Reportes larguísimos (50–400 láminas) sin titulares claros ni síntesis ejecutiva",
+    "Errores de campo: encuestadores mal capacitados, fallas de QA, datos contaminados o inventados",
+    "Rigidez de algunas agencias frente a cambios en objetivos, tiempos o alcance",
+    "Procesos desgastantes: armar el brief inicial y adaptar reportes a diferentes audiencias internas",
+    "Presión de tiempos: si el estudio llega tarde, ya no influye en la decisión",
+    "Dificultad para avanzar en proyectos de IA/analytics por temas de seguridad de datos y velocidad de adopción interna"
+  ],
+  "objections": [
+    "Desconfía de propuestas cuyo precio no corresponde al alcance o a la geografía solicitada",
+    "Rechaza estudios que cuestan más que la acción o decisión que pretenden informar",
+    "Cuestiona de inmediato propuestas sin metodología clara, sin diseño muestral o sin plan de QA",
+    "Descarta agencias que no muestran experiencia en su industria o en el tipo de problema a resolver",
+    "Se frustra con agencias poco proactivas que sólo ejecutan lo pedido sin proponer análisis adicionales",
+    "Considera inaceptable cualquier indicio de manipulación o invención de datos",
+    "Se resiste a propuestas de IA que no explican cómo protegen la información sensible de la empresa"
+  ],
+  "motivations": [
+    "Tomar decisiones con evidencia, no sólo con opinión o intuición",
+    "Maximizar el valor de cada peso invertido en investigación y medios",
+    "Recibir insights profundos que vayan más allá de describir tablas y porcentajes",
+    "Tener aliados que lo ayuden a verse bien internamente y a posicionar el área como estratégica",
+    "Simplificar su carga operativa con mejores briefs, mejores entregables y mejores herramientas (incluida la IA)",
+    "Aprender y mantenerse actualizado en analytics, machine learning, big data y agentes de IA",
+    "Equilibrar logro profesional con tiempo y energía para su familia y sus hobbies"
+  ],
+  "channels": [
+    "GPT como primer filtro para contexto rápido, ideas y resúmenes de PDFs",
+    "Grupos y comunidades de marketing (ej. MCX/AGA) y colegas que comparten artículos",
+    "Newsletters y contenidos de IAB, Kantar, Ipsos y otras casas de investigación",
+    "YouTube y cursos online para aprender sobre big data, machine learning y agentes de IA",
+    "Programas y diplomados/másters en analítica y ciencia de datos (ej. Big Data & Machine Learning)",
+    "Documentación y entrenamientos de plataformas tecnológicas (ej. Google Cloud, Vertex, Copilot)",
+    "Uso moderado de LinkedIn, consumiendo más historias y casos que artículos académicos"
+  ],
+  "quotes": [
+    "Lo primero que reviso en una propuesta es el precio, porque indica si entendieron bien el requerimiento.",
+    "Nunca debe costar más un estudio que la acción.",
+    "No leo reportes largos de 400 páginas; prefiero titulares que enganchen.",
+    "Si el tema me interesa, leo mucho; si sólo necesito contexto rápido, prefiero mapas mentales y visualizaciones claras.",
+    "Las agencias que valoro son las que actúan como aliados, no sólo como ejecutores.",
+    "La investigación sirve si llega a tiempo a la mesa donde se toman decisiones.",
+    "Todo mundo quiere vender IA, pero pocos tienen claro cómo usarla bien y cómo cuidar la información."
+  ],
+  "regionalNotes": [
+    "Opera principalmente en México, en contextos corporativos grandes con procesos formales de compra.",
+    "En empresas como Cemex o Electrolit, los estudios menores a USD 10K se aprueban relativamente fácil si el caso de negocio es claro.",
+    "Estudios por encima de ~USD 10K suelen requerir al menos tres cotizaciones y una justificación estratégica sólida.",
+    "En educación (ej. UDEM), el éxito de los estudios se mide sobre todo por la oportunidad en el tiempo de entrega.",
+    "En consumo masivo/bebidas, la calidad y limpieza de datos es crítica para modelos predictivos e hipersegmentación.",
+    "Hay alta sensibilidad en temas de resguardo de datos cuando se usa IA y nubes externas; legal y compliance están muy encima."
+  ],
+  "bench": {
+    "cplTargetMXN": [1000, 2500],
+    "retentionP50": 65,
+    "noShowRangePct": [10, 20]
+  }
+}

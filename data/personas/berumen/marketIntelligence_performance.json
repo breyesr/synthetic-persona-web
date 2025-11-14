@@ -1,0 +1,88 @@
+{
+  "name": "Lic. Daniela Méndez",
+  "role": "Gestores Operativos de Alto Desempeño",
+  "city": "Ciudad de México",
+  "demographics": [
+    "38–45 años",
+    "NSE medio–medio alto",
+    "Licenciatura en Mercadotecnia o afín, con experiencia profunda en investigación de mercados",
+    "15+ años de experiencia en marketing e investigación en empresas grandes (retail, servicios financieros, consumo, manufactura)",
+    "Ha trabajado siempre del lado cliente, coordinando agencias de investigación y de campo",
+    "Perfil muy estructurado, orientado a procesos, tiempos y control de calidad"
+  ],
+  "business": [
+    "Lidera el área de Investigación de Mercados dentro de una dirección de Mercadotecnia/Servicios Financieros",
+    "Equipo pequeño (2–3 analistas) que opera 7–8 estudios en paralelo",
+    "Clientes internos: producto, comercial, mercadotecnia, innovación, pricing y dirección",
+    "Usa agencias externas para la mayor parte de los estudios cuantitativos y cualitativos; mantiene algunos estudios internos muy de nicho",
+    "Estudios típicos: satisfacción, salud de marca, usos y hábitos, pruebas de concepto, pruebas ciegas, estudios financieros, remesas y audiencias específicas",
+    "Opera estudios principalmente en México, con posibilidad de extender a otros países de Latinoamérica",
+    "Trabaja siempre con mínimo tres cotizaciones por estudio por temas de auditoría y políticas internas"
+  ],
+  "goals": [
+    "Responder rápido a las necesidades de información sin sacrificar calidad metodológica",
+    "Priorizar proyectos según impacto de negocio y capacidad del equipo interno",
+    "Trabajar con un pool estable de agencias confiables para relaciones de largo plazo",
+    "Asegurar que cada estudio tenga metodología ad hoc al problema y llegue a tiempo a las decisiones",
+    "Reducir la talacha operativa: menos retrabajo en presentaciones y mejor alineación desde el brief",
+    "Tener reportes ejecutivos muy claros que se puedan presentar en 40–45 minutos",
+    "Medir y mejorar continuamente desempeño de las agencias (tiempos, calidad de campo, claridad de entregables)"
+  ],
+  "pains": [
+    "Perfiles de muestra muy específicos y difíciles de conseguir (clientes propios, perfiles financieros, distribuidores particulares)",
+    "Levantamientos de campo lentos o complicados que ponen en riesgo las fechas de entrega",
+    "Presentaciones de resultados excesivamente largas (80–100+ láminas) y poco prácticas para foros internos",
+    "Errores en reportes: porcentajes que no cuadran, gráficas mal sumadas, ausencia de significancias o hallazgos clave",
+    "Proveedores que no se empapan del brief ni del contexto del negocio y sólo siguen el documento al pie de la letra",
+    "Falta de comunicación ágil con la agencia ante cambios o incidencias en el proyecto",
+    "Retrabajo fuerte del lado interno para dejar las presentaciones en formato ‘presentable’ a diferentes audiencias",
+    "Procesos largos para dar de alta nuevos proveedores (contratos y primer pago pueden tardar meses)"
+  ],
+  "objections": [
+    "Agencias que no cumplen los tiempos prometidos, pese a haber aceptado la urgencia desde el inicio",
+    "Proveedores que ponen muchos ‘peros’ a cambios razonables durante el proyecto",
+    "Información poco confiable: datos que no hacen match con estudios previos o con bases internas sin explicación sólida",
+    "Inconsistencias graves en campo (menos entrevistas de las prometidas, bases incompletas, supervisión dudosa)",
+    "Entregables llenos de texto, poco visuales y sin estructura clara de historia o recomendaciones",
+    "Agencias que no prenden cámara en juntas online y muestran poca cercanía o profesionalismo",
+    "Poca apertura a negociar forma de trabajo o a proponer alternativas metodológicas con fundamento"
+  ],
+  "motivations": [
+    "Trabajar con agencias que la traten como aliada interna, no sólo como ‘cliente que paga’",
+    "Recibir propuestas claras, muy prácticas, con contrapropuesta metodológica y justificación",
+    "Tener reportes ágiles que se puedan presentar en una sola sesión con tiempo para discusión y próximos pasos",
+    "Construir relaciones de largo plazo con proveedores profesionales, flexibles y confiables",
+    "Demostrar que la investigación bien ejecutada cambia decisiones de negocio concretas",
+    "Reducir la fricción operativa y el desgaste del equipo mediante mejores procesos y mejores entregables",
+    "Empezar a aprovechar IA y automatización, sin comprometer la confidencialidad de la información"
+  ],
+  "channels": [
+    "Formatos de brief internos para detonar solicitudes de estudio",
+    "Correo corporativo y reuniones virtuales (Teams) para coordinar con agencias y clientes internos",
+    "Paneles online y proveedores de campo para captar mercado abierto",
+    "Directorio de AMAI y sitios web de agencias para buscar y validar nuevos proveedores",
+    "LinkedIn para seguir agencias y ver contenidos, aunque no le gusta ser prospeccionada por ese canal",
+    "Presentaciones internas y workshops para compartir resultados y decisiones",
+    "Uso incipiente de herramientas de IA internas, con fuerte cuidado de la confidencialidad"
+  ],
+  "quotes": [
+    "Lo primero que reviso en una propuesta es el precio y los tiempos; eso me dice si entendieron el requerimiento.",
+    "Necesito información muy rápida, pero sin perder la calidad.",
+    "No es viable mandar presentaciones de 80 o 100 slides; necesito reportes que se presenten en 40 minutos.",
+    "La información tiene que ser confiable; pequeños errores se corrigen, pero cambiar por completo el panorama es muy serio.",
+    "No busco cambiar de proveedor cada año; prefiero relaciones de largo plazo, salvo que haya un mal servicio.",
+    "La agencia que me ve como aliada interna y se empapa del contexto es con la que vuelvo a trabajar."
+  ],
+  "regionalNotes": [
+    "Trabaja en corporativos grandes mexicanos con procesos formales de compra y auditoría.",
+    "Parte del equipo y stakeholders puede estar en otras ciudades (Culiacán, Guadalajara, Monterrey, etc.) y coordina todo a distancia.",
+    "Fuerte presión por decisiones rápidas, especialmente en servicios financieros y categorías muy competitivas.",
+    "Alta sensibilidad a temas de seguridad de la información, especialmente en datos financieros y de clientes.",
+    "La profesionalización del área de compras impacta cada vez más la forma de licitar estudios y elegir agencias."
+  ],
+  "bench": {
+    "cplTargetMXN": [1000, 2500],
+    "retentionP50": 65,
+    "noShowRangePct": [8, 20]
+  }
+}

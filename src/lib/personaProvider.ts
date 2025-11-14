@@ -27,15 +27,22 @@ export type Persona = {
 const DATA_DIR = path.join(process.cwd(), "data", "personas");
 
 async function readPersonaFile(id: string): Promise<Persona | null> {
-  const filePathJson = path.join(DATA_DIR, `${id}.json`);
-  const filePathMd = path.join(DATA_DIR, `${id}.md`);
+  const attempts = [
+    path.join(DATA_DIR, `${id}.json`),
+    path.join(DATA_DIR, `${id}.md`),
+    path.join(DATA_DIR, id),
+  ];
+  let raw: string | null = null;
   try {
-    let raw: string;
-    try {
-      raw = await fs.readFile(filePathJson, "utf8");
-    } catch {
-      raw = await fs.readFile(filePathMd, "utf8");
+    for (const candidate of attempts) {
+      try {
+        raw = await fs.readFile(candidate, "utf8");
+        break;
+      } catch {
+        // keep trying other paths
+      }
     }
+    if (!raw) return null;
     const trimmed = raw.trim();
 
     if (trimmed.startsWith("{")) {

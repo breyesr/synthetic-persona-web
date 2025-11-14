@@ -1,0 +1,16 @@
+{
+  "id": "Investigación",
+  "name": "Market Research Agencies (Mexico)",
+  "bench": {
+    "cplTargetMXN": [2000, 8000],
+    "retentionP50": 60,
+    "roasTarget": 5,
+    "channelCPL": {
+      "online_panels": [1800, 3500],
+      "telephone_surveys": [2500, 6000],
+      "face_to_face": [3500, 8000],
+      "qual_recruitment": [2000, 7000],
+      "public_opinion_tracking": [2500, 5000]
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "name": "Nick the Contractor",
+  "role": "Builder / Contractor / Distributor",
+  "city": "Houston",
+  "demographics": [
+    "30–55 years old",
+    "Experience in construction, site operations, or procurement",
+    "Majority male segment, though roles are diversifying",
+    "Technical background through trade school, engineering, or on-the-job progression",
+    "Works in small to mid-size firms or large national contractors depending on market"
+  ],
+  "business": [
+    "Oversees construction projects from planning to delivery",
+    "Coordinates subcontractors, crews, suppliers and inspections",
+    "Manages budgets, timelines, safety, and material procurement",
+    "Buys cement, concrete, aggregates, ready-mix and complementary materials",
+    "Runs 1–10 projects at any time depending on company size",
+    "Operates under strict deadlines, cost pressures and regulatory compliance"
+  ],
+  "goals": [
+    "Deliver jobs on time and within budget",
+    "Reduce supply chain risks: avoid delays, shortages and inconsistencies",
+    "Work with reliable suppliers who offer predictable delivery windows",
+    "Increase efficiency through clear logistics information and digital tools",
+    "Get real-time updates that help avoid downtime on site",
+    "Choose materials with proven performance for safety and durability"
+  ],
+  "pains": [
+    "Project delays due to late deliveries or materials not available",
+    "Pricing swings that affect budget predictability",
+    "Lack of clarity on lead times, order status or dispatch logistics",
+    "Poor communication between sales reps, dispatch and job sites",
+    "Complex ordering processes that require too many calls or approvals",
+    "Difficulty troubleshooting unexpected issues with concrete or materials",
+    "Pressure from clients and inspectors with little room for error",
+    "Inconsistent quality from different plants or suppliers"
+  ],
+  "objections": [
+    "Won’t switch suppliers unless reliability is proven over time",
+    "Avoids brands with history of inconsistent product or logistics failures",
+    "Rejects digital tools that increase work instead of simplifying it",
+    "Dislikes vague or marketing-fluff messaging with no technical substance",
+    "Suspicious of sustainability claims that don’t show measurable benefits",
+    "Avoids suppliers without transparent pricing or support"
+  ],
+  "motivations": [
+    "Keep crews productive and avoid costly downtime",
+    "Have one dependable supplier that reduces complexity",
+    "Access clear technical data, safety sheets and performance specs",
+    "Use tools that save time on ordering, tracking and receiving material",
+    "Build a long-term partnership with suppliers that ‘have their back’",
+    "Gain recognition for delivering high-quality, on-schedule work"
+  ],
+  "channels": [
+    "Phone, WhatsApp and text for urgent coordination with suppliers",
+    "Supplier portals and apps for ordering and tracking",
+    "YouTube for equipment tips, safety videos and troubleshooting",
+    "LinkedIn for professional updates and industry news",
+    "On-site meetings with sales reps and technical advisors",
+    "Trade shows, local builder associations and contractor networks"
+  ],
+  "quotes": [
+    "If the truck is late, my whole day is shot.",
+    "Give me straight answers about availability and timing, not marketing talk.",
+    "I don’t have time to chase five people—just give me one reliable point of contact.",
+    "If your product is solid and your logistics are tight, we’ll work together for years.",
+    "Digital tools are great if they actually save me time on the job."
+  ],
+  "regionalNotes": [
+    "US: Strong focus on OSHA, scheduling, labor shortages and competitive bidding.",
+    "UK: Higher regulatory oversight, sustainability standards and site documentation.",
+    "Mexico: Strong reliance on supplier relationships, WhatsApp communication and local logistics performance.",
+    "Across all: Reliability and delivery timing are the top decision drivers."
+  ],
+  "bench": {
+    "cplTargetMXN": [150, 350],
+    "retentionP50": 70,
+    "noShowRangePct": [5, 15]
+  }
+}

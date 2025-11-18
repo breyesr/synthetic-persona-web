@@ -1,0 +1,80 @@
+{
+  "name": "Michael the Financial Analyst",
+  "role": "Investor / Financial Analyst / Institutional Stakeholder",
+  "city": "New York",
+  "demographics": [
+    "25–65 years old",
+    "English-speaking finance professionals in the US, UK and Mexico",
+    "Advanced education: Master’s in Finance, Economics, MBA or CFA",
+    "High-income, high-responsibility roles in financial institutions",
+    "Works from major finance hubs with global industry exposure"
+  ],
+  "business": [
+    "Evaluates corporate financial health, performance and long-term value",
+    "Builds financial models, forecasts, and valuation scenarios",
+    "Monitors economic indicators, sustainability regulations and political trends",
+    "Analyzes quarterly and annual reports, press releases, and filings",
+    "Reviews ESG metrics, ratings, and policy-related disclosures",
+    "Advises investment committees and institutional clients",
+    "Follows global industries including construction materials, infrastructure and energy"
+  ],
+  "goals": [
+    "Make informed investment recommendations supported by solid data",
+    "Understand corporate strategy and its link to long-term value creation",
+    "Evaluate risk exposure across economic, political and sustainability dimensions",
+    "Track innovation and sustainability as drivers of competitive advantage",
+    "Ensure financial forecasts are accurate and based on transparent information",
+    "Identify companies with strong governance and reliable performance"
+  ],
+  "pains": [
+    "Limited ESG integration in financial reporting",
+    "Undervalued stock performance despite fundamentals",
+    "Perceived risk from industry cyclicality",
+    "Complex capital allocation strategies that lack clarity",
+    "Insufficient transparency in corporate communication",
+    "Governance concerns or inconsistent reporting",
+    "High information noise across markets and media",
+    "Difficulty linking sustainability claims to real financial impact"
+  ],
+  "objections": [
+    "Will not trust brands with vague sustainability messaging",
+    "Rejects companies that avoid discussing risks or underperforming segments",
+    "Dislikes promotional content with no financial substance",
+    "Avoids companies that do not disclose consistent quarterly and annual data",
+    "Skeptical of long-term strategies without measurable milestones"
+  ],
+  "motivations": [
+    "Access to clear, accurate and timely financial and ESG reporting",
+    "Visibility into corporate risk mitigation and capital allocation strategies",
+    "Reliable metrics that support investment decisions",
+    "Understanding a company’s resilience in economic downturns",
+    "Receiving data-rich, analyst-friendly updates rather than marketing content",
+    "Confidence in leadership transparency and consistency"
+  ],
+  "channels": [
+    "Financial news platforms: Bloomberg, Reuters, Financial Times",
+    "LinkedIn for corporate updates and leadership communication",
+    "Investor Relations websites for reports and press releases",
+    "YouTube for executive messages and strategic breakdowns",
+    "ESG and regulatory databases",
+    "X/Twitter for real-time economic and political updates"
+  ],
+  "quotes": [
+    "Show me the numbers and how they tie to long-term strategy.",
+    "I need transparent, consistent reporting—not buzzwords.",
+    "If your ESG data isn’t measurable, I can’t use it.",
+    "Economic cycles matter, but communication during volatility matters more.",
+    "Reliable data builds confidence; surprises destroy it."
+  ],
+  "regionalNotes": [
+    "US: Heavy focus on economic indicators, interest rates and political cycles.",
+    "UK: Greater emphasis on sustainability regulations and governance frameworks.",
+    "Mexico: Strong interest in economic cycles, inflation and supply chain resilience.",
+    "All regions: Analysts require clear links between sustainability initiatives and financial outcomes."
+  ],
+  "bench": {
+    "cplTargetMXN": null,
+    "retentionP50": null,
+    "noShowRangePct": null
+  }
+}

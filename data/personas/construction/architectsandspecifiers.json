@@ -1,75 +1,86 @@
 {
-  "name": "Lic. Andrés el Psicólogo",
-  "role": "Psicólogo clínico (SMB, 2–5 psicólogos)",
-  "city": "Monterrey",
+  "name": "Alex the Architect",
+  "role": "Architect / Specifier / Design Consultant",
+  "city": "Mexico City",
   "demographics": [
-    "30–45 años",
-    "NSE medio–medio alto",
-    "Equilibrio de género",
-    "Lic. en Psicología, muchos con maestría en clínica/psicoterapia/tanatología"
+    "28–55 years old",
+    "Professionally trained in architecture, design, engineering or related fields",
+    "Highly educated and detail-oriented; many with postgraduate specialization or sustainability certifications",
+    "Design-driven, innovation-focused, and visually oriented",
+    "Works at small boutique studios, mid-size firms, or global multi-office practices depending on region"
   ],
   "business": [
-    "Consultorio 2–4 salas",
-    "60–120 sesiones/mes",
-    "Ticket MX$500–$900",
-    "Frecuencia semanal/quincenal",
-    "Captación por Doctoralia, Google Maps, redes sociales y referidos"
+    "Leads or contributes to material selection, specification and design intent for architectural projects",
+    "Balances aesthetic vision, technical requirements, building codes, engineering constraints and client preferences",
+    "Researches materials extensively through digital platforms, case studies, BIM libraries, peers and manufacturers",
+    "Evaluates materials based on performance, sustainability credentials, cost, compliance and design impact",
+    "Produces drawings, models, and full specification documents to guide contractors and influence final procurement",
+    "Coordinates with engineers, contractors, clients and suppliers throughout design and construction",
+    "Protects specified materials from substitutions and value engineering during construction"
   ],
   "goals": [
-    "Incrementar pacientes nuevos 10–15% anual",
-    "Mantener retención >70% (4+ sesiones)",
-    "Aumentar consultas online",
-    "Reforzar reputación digital con reseñas",
-    "Estabilizar ingresos reduciendo cancelaciones y no-shows"
+    "Create distinctive, high-quality, and innovative designs that strengthen their professional reputation",
+    "Choose materials that meet design intent, technical performance and sustainability goals",
+    "Avoid project failures caused by material underperformance or poor supplier support",
+    "Stay current on new materials, sustainable technologies and global design trends",
+    "Deliver accurate specifications that reduce risk and avoid costly rework on site",
+    "Work with trustworthy suppliers who provide transparent data and fast, knowledgeable support",
+    "Build a long-term library of proven materials they can confidently reuse in future projects"
   ],
   "pains": [
-    "Estigma salud mental",
-    "Competencia no regulada (coaches/alternativos)",
-    "Cancelaciones y no-shows",
-    "Límites éticos en publicidad (COFEPRIS, códigos éticos)",
-    "Pacientes abandonan tratamiento prematuramente"
+    "Time pressure limits ability to fully explore material options and conduct deep research",
+    "Fear that a material will fail, cause delays, or damage their professional reputation",
+    "Budget constraints forcing compromise between ideal design and client affordability",
+    "Contractors substituting cheaper materials that compromise design intent",
+    "Greenwashing and vague sustainability claims with no measurable data",
+    "Inconsistent or incomplete technical information from suppliers",
+    "Poor responsiveness from manufacturers when issues arise during installation",
+    "Difficulty staying updated on rapidly evolving materials and certifications"
   ],
   "objections": [
-    "Desconfianza si no hay credenciales",
-    "Promesas milagrosas",
-    "Precio percibido alto sin resultados visibles",
-    "Comparaciones con coaches sin preparación"
+    "Rejects suppliers who rely on aggressive sales tactics rather than technical expertise",
+    "Avoids brands without transparent performance data, certifications or test results",
+    "Dislikes generic corporate marketing with no practical or technical value",
+    "Will not specify products with a history of inconsistent quality or logistical unreliability",
+    "Skeptical of new materials without proven case studies or peer endorsements",
+    "Avoids companies that underestimate the importance of aesthetics and architectural detailing"
   ],
   "motivations": [
-    "Confianza y ética",
-    "Privacidad",
-    "Acompañamiento continuo",
-    "Bienestar integral",
-    "Diferenciación frente a competencia informal"
+    "Deliver visually striking and technically sound buildings that showcase their design capability",
+    "Use sustainable materials that support climate goals, certifications and long-term performance",
+    "Collaborate with knowledgeable suppliers who act as technical partners",
+    "Access clear, accurate, immediately available technical documentation",
+    "Leverage peer recommendations and repeat trusted brands to reduce risk",
+    "Specify materials that elevate the project’s aesthetic and performance quality",
+    "Gain recognition from clients, peers and the architecture community through innovative project outcomes"
   ],
   "channels": [
-    "Doctoralia",
-    "Google Maps/Reviews",
-    "WhatsApp",
-    "Instagram",
-    "TikTok",
-    "Facebook (grupos de bienestar)"
+    "Architecture media platforms: ArchDaily, Dezeen, Architectural Record",
+    "Search engines for rapid material discovery and case studies",
+    "Design and inspiration platforms: Instagram, Pinterest, MaterialBank",
+    "BIM libraries, online product directories and CAD resources",
+    "Peer networks: firm colleagues, AIA/RIBA/CA associations, online forums",
+    "Manufacturer websites with data sheets, BIM objects and technical manuals",
+    "Webinars, CEU courses, lunch-and-learn sessions and trade shows",
+    "LinkedIn for professional updates, thought leadership and industry trends"
   ],
   "quotes": [
-    "En Monterrey muchos pacientes llegan porque la empresa les pide terapia, pero mantenerlos después depende de que confíen en mí.",
-    "En CDMX la gente busca en Doctoralia y revisa mis credenciales antes de escribirme, sin eso no me contactan.",
-    "Aquí en Guadalajara prefieren preguntar por WhatsApp primero, quieren cerciorarse de que no sea un charlatán.",
-    "En Puebla llegan muchos adolescentes por recomendación de la escuela, pero el reto es que los padres den seguimiento.",
-    "Mi objetivo es que me busquen por confianza y preparación, no solo porque salí en un anuncio.",
-    "El reto es que el paciente entienda que la terapia no es una consulta mágica de una sola vez.",
-    "Lo que más me preocupa es que me comparen con un coach sin preparación y piensen que somos lo mismo.",
-    "Si no tengo buenas reseñas en Doctoralia, prácticamente no existo para pacientes nuevos."
+    "Give me accurate technical data, not marketing fluff.",
+    "I need to trust that what I specify will perform exactly as promised.",
+    "Innovation is exciting, but only if the material is proven and reliable.",
+    "If you can’t answer my technical question quickly, I’ll move on.",
+    "A material can be beautiful, but if it fails, it destroys the design.",
+    "Show me real case studies—not claims without proof."
   ],
   "regionalNotes": [
-    "Puebla: adolescentes por recomendación de escuela, seguimiento depende de padres",
-    "Monterrey: llegan por empresa, comparan con coaches; credenciales clave",
-    "CDMX: buscan en Doctoralia y validan credenciales",
-    "Guadalajara: contacto inicial por WhatsApp"
+    "US: Strong emphasis on sustainability standards, certifications, CEU programs and technical rigor.",
+    "UK: Heavy focus on energy performance, regulatory compliance and standardized documentation.",
+    "Mexico: Deep reliance on peer networks and supplier relationships; Spanish-language content and personal support matter greatly.",
+    "Across all: Visual inspiration, technical accuracy and sustainability credentials are decisive factors in specification."
   ],
-
   "bench": {
-    "cplTargetMXN": [200, 500],
-    "retentionP50": 65,
-    "noShowRangePct": [20, 40]
+    "cplTargetMXN": null,
+    "retentionP50": null,
+    "noShowRangePct": null
   }
 }

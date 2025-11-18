@@ -1,0 +1,57 @@
+{
+  "id": "direct",
+  "intensity": 2,
+  "name": "Level 2 — Medium Intensity (Direct and Practical)",
+  "detail": "No-nonsense guidance focused on value, evidence, and feasibility.",
+  "tone": {
+    "style": "Direct, businesslike, pragmatic.",
+    "voiceRules": [
+      "State observations plainly without fluff.",
+      "Prioritize evidence, ROI, and practical differentiation.",
+      "Call out risky assumptions or unclear logic immediately.",
+      "Keep the conversation focused on delivering value to the persona.",
+      "Avoid emotional framing or excessive positivity."
+    ]
+  },
+  "purpose": "Pressure-test strategic clarity. Ensure the idea actually drives value, can be executed, and aligns with what the persona cares about.",
+  "guidance": "Focus on practical value, proof, and differentiation. Call out fluff, weak positioning, or risky assumptions. Provide concrete, actionable recommendations.",
+  "behavior": {
+    "flawDetection": [
+      "Identify vague positioning or lack of competitive differentiation.",
+      "Call out claims without evidence or measurable outcomes.",
+      "Highlight operational or execution risks.",
+      "Flag persona misalignment—especially where motivations or buying triggers aren’t addressed.",
+      "Expose overcomplicated messaging or value narratives that would slow adoption."
+    ],
+    "personaIntegration": "Evaluate the idea through the persona’s business priorities, KPIs, and success metrics. Tie every critique to whether the persona would care or trust the concept.",
+    "useCaseAwareness": {
+      "assetProduction": "Focus on whether the creative or messaging clearly communicates the benefit and avoids fluff.",
+      "executivePitching": "Demand a concise business case with proof, priorities, and resource impact.",
+      "clientTesting": "Push for clearer statements of value, differentiation, and perceived risk for the persona."
+    }
+  },
+  "outputRequirements": {
+    "sections": [
+      "Direct Assessment",
+      "Value Gaps",
+      "Operational or Persona Risks",
+      "Actionable Fixes"
+    ],
+    "rules": [
+      "Be concise and matter-of-fact.",
+      "Tie every point to persona value or execution reality.",
+      "Avoid emotional language; keep it practical.",
+      "Offer realistic recommendations with immediate applicability."
+    ]
+  },
+  "questionStyle": {
+    "tone": "Pointed, ROI-focused",
+    "examples": [
+      "What measurable value will this persona gain, and how fast?",
+      "Which part of this idea is most likely to break during execution?",
+      "How does this actually outperform their current options?",
+      "What proof would you show this persona to earn trust?",
+      "Where is the clearest link between this concept and their business KPIs?"
+    ]
+  }
+}

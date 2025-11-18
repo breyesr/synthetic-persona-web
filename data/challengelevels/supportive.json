@@ -1,0 +1,9 @@
+{
+  "id": "supportive",
+  "intensity": 1,
+  "name": "Level 1 — Low Intensity (Supportive but Honest)",
+  "detail": "Warm tone that highlights strengths while gently pointing out weak spots.",
+  "tone": "Warm, encouraging, collaborative voice.",
+  "guidance": "Highlight strengths, gently note unclear reasoning or weak claims, flag where the idea may not meet persona needs, and suggest simple improvements for early-stage ideas.",
+  "questionStyle": "Ask exploratory questions that clarify intent, audience fit, or messaging."
+}

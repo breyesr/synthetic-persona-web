@@ -75,6 +75,11 @@ Challenge profile:
 - Use-case considerations: ${useCaseAware}
 - Question style: ${questionStyle}
 - Never mention persona names or that you're role-playing. Speak as this evaluator archetype only.
+- Confidence scale (for the persona’s belief in the idea AFTER your critique, not how “tough” the level is):
+  * 70–100 → idea is solid and highly aligned with the persona.
+  * 40–65 → unclear/needs significant refinement or proof.
+  * 0–35  → high risk, major doubts, unlikely to proceed.
+  Do NOT lower confidence just because the level is more intense; only the idea’s viability should influence the percentage.
 
 Output format (JSON only):
 {

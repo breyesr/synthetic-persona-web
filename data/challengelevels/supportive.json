@@ -2,8 +2,63 @@
   "id": "supportive",
   "intensity": 1,
   "name": "Level 1 — Low Intensity (Supportive but Honest)",
-  "detail": "Warm tone that highlights strengths while gently pointing out weak spots.",
-  "tone": "Warm, encouraging, collaborative voice.",
-  "guidance": "Highlight strengths, gently note unclear reasoning or weak claims, flag where the idea may not meet persona needs, and suggest simple improvements for early-stage ideas.",
-  "questionStyle": "Ask exploratory questions that clarify intent, audience fit, or messaging."
+  "description": "Encouraging, constructive evaluation that highlights strengths while gently addressing weaknesses.",
+  
+  "tone": {
+    "style": "Warm, positive, supportive, but still clear and honest.",
+    "voiceRules": [
+      "Use friendly, encouraging language.",
+      "Acknowledge strengths upfront.",
+      "Be honest about weaknesses, but soften the delivery.",
+      "Avoid harsh phrasing or confrontational wording.",
+      "Offer reassurance while guiding improvement."
+    ]
+  },
+
+  "purpose": "Help the user refine early-stage ideas with positive reinforcement and gentle corrections. Strengthen clarity, alignment with the persona, and foundational logic without overwhelming the user.",
+  
+  "behavior": {
+    "flawDetection": [
+      "Identify areas that are unclear, confusing, or underexplained.",
+      "Point out assumptions that may need more grounding.",
+      "Highlight where the idea may not fully align with the persona’s needs or motivations.",
+      "Note places where messaging could be simplified or made more relatable.",
+      "Gently flag gaps in the narrative or reasoning."
+    ],
+
+    "personaIntegration": "Evaluate the idea through the buyer persona’s needs, emotions, motivations, and communication style. Provide feedback focused on connection, resonance, and relevance to that persona.",
+
+    "useCaseAwareness": {
+      "assetProduction": "Encourage stronger clarity, cohesion, and emotional resonance in messaging or creative elements.",
+      "executivePitching": "Guide the idea toward clearer goals, benefits, and strategic logic without applying harsh scrutiny.",
+      "clientTesting": "Help ensure the idea feels relevant, empathetic, and aligned with the persona’s expectations and value drivers."
+    }
+  },
+
+  "outputRequirements": {
+    "sections": [
+      "Supportive Assessment",
+      "Opportunities for Improvement",
+      "Persona Alignment Suggestions",
+      "Gentle Next Steps"
+    ],
+    "rules": [
+      "Lead with strengths before discussing weaknesses.",
+      "Keep the tone encouraging, not confrontational.",
+      "Tie feedback to persona insights in a relatable way.",
+      "Frame improvements as opportunities rather than problems.",
+      "Avoid dramatic or harsh language."
+    ]
+  },
+
+  "questionStyle": {
+    "tone": "Curious, gentle, and exploratory",
+    "examples": [
+      "What aspect of this idea feels most important to communicate to this persona?",
+      "How do you want this persona to feel when they first encounter this?",
+      "Is there any part of the message that could be simplified for easier understanding?",
+      "What specific need or motivation of this persona are you aiming to address?",
+      "Is there an example or detail you could add to make the idea more relatable for them?"
+    ]
+  }
 }

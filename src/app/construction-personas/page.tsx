@@ -30,6 +30,7 @@ type ChallengeLevelOption = {
 export default function ConstructionPersonasPage() {
   const [personas, setPersonas] = useState<PersonaOption[]>([]);
   const [personaNames, setPersonaNames] = useState<Record<string, string>>({});
+  const [personaRoles, setPersonaRoles] = useState<Record<string, string>>({});
   const [personaType, setPersonaType] = useState<string>("");
   const [levels, setLevels] = useState<ChallengeLevelOption[]>([]);
   const [challengeLevelId, setChallengeLevelId] = useState<string>("");
@@ -56,8 +57,10 @@ export default function ConstructionPersonasPage() {
             : [];
         if (!cancelled) {
           const lookup: Record<string, string> = {};
+          const roles: Record<string, string> = {};
           const selectOptions: PersonaOption[] = list.map((item) => {
             lookup[item.id] = item.name;
+            if (item.role?.trim()) roles[item.id] = item.role.trim();
             return {
               id: item.id,
               name: item.role?.trim() ? item.role : item.name,
@@ -65,6 +68,7 @@ export default function ConstructionPersonasPage() {
           });
           setPersonas(selectOptions);
           setPersonaNames(lookup);
+          setPersonaRoles(roles);
           setPersonaType((prev) => prev || selectOptions[0]?.id || "");
         }
       } catch (err) {
@@ -122,16 +126,6 @@ export default function ConstructionPersonasPage() {
     personaNames[personaType] ??
     personas.find((p) => p.id === personaType)?.name ??
     "this persona";
-
-  const focusHint = useMemo(
-    () =>
-      evaluationFocus.trim()
-        ? evaluationFocus.trim()
-        : "Describe the angle you want to test (e.g., messaging clarity, executive pitch, client proof).",
-    [evaluationFocus]
-  );
-
-  const selectedLevel = levels.find((lvl) => lvl.id === challengeLevelId);
 
   async function onAsk() {
     if (disabled) return;
@@ -201,9 +195,6 @@ export default function ConstructionPersonasPage() {
                   ))}
                 </select>
               </div>
-              <p className="text-xs text-gray-400">
-                {selectedLevel?.detail ?? "Choose how intense you want the feedback."}
-              </p>
             </div>
           </div>
 
@@ -231,7 +222,7 @@ export default function ConstructionPersonasPage() {
           </div>
 
           <label className="space-y-1 block">
-            <span className="text-xs uppercase tracking-wide text-gray-300">Focus on “which angle to test”</span>
+            <span className="text-xs uppercase tracking-wide text-gray-300">Focus</span>
             <textarea
               value={evaluationFocus}
               onChange={(e) => setEvaluationFocus(e.target.value)}
@@ -239,11 +230,6 @@ export default function ConstructionPersonasPage() {
               className="w-full rounded-xl border border-white/20 bg-white/90 p-3 text-sm text-gray-700 shadow-inner"
               placeholder="Example: Stress-test how clearly we communicate ROI to the CFO."
             />
-            <p className={`text-xs ${focusInvalid ? "text-red-500" : "text-gray-400"}`}>
-              {focusInvalid
-                ? "Enter at least 5 characters so we know what angle to test."
-                : focusHint}
-            </p>
           </label>
 
           <div className="flex flex-wrap gap-3">
@@ -263,19 +249,16 @@ export default function ConstructionPersonasPage() {
             <div className="flex items-center justify-between flex-wrap gap-2">
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">
-                  {personaName} — {result.focus}
+                  {personaName} — {personaRoles[personaType] ?? "Persona"}
                 </h2>
                 <p className="text-sm text-gray-500">
-                  {result.challengeLabel}
-                  {result.challengeDetail ? ` — ${result.challengeDetail}` : ""}
+                  Level {result.challengeLevel} — Confidence:{" "}
+                  <span className="font-semibold">{result.confidence}%</span>
                 </p>
-              </div>
-              <div className="text-xs text-gray-600">
-                Confidence: <span className="font-semibold">{result.confidence}%</span>
               </div>
             </div>
 
-            <div className="rounded-2xl bg-gray-50 p-4 text-sm text-gray-800 space-y-2">
+            <div className="rounded-2xl bg-gray-50 border-l-4 border-indigo-200 p-4 text-sm text-gray-800 space-y-2 shadow-sm">
               <p className="text-xs uppercase tracking-wide text-gray-500">
                 Summary {result.tone ? `• Tone: ${result.tone}` : ""}
               </p>
@@ -283,7 +266,7 @@ export default function ConstructionPersonasPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
+              <div className="space-y-2 rounded-2xl bg-emerald-50/60 p-4">
                 <p className="font-medium text-sm text-gray-900">Strengths</p>
                 <ul className="list-disc ml-5 text-sm text-gray-700 space-y-1">
                   {result.strengths.map((item, idx) => (
@@ -291,7 +274,7 @@ export default function ConstructionPersonasPage() {
                   ))}
                 </ul>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 rounded-2xl bg-rose-50/70 p-4">
                 <p className="font-medium text-sm text-gray-900">Gaps / risks</p>
                 <ul className="list-disc ml-5 text-sm text-gray-700 space-y-1">
                   {result.gaps.map((item, idx) => (
@@ -301,7 +284,7 @@ export default function ConstructionPersonasPage() {
               </div>
             </div>
 
-            <div>
+            <div className="rounded-2xl bg-amber-50/80 p-4">
               <p className="font-medium text-sm text-gray-900 mb-1">Priority fixes</p>
               <ul className="list-disc ml-5 text-sm text-gray-700 space-y-1">
                 {result.improvements.map((item, idx) => (
@@ -310,7 +293,7 @@ export default function ConstructionPersonasPage() {
               </ul>
             </div>
 
-            <div>
+            <div className="rounded-2xl bg-blue-50/80 p-4">
               <p className="font-medium text-sm text-gray-900 mb-1">Follow-up questions</p>
               <ul className="list-disc ml-5 text-sm text-gray-700 space-y-1">
                 {result.questions.map((item, idx) => (

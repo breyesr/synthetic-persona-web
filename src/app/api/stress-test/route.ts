@@ -32,6 +32,20 @@ const StressResponse = z.object({
 
 const MODEL = process.env.OPENAI_MODEL || "gpt-4o-mini";
 
+const CONFIDENCE_RANGES: Record<number, [number, number]> = {
+  1: [65, 95],
+  2: [55, 90],
+  3: [50, 85],
+};
+
+function normalizeConfidence(raw: number, intensity: number) {
+  const clamped = Math.max(0, Math.min(100, raw));
+  const [min, max] = CONFIDENCE_RANGES[intensity] ?? [55, 90];
+  const span = Math.max(5, max - min);
+  const scaled = min + (clamped / 100) * span;
+  return Math.max(0, Math.min(100, Math.round(scaled)));
+}
+
 export async function POST(req: Request) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
@@ -92,6 +106,11 @@ export async function POST(req: Request) {
       );
     }
 
+    const normalizedConfidence = normalizeConfidence(
+      parsed.data.confidence,
+      challengeLevel.intensity
+    );
+
     return NextResponse.json({
       persona: persona.name,
       challengeLevel: challengeLevel.intensity,
@@ -100,6 +119,7 @@ export async function POST(req: Request) {
       challengeDetail: challengeLevel.detail,
       focus: focusMeta.label,
       ...parsed.data,
+      confidence: normalizedConfidence,
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Failed to evaluate";

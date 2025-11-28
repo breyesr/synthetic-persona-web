@@ -1,123 +1,109 @@
-Contributing to Synthetic Persona Web
+# Contributing to Synthetic Persona Web
 
 Thanks for your interest in contributing! This guide will help you set up your environment, understand the workflow, and follow our standards.
 
-⸻
+---
 
-🛠 Development Setup
+## 🛠 Development Setup ("Zero-to-Hero")
 
-1. Clone the Repository
+This guide will take you from a fresh clone to a fully running local environment. It assumes you have **Node.js**, **npm**, and **Docker Desktop** installed.
 
+#### 1. Clone the Repository
+```bash
 git clone https://github.com/breyesr/synthetic-persona-web.git
 cd synthetic-persona-web
+```
 
-2. Install Dependencies
-
+#### 2. Install Dependencies
+```bash
 npm install
+```
 
-3. Run Locally
+#### 3. Configure Environment Variables
+Create your local environment file from the example.
+```bash
+cp .env.example .env.local
+```
+Now, edit the new `.env.local` file and add your `OPENAI_API_KEY`. The `POSTGRES_URL_LOCAL` is already configured for the Docker setup.
 
-PORT=3001 npm run dev
+#### 4. Start the Local Database
+With Docker Desktop running, start the Postgres database container.
+```bash
+docker-compose up -d
+```
+This starts a database on port `5433` that persists between restarts.
 
-Then open http://localhost:3001
+#### 5. Set Up Database Schema
+Create the `documents` table and indexes in your local database.
+```bash
+npm run db:setup
+```
 
-4. Environment Variables
+#### 6. Seed the Database (Ingestion)
+Process the local files in `/data`, generate embeddings, and load them into your database.
+```bash
+npm run embed
+```
 
-Create a .env.local file in the root of the project:
+#### 7. Run the Application
+Finally, run the Next.js development server.
+```bash
+npm run dev
+```
+The application will be available at `http://localhost:3000`.
 
-OPENAI_API_KEY=your-openai-api-key
+---
 
-Required:
-  • OPENAI_API_KEY → Needed for persona Q&A and actionable insights. Without it, the app falls back to deterministic stubs.
+## ✍️ Managing Content (Ingestion Runbook)
 
-Optional:
-  • PORT → Defaults to 3000; override with your preferred port.
-  • Next.js Telemetry can be disabled: npx next telemetry disable
+The vector database is not automatically updated. You must re-run the ingestion script when you change the source content.
 
-5. Code Standards
-  • Language: TypeScript + React (Next.js App Router)
-  • Style: ESLint + Prettier enforced.
-  • No any types unless explicitly justified.
-  • Components follow functional React with hooks.
+#### How to Add New Content
+Place new JSON persona files (or PDFs in the future) into the `/data` directory or its subdirectories.
 
-6. Git Workflow
-  • Default branch: main (production)
-  • Development branch: develop
-  • Feature branches: feat/<short-description>
-  • Bugfix branches: fix/<short-description>
+#### How to Index New Content
+After adding or modifying files, run the `embed` script from your terminal:
+```bash
+npm run embed
+```
+The script will find your new files, create embeddings, and add them to the database.
 
-Workflow:
+#### How to Delete Old Content
+Simply **delete the source file** from the `/data` directory. The next time you run `npm run embed`, the script's cleanup process will automatically find and delete all chunks associated with that missing file from the database.
 
-git checkout develop
-git pull origin develop
-git checkout -b feat/my-new-feature
+---
 
-Open a PR into develop. Once approved, merges to main will auto-deploy to Vercel.
+## 🏗️ Project Structure (v2)
 
-7. Commit Conventions
+`src/`
+ ├─ `app/`
+ │   ├─ `api/`
+ │   │   ├─ `persona/route.ts`      # Streaming RAG-powered Q&A API
+ │   │   └─ `stress-test/route.ts`  # RAG-powered Stress Test API
+ │   ├─ `consultas/page.tsx`      # Frontend for streaming Q&A
+ │   └─ `page.tsx` (now `construction-personas/page.tsx`) # Frontend for Stress Test
+ ├─ `components/`
+ │   └─ ... (UI components)
+ ├─ `lib/`
+ │   ├─ `clients.ts`              # Initializes and exports DB and OpenAI clients
+ │   ├─ `rag.ts`                  # Core hybrid search logic
+ │   ├─ `personaProvider.ts`      # Reads persona files and enriches with RAG context
+ │   ├─ ... (other providers)
+ └─ `data/`
+     ├─ `personas/`               # Source documents for persona data
+     └─ ... (other source data)
 
-Follow Conventional Commits:
-  • feat: – new feature
-  • fix: – bug fix
-  • docs: – documentation only changes
-  • refactor: – code changes that neither fix a bug nor add a feature
-  • chore: – maintenance tasks
+---
 
-Example:
+##  Git Workflow & Commit Conventions
 
-git commit -m "feat(scorecard): improve CPL calculation logic"
+*   **Branches**: `main` (production), `develop` (staging), `feat/*` (features), `fix/*` (bugfixes).
+*   **Workflow**: Create feature branches off `develop`. Open PRs against `develop`. Merges to `main` are for production releases.
+*   **Commits**: Follow [Conventional Commits](https://www.conventionalcommits.org/).
+    *   `feat:` (new feature), `fix:` (bug fix), `docs:` (documentation), `refactor:` (code cleanup), `chore:` (build tasks).
 
-8. Testing
+---
 
-Currently lightweight:
-  • Manual testing via local dev.
-  • Use starter questions in the IntakeForm to verify persona Q&A changes.
-  • Ensure outputs remain coherent (Scorecard → Q&A → Insights).
+## 🚀 Deployment
 
-9. Project Structure
-
-src/
- ├─ app/
- │   ├─ api/
- │   │   ├─ scorecard/route.ts   # Scorecard API
- │   │   ├─ persona/route.ts     # Persona Q&A + Insights API
- │   │   ├─ ...
- │   └─ page.tsx                # App entry
- ├─ components/
- │   ├─ IntakeForm.tsx          # Main UI form
- │   ├─ PersonaSelect.tsx
- │   ├─ IndustrySelect.tsx
- │   ├─ CitySelect.tsx
- ├─ lib/
- │   ├─ aiNarrative.ts          # Scorecard + Insights logic
- │   ├─ personaProvider.ts      # Persona context
- │   ├─ industryProvider.ts     # Industry benchmarks
- └─ prompts/                    # Prompt definitions
-
-10. Deployment
-  • Hosted on Vercel.
-  • Every push to main triggers a production build.
-  • Every PR deploys to a Vercel preview URL.
-
-11. Documentation
-  • /docs/README.md → Project overview & quickstart.
-  • /docs/architecture.md → High-level system architecture.
-  • /docs/contributing.md (this file) → Development guide.
-
-12. How to Contribute
-  1.  Fork the repo & create a branch.
-  2.  Make your changes.
-  3.  Run locally & test thoroughly.
-  4.  Commit using Conventional Commit message.
-  5.  Open a PR into develop.
-
-⸻
-
-✨ Notes for Contributors
-  • Goal of MVP:
-  • Take minimal user inputs.
-  • Return: Scorecard (numbers), Persona Q&A (human voice), Insights (actions).
-  • LLM dependency: OpenAI is used, but fallback stubs keep the app working offline.
-  • Keep it simple: Always prefer clarity in Spanish for end-user outputs.
-
-Happy coding 🚀
+Deployment is handled via Vercel. Every push to a PR creates a Preview Deployment, and every merge to `main` deploys to production. See `docs/DEPLOYMENT.md` for more details, including how to populate the production database.

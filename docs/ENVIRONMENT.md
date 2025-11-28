@@ -1,107 +1,62 @@
-ENVIRONMENT.md
+# Environment Configuration
 
-This document describes the environment configuration for Synthetic Persona Web. It defines required environment variables, recommended defaults, and best practices for local, staging, and production deployments.
+This document describes the environment configuration for the Synthetic Persona Web application, including the new database requirements.
 
-⸻
+---
 
-1. Node & Framework Versions
-  • Node.js: >=20.x
-  • Next.js: 15.x (App Router with Turbopack)
-  • TypeScript: 5.x
-  • Package Manager: npm
+## 1. Node & Framework Versions
+*   **Node.js**: >=20.x
+*   **Next.js**: 15.x
+*   **TypeScript**: 5.x
+*   **Package Manager**: npm
 
-Ensure consistency by using the .nvmrc file or explicitly setting Node version in your environment.
+---
 
-⸻
+## 2. Environment Variables
 
-2. Environment Variables
+All sensitive or environment-dependent values should be defined via `.env.local` (for local development) or through Vercel’s Environment Variables UI (for preview/production deployments).
 
-All sensitive or environment-dependent values should be defined via .env.local (for local) or through Vercel’s Environment Variables UI (for staging/production).
+### Core Variables
 
-Core Variables
-  • OPENAI_API_KEY → Required. API key for OpenAI (used for scorecard narratives, persona Q&A, and insights).
-  • PORT → Local dev port (default: 3000 if unset, we use 3001).
+| Variable               | Scope    | Description                                                                                                   |
+| ---------------------- | -------- | ------------------------------------------------------------------------------------------------------------- |
+| `OPENAI_API_KEY`       | All      | **Required**. API key for OpenAI, used for embeddings and chat completions.                                     |
+| `POSTGRES_URL_LOCAL`   | Local    | **Required for Local Dev**. The connection string for the local Docker-based Postgres database.                   |
+| `POSTGRES_URL`         | Vercel   | **Required for Deployment**. The connection string for the production/preview Vercel Postgres (Neon) database.    |
+| `LLAMA_CLOUD_API_KEY`  | All      | **Optional (Future)**. The API key for LlamaParse, which will be used for PDF ingestion in Phase 2.           |
 
-Vercel-specific
-  • VERCEL_ENV → Provided automatically by Vercel (development, preview, production).
-  • VERCEL_URL → Auto-set with deployment URL.
+---
 
-Optional / Future-Proofing
-  • LOG_LEVEL → Set verbosity for logging (debug, info, warn, error). Default: info.
-  • DISABLE_TELEMETRY → If true, disables any non-essential telemetry.
+## 3. Local Environment Setup
 
-⸻
+1.  **Copy the example file**:
+    ```bash
+    cp .env.example .env.local
+    ```
 
-3. Environment Files
-  • .env.local → Local overrides, not committed.
-  • .env.development → Defaults for local dev (safe values).
-  • .env.production → Production-only secrets (e.g., API keys).
+2.  **Edit `.env.local`**: Add your `OPENAI_API_KEY`. The `POSTGRES_URL_LOCAL` is already pre-configured for the Docker setup.
 
-Note: Only .env.example is committed. It lists all required variables with dummy values so contributors know what to configure.
+    **Example `.env.local`:**
+    ```env
+    # For local Docker database
+    POSTGRES_URL_LOCAL="postgresql://user:password@localhost:5433/persona_db"
 
-⸻
+    # For OpenAI API
+    OPENAI_API_KEY="sk-xxxxxx"
+    ```
 
-4. Local Environment Setup
+---
 
-# Copy example file
-cp .env.example .env.local
+## 4. Vercel Environments (Preview & Production)
 
-# Edit with your own secrets
-nano .env.local
+For both Preview and Production deployments on Vercel, the following variables must be set in the Vercel Dashboard under **Project → Settings → Environment Variables**.
 
-Example .env.local:
+*   `POSTGRES_URL`: This is set automatically when you integrate a Vercel Postgres (Neon) database with your project. **Ensure it is available to the Build environment.**
+*   `OPENAI_API_KEY`: You must add your OpenAI key manually.
 
-OPENAI_API_KEY=sk-xxxxxx
-PORT=3001
-LOG_LEVEL=debug
+---
 
-Run the app locally:
-
-npm install
-PORT=3001 npm run dev
-
-Access: http://localhost:3001
-
-⸻
-
-5. Staging / Preview Environment
-
-On Vercel:
-  1.  Go to Project → Settings → Environment Variables.
-  2.  Add OPENAI_API_KEY and any optional variables.
-  3.  Set scope = Preview.
-
-Preview branches (feat/*) automatically deploy with these vars.
-
-⸻
-
-6. Production Environment
-  • Same setup in Vercel dashboard, but scope = Production.
-  • Ensure the correct OPENAI_API_KEY for production workloads.
-  • Use LOG_LEVEL=info (or warn) to reduce noise.
-
-⸻
-
-7. Security Best Practices
-  • Never commit .env.local or .env.production.
-  • Rotate API keys at least every 90 days.
-  • Use Vercel Secrets for sensitive values.
-  • Keep .env.example updated whenever new vars are introduced.
-
-⸻
-
-8. Troubleshooting
-  • App won’t start (Missing API key) → Check OPENAI_API_KEY is set.
-  • Port already in use → Change PORT in .env.local (e.g., 3002).
-  • Environment mismatch → Run echo $VERCEL_ENV to confirm context.
-
-⸻
-
-9. Checklist for New Developers
-  • Install Node.js 20.x and npm.
-  • Copy .env.example → .env.local.
-  • Add your own OPENAI_API_KEY.
-  • Run npm install && npm run dev.
-  • Open http://localhost:3001.
-
-If everything compiles, your environment is ready.
+## 5. Security Best Practices
+*   Never commit `.env.local` or other files containing secrets to Git.
+*   Use the "Sensitive" setting in Vercel for API keys so they cannot be viewed after being set.
+*   Keep `.env.example` updated whenever new variables are introduced so other developers are aware of new requirements.

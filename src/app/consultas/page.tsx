@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useChat } from 'ai';
+import { useChat } from '@ai-sdk/react';
 import PersonaSelect, { PersonaOption } from "@/components/PersonaSelect";
 import IndustrySelect from "@/components/IndustrySelect";
 

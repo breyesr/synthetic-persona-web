@@ -5,7 +5,7 @@ import { openai } from '@/lib/clients';
 import { getPersona } from '@/lib/personaProvider'; // Use the central provider
 import { hybridSearch } from '@/lib/rag'; // Keep for type definitions, or just copy the type
 
-export const runtime = 'edge'; // Use Vercel's edge runtime for streaming
+export const runtime = 'nodejs'; // Use Node.js runtime for file system access
 
 const Body = z.object({
   messages: z.array(z.object({

@@ -2,7 +2,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import matter from "gray-matter";
-import { retrievePersonaContext } from "@/lib/ragSource";
+import { hybridSearch } from "@/lib/rag";
 
 export type Bench = {
   cplTargetMXN: [number, number];
@@ -111,22 +111,17 @@ const FALLBACK: Record<string, Persona> = {
   },
 };
 
-export async function getPersona(id: string, uploadedContext?: string): Promise<Persona | null> {
+export async function getPersona(id: string, userQuery: string): Promise<Persona | null> {
   const file = await readPersonaFile(id);
   const base = file ?? FALLBACK[id] ?? null;
   if (!base) return null;
 
-  const query = [
-    "persona:", base.name,
-    "goals:", (base.profile?.goals ?? []).join(", "),
-    "pains:", (base.profile?.pains ?? []).join(", "),
-  ].join(" ");
+  // Use the user's query for hybrid search to get relevant context
+  const searchResults = await hybridSearch(userQuery, id);
+  const ragContext = searchResults.map(r => r.content).join("\n\n");
 
-  const rag = await retrievePersonaContext({ personaId: id, query, uploadedContext });
-
-  const context = rag?.combinedContext
-    ? [rag.combinedContext, base.context].filter(Boolean).join("\n\n")
-    : [base.context, uploadedContext?.trim()].filter(Boolean).join("\n\n");
+  // Combine the dynamic RAG context with the static context from the persona file
+  const context = [ragContext, base.context].filter(Boolean).join("\n\n");
 
   return { ...base, context };
 }

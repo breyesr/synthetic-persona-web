@@ -1,12 +1,12 @@
 // src/app/api/persona/route.ts
-import { OpenAIStream, StreamingTextResponse, StreamData } from 'ai';
+import { createOpenAI } from '@ai-sdk/openai';
+import { streamText } from 'ai';
 import { z } from 'zod';
-import { openai } from '@/lib/clients';
-import { getPersona } from '@/lib/personaProvider'; // Use the central provider
-import { hybridSearch } from '@/lib/rag'; // Keep for type definitions, or just copy the type
+import { getPersona } from '@/lib/personaProvider';
 
-export const runtime = 'nodejs'; // Use Node.js runtime for file system access
+export const runtime = 'nodejs';
 
+// Define the API schema using Zod
 const Body = z.object({
   messages: z.array(z.object({
     role: z.enum(['user', 'assistant']),
@@ -15,29 +15,27 @@ const Body = z.object({
   personaType: z.string(),
 });
 
-function buildPrompt(personaName: string, query: string, context: string) {
+// Initialize the OpenAI provider
+const openai = createOpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+function buildSystemPrompt(personaName: string, context: string) {
   return `
-You are playing the role of ${personaName}.
-Based on the following context about your persona, answer the user's question in the first person.
-If the context does not contain the answer, state that you do not have an opinion on the matter.
+You are playing the role of ${personaName}, a real person with genuine opinions.
+Based on the following context about your persona, answer the user's question in the first person, speaking as that persona.
+If the provided context does not contain enough information to form an opinion, state that you do not have an opinion on the matter.
+Keep your answer concise and directly address the user's question.
 
-Context:
----
+## Context about you, ${personaName}:
 ${context}
----
-
-User's Question: ${query}
-
-Your Answer (as ${personaName}):
   `.trim();
 }
 
 export async function POST(req: Request) {
   try {
-    const body = Body.parse(await req.json());
-    const { messages, personaType } = body;
+    const { messages, personaType } = Body.parse(await req.json());
 
-    // The user's question is the last message in the array
     const lastMessage = messages[messages.length - 1];
     if (lastMessage.role !== 'user' || !lastMessage.content) {
       throw new Error('Invalid last message format.');
@@ -50,35 +48,18 @@ export async function POST(req: Request) {
       return new Response(JSON.stringify({ error: "Persona not found" }), { status: 404 });
     }
 
-    // 2. Create a StreamData instance to send context to the frontend
-    // Note: We don't have the raw search results here anymore, so we can't send sources.
-    // This is a trade-off of this simpler architecture.
-    // We could modify getPersona to return the sources as well if needed.
-    const data = new StreamData();
-    data.append({
-      type: 'sources',
-      sources: [{ source_file: `${persona.id}.json`, persona_id: persona.id }],
+    // 2. Build the system prompt with the retrieved context
+    const systemPrompt = buildSystemPrompt(persona.name, persona.context);
+
+    // 3. Call the AI with the new system prompt and user messages
+    const result = await streamText({
+      model: openai('gpt-4o-mini'),
+      system: systemPrompt,
+      messages: messages,
     });
 
-    // 3. Build the prompt for the LLM
-    const prompt = buildPrompt(persona.name, question, persona.context);
-
-    // 4. Request the OpenAI API for a streaming completion
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
-      stream: true,
-      messages: [{ role: 'user', content: prompt }],
-    });
-
-    // 5. Convert the response into a friendly text-stream
-    const stream = OpenAIStream(response, {
-      onFinal(completion) {
-        data.close();
-      },
-    });
-
-    // 6. Respond with the stream, passing the StreamData as the first argument
-    return new StreamingTextResponse(stream, {}, data);
+    // 4. Respond with the stream
+    return result.toAIStreamResponse();
 
   } catch (err) {
     const msg = err instanceof Error ? err.message : 'Bad request';

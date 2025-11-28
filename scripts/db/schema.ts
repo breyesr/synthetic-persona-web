@@ -9,11 +9,11 @@ import { Client } from 'pg';
 
 
 
-// Determine if we're in a production environment
+// Determine which connection string to use. Prioritize the production one if available.
 
-const isProduction = process.env.NODE_ENV === 'production';
 
-const connectionString = isProduction ? process.env.POSTGRES_URL : process.env.POSTGRES_URL_LOCAL;
+
+const connectionString = process.env.POSTGRES_URL || process.env.POSTGRES_URL_LOCAL;
 
 if (!connectionString) {
   throw new Error('Database connection string is not set. Please check your .env file.');

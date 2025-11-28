@@ -19,13 +19,15 @@ const CHUNK_OVERLAP = 50;
 const UUID_NAMESPACE = '1b671a64-40d5-491e-99b0-da01ff1f3341'; // DO NOT CHANGE
 
 // --- VALIDATE ENVIRONMENT VARIABLES ---
-const connectionString = isProduction ? process.env.POSTGRES_URL : process.env.POSTGRES_URL_LOCAL;
+// Prioritize the production one if available.
+const connectionString = process.env.POSTGRES_URL || process.env.POSTGRES_URL_LOCAL;
 if (!connectionString) {
   throw new Error('Database connection string is not set. Please check your .env file.');
 }
 if (!process.env.OPENAI_API_KEY) {
     throw new Error('OPENAI_API_KEY is not set. Please check your .env file.');
 }
+
 
 // --- CLIENTS ---
 const pgClient = new Client({ connectionString });

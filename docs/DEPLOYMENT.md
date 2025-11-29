@@ -1,113 +1,78 @@
-Deployment Guide — Synthetic Persona Web
+# Deployment Guide — Synthetic Persona Web (v2)
 
-This document explains how to deploy Synthetic Persona Web to production using Vercel. It also covers environment variables, branch strategy, and troubleshooting.
+This document explains how to deploy the application to production using Vercel, including the new database requirements.
 
-⸻
+---
 
-1. Prerequisites
-  • GitHub repository with the project code (main branch is production-ready).
-  • Vercel account linked to GitHub.
-  • Node.js 18+ installed locally for testing.
-  • Required environment variables (see .env.example).
+## 1. Prerequisites
+*   GitHub repository with the project code.
+*   Vercel account linked to GitHub.
+*   Node.js and Docker installed locally for running setup scripts.
 
-⸻
+---
 
-2. Environment Variables
+## 2. Environment Variables
 
-Set these variables in Vercel Dashboard → Project → Settings → Environment Variables:
-  • OPENAI_API_KEY → API key from OpenAI (required).
-  • PORT → Optional, defaults to 3000 locally. Not required in Vercel.
+The following variables must be set in your Vercel Dashboard under **Project → Settings → Environment Variables**.
 
-For local development, create a file named .env.local with:
+| Variable         | Required For | Description                                                                                    |
+| ---------------- | ------------ | ---------------------------------------------------------------------------------------------- |
+| `POSTGRES_URL`   | Production   | The connection string for your Vercel Postgres (Neon) database.                                |
+| `OPENAI_API_KEY` | Production   | Your secret key for the OpenAI API.                                                            |
+| `LLAMA_CLOUD_API_KEY` | Future Use   | For Phase 2 PDF parsing. Can be left blank for now.                                            |
 
-OPENAI_API_KEY=sk-xxxx
-PORT=3001
+**Important**: Ensure these variables are available during the **Build Phase** by checking the appropriate scopes in the Vercel UI.
 
+---
 
-⸻
+## 3. Vercel Deployment
 
-3. Local Deployment (Testing Before Push)
+### First-Time Setup
 
-# Install dependencies
-yarn install   # or npm install
+1.  Go to **Vercel Dashboard → Add New Project**.
+2.  Import your GitHub repository (`synthetic-persona-web`).
+3.  **Create and Link a Database**:
+    *   In the project configuration, navigate to the **Storage** tab.
+    *   Select **Postgres** (provided by Neon) and create a new database.
+    *   Connect the new database to your project. This should automatically add the `POSTGRES_URL` environment variable.
+4.  **Add Remaining Environment Variables**: Go to **Settings → Environment Variables** and add your `OPENAI_API_KEY`.
+5.  Click **Deploy**. The first build will likely fail or result in a non-functional app because the database is empty. Proceed to the next step.
 
-# Run local dev server
-PORT=3001 npm run dev
+### Step 4: Populate the Production Database (Critical)
 
-# Open in browser
-http://localhost:3001
+For the deployed application to work, its database must be set up and seeded with data. This is done by running the local scripts but pointing them at the remote Vercel database.
 
+1.  **Get Production DB URL**: Copy the `POSTGRES_URL` value from your Vercel project's environment variables.
+2.  **Run `db:setup` for Production**: In your local terminal, run the following command, pasting the URL you copied:
+    ```bash
+    POSTGRES_URL="YOUR_VERCEL_CONNECTION_STRING" npm run db:setup
+    ```
+3.  **Run `embed` for Production**: Now, run the ingestion script, again targeting the production database:
+    ```bash
+    POSTGRES_URL="YOUR_VERCEL_CONNECTION_STRING" OPENAI_API_KEY="YOUR_OPENAI_KEY" npm run embed
+    ```
 
-⸻
+### Subsequent Deployments
+*   `main` branch auto-deploys to production.
+*   Pull Requests auto-deploy to preview URLs.
+*   If you change the data in `/data`, you must re-run the `embed` script (Step 4.3) against the production database to see the changes reflected in your deployment.
 
-4. Vercel Deployment
+---
 
-First-Time Setup
-  1.  Go to Vercel Dashboard → Add New Project.
-  2.  Import GitHub repo synthetic-persona-web.
-  3.  Set root directory (usually /).
-  4.  Add environment variables.
-  5.  Deploy.
+## 5. Troubleshooting
 
-Subsequent Deployments
-  • Main branch auto-deploys to production URL: https://synthetic-persona-web.vercel.app
-  • Feature branches deploy to preview URLs automatically (e.g., https://feat-scorecard.vercel.app).
+*   **Build Error: `Database connection string is not set`**
+    *   **Cause**: The `POSTGRES_URL` is not available during the build step.
+    *   **Fix**: Go to your Vercel Environment Variables settings and ensure `POSTGRES_URL` is configured to be available for the **Build** environment (in addition to Preview/Production).
 
-⸻
+*   **Preview App loads but shows errors or no data.**
+    *   **Cause**: You have not populated the production/preview database yet.
+    *   **Fix**: Follow the steps in "Populate the Production Database" above to run the `db:setup` and `embed` scripts.
 
-5. Branch Strategy
-  • main → Stable production.
-  • develop → Integration branch.
-  • feat/* → Feature work. Each feature branch will get its own preview deployment.
+*   **500 error on API routes.**
+    *   **Cause**: `OPENAI_API_KEY` is likely missing or invalid in your Vercel environment variables.
+    *   **Fix**: Verify the key in Vercel settings.
 
-Workflow:
-  1.  Work on feat/* branch locally.
-  2.  Push to GitHub → Vercel creates preview deployment.
-  3.  Merge into develop for integration testing.
-  4.  Merge into main for production release.
+---
 
-⸻
-
-6. Troubleshooting
-
-Common Issues
-  • Lint/Type errors blocking build → We configured next.config.ts to skip ESLint/TS errors in production. If strict typing is required, fix before merge.
-  • 500 error on API routes → Ensure OPENAI_API_KEY is set correctly in Vercel.
-  • Deployment not updating → Clear build cache in Vercel → Redeploy.
-
-Debugging a Preview Deployment
-  1.  Open preview URL from Vercel.
-  2.  Use DevTools → Network tab to inspect API calls.
-  3.  If needed, run locally with the same branch:
-
-git checkout feat/my-feature
-npm install
-npm run dev
-
-
-
-⸻
-
-7. Rollback Strategy
-
-If production deploy introduces a bug:
-  1.  Go to Vercel Dashboard → Project → Deployments.
-  2.  Find the last good deployment.
-  3.  Click Promote to Production.
-
-This instantly rolls back without code changes.
-
-⸻
-
-8. Future Improvements
-  • Add staging project in Vercel for QA before production.
-  • Automate lint/type checks with GitHub Actions.
-  • Add monitoring for API errors and response times.
-
-⸻
-
-✅ With this guide, any developer should be able to:
-  • Run locally.
-  • Deploy to Vercel.
-  • Debug issues.
-  • Rollback safely.
+*For local development setup, branching strategy, and rollback instructions, please refer to `CONTRIBUTING.md` and the original sections of this guide.*

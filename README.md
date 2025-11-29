@@ -2,23 +2,30 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+This guide provides the minimal commands to get the project running locally. For a complete "zero-to-hero" setup guide, which includes configuring environment variables, please see **[our full Contributing Guide](./docs/CONTRIBUTING.md)**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Prerequisites:**
+- Node.js, npm, and Docker Desktop are installed.
+- You have created and configured your `.env.local` file as described in the contributing guide.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Quick Start
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1.  **Start the local database:**
+    ```bash
+    docker-compose up -d
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2.  **Set up the database schema and ingest data:**
+    ```bash
+    npm run db:setup && npm run embed
+    ```
+
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+Open [http://localhost:3000](http://localhost:3000) (or the port Next.js selects if 3000 is busy) with your browser to see the result.
+
 
 ## Learn More
 

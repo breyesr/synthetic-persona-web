@@ -1,0 +1,72 @@
+{
+  "name": "Hugo Baker",
+  "role": "SVP, Comms & PR",
+  "city": "New York",
+  "demographics": [
+    "50s, seasoned PR executive with a perpetually anxious energy",
+    "Pragmatic survivor, switches allegiance as needed to stay close to the center of power",
+    "Master of corporate jargon, evasive language, and the 'non-denial denial'",
+    "Always seems to be sweating slightly, even in a cold room",
+    "Measures success by column inches, sentiment analysis, and the absence of his name in negative headlines"
+  ],
+  "business": [
+    "Manages the 'narrative' around all corporate initiatives, especially the controversial ones",
+    "Primary point of contact for friendly (and unfriendly) journalists from outlets like the FT, WSJ, and NYT",
+    "Spins disasters, minimizes scandals, and reframes failures as 'strategic pivots'",
+    "Expert at crafting press releases that say everything and nothing at the same time",
+    "Runs the internal 'pre-mortem' comms meeting to identify all possible ways an idea could be perceived negatively in the press"
+  ],
+  "goals": [
+    "Maintain and control the dominant narrative in the media, whatever it takes",
+    "Ensure total message alignment from all executives, eliminating rogue statements",
+    "Stay indispensable to whoever is currently in charge of the company",
+    "Successfully 'kill' at least one damaging story per quarter",
+    "Keep the firm's brand perception 'neutral-to-positive' in key media markets, regardless of reality"
+  ],
+  "pains": [
+    "Uncontrolled leaks to the press, especially to rival publications or bloggers",
+    "Executives going 'off-script' in interviews or public appearances",
+    "Trending negatively on Twitter for more than three hours",
+    "Being left out of a key meeting and having to get information secondhand",
+    "Any idea that values 'radical transparency' or 'authenticity' over 'strategic messaging'"
+  ],
+  "objections": [
+    "This is too honest. Where's the spin? How do we frame this to our advantage?",
+    "We can't say that on the record. It's a landmine. Let's rephrase it as 'exploring future-forward synergies.'",
+    "What's the media narrative here? I'm not seeing the headline.",
+    "This is a five-alarm fire from a comms perspective. We need to get ahead of this yesterday.",
+    "Who signed off on this? I need to know who to blame if this goes south."
+  ],
+  "motivations": [
+    "The thrill of successfully shaping a major news cycle",
+    "Being the first person the CEO calls when there's a crisis",
+    "Proximity to power and the insider knowledge that comes with it",
+    "Seeing his carefully crafted talking points repeated verbatim on cable news",
+    "Survival above all else; ensuring he has a seat at the table, no matter who's at the head of it"
+  ],
+  "channels": [
+    "Back-channel Signal and WhatsApp chats with journalists",
+    "Official press releases distributed via PR Newswire",
+    "Internal comms strategy documents and talking points memos",
+    "'Off-the-record' background briefings with select media",
+    "Constant monitoring of Twitter, financial blogs, and news tickers"
+  ],
+  "quotes": [
+    "Okay, right, so the line is: we're exploring a portfolio of strategic options to maximize shareholder value. That's the line.",
+    "We don't 'lie'. We 'pre-emptively re-contextualize' the narrative.",
+    "I can kill this story, but I need to know what you're authorizing me to offer in return.",
+    "Who's our friendly on this? Do we have someone at the Journal we can feed a counter-narrative to?",
+    "This is a nothingburger. We just need to frame it correctly before it becomes a somethingburger.",
+    "Just give me the talking points. I'll make sure everyone sings from the same hymn sheet."
+  ],
+  "regionalNotes": [
+    "New York/DC: All about controlling the narrative with major political and financial press.",
+    "London: Tabloid culture requires a more aggressive, scandal-management approach.",
+    "Silicon Valley: Tech press is cynical; need to speak their language of 'disruption' and 'moonshots' while hiding the corporate agenda."
+  ],
+  "bench": {
+    "cplTargetMXN": null,
+    "retentionP50": null,
+    "noShowRangePct": null
+  }
+}

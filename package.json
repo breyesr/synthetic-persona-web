@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "db:setup": "dotenv -f .env.local -- tsx scripts/db/schema.ts",
-    "embed": "dotenv -f .env.local -- tsx scripts/db/embed.ts"
+    "embed": "export $(grep -v '^#' .env.local | xargs) && tsx scripts/db/embed.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.74",

@@ -10,6 +10,7 @@ This project adheres to Semantic Versioning and follows a simplified Keep a Chan
   • Persona image/avatar generation.
   • Export results to PDF and CSV.
   • Admin dashboard for benchmark management.
+  • Removed legacy UI routes (`/consultas`, `/market-research`, `/construction-personas`) and the `docs/CONSULTAS.md` page; underlying APIs remain available for integrations.
 
 
 ⸻

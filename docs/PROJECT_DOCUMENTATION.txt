@@ -10,7 +10,6 @@ Synthetic Persona Web — Technical Documentation
 2. UX Entry Points
 ------------------
 - `/` (`src/app/page.tsx`): renders `IntakeForm` with persona dropdown, business metrics, acquisition channels, and repeat rate. Submitting hits `/api/scorecard` to build the numeric score + narrative. Post-submit focus buttons unlock the persona Q&A workflow.
-- `/consultas` (`src/app/consultas/page.tsx`): lightweight playground to ask a persona an arbitrary question without filling the full intake.
 - Shared components: `PersonaSelect`, `IndustrySelect`, `CitySelect`, and the large `IntakeForm` orchestrate all form logic, validation, preset starter questions, and Q&A rendering.
 
 3. Data + AI Flow
@@ -26,7 +25,7 @@ Synthetic Persona Web — Technical Documentation
    - When the intake payload includes numbers, it also calls `buildActionableInsights` to merge persona bullets + business math into “what to do this week”, KPIs, and tone guidance.
 5. **Action card generator** (`src/app/api/action-card/route.ts`):
    - Accepts the scorecard + persona reply and asks OpenAI (model configurable via `OPENAI_MODEL`) for DIY steps, agency-ready handoff bullets, a “why now”, and an impact score. Not yet wired into the UI but ready for integrations/automations.
-6. **Cities & industries** (`/api/cities`, `/api/industries`) are simple file-backed endpoints used by the selects. `/api/personas` lists locally available personas for the `/consultas` view.
+6. **Cities & industries** (`/api/cities`, `/api/industries`) are simple file-backed endpoints used by the selects. `/api/personas` lists locally available personas for selector components.
 7. **RAG enrichment** (`src/lib/ragSource.ts`): optional Markdown persona notes are chunked, embedded via `text-embedding-3-small`, and re-injected into prompts to keep answers aligned with custom uploads (`uploadedContext`).
 
 4. Key Modules
@@ -60,7 +59,7 @@ No third-party databases are used; everything else is file-backed.
 - **Add an industry**: add a JSON file to `data/industries/` with `{ id, name, bench }`. Channel-specific CPL ranges greatly improve scorecard accuracy.
 - **Custom cities list**: edit `data/cities.json`. `/api/cities` dedupes IDs and falls back to a short default list if parsing fails.
 - **Surface the action card**: call `/api/action-card` after a persona Q&A to display DIY vs agency recommendations inside the UI. The handler already expects persona + scorecard payloads.
-- **Internationalization**: update `src/app/layout.tsx` metadata + fonts, extend persona/industry files with `locale`, and adjust copy in `IntakeForm`/`ConsultasPage`.
+- **Internationalization**: update `src/app/layout.tsx` metadata + fonts, extend persona/industry files with `locale`, and adjust copy in `IntakeForm`.
 
 8. Known Limitations & Risks
 ----------------------------
@@ -78,12 +77,8 @@ No third-party databases are used; everything else is file-backed.
 
 This document should give new contributors enough context to navigate the codebase, wire new data, and understand how the AI-assisted flows fit together.
 
-10. Idea Stress Testing Tool (Construction Personas)
-----------------------------------------------------
-- **Surface**: `/construction-personas` (renamed in UI as “Idea Stress Testing Tool”) now targets the construction persona catalog under `data/personas/construction/`. Users select a persona, describe their idea, share a goal, and specify “which angle to test” as free text.
-- **Challenge Levels**: Each intensity lives as its own JSON file in `data/challengelevels/` (`supportive.json`, `direct.json`, `critical.json`). Fields cover tone styles, behavior rules, use-case awareness, and output requirements. These files are read by `src/lib/challengeLevels.ts`, and `/api/challenge-levels` exposes them to the frontend. Caching happens only in production so changes are picked up automatically during local dev.
-- **New API**: `/api/stress-test` accepts `{ personaType, challengeLevelId, idea, goal, evaluationFocus }`. It loads persona context plus the selected challenge-level metadata, then builds a system prompt describing tone, behavior, persona integration, and question style. Responses include summary, strengths, gaps, improvements, follow-up questions, tone label, confidence, and echo back the challenge metadata.
-- **Frontend Flow**:
-  * Persona dropdown shows persona roles but submits canonical ids; levels dropdown is driven entirely by `/api/challenge-levels`.
-  * Idea textarea spans full width; idea, goal, and evaluation focus require minimum characters before enabling the “Stress-test” button.
-  * Results highlight persona name, chosen focus, challenge label/detail, summary block, strengths/gaps, prioritized fixes, and follow-up questions, matching the JSON contract returned by `/api/stress-test`.
+10. Idea Stress Testing Tool (API-only)
+---------------------------------------
+- **Surface**: the dedicated `/construction-personas` UI was removed; the functionality remains available via the APIs below for integrations or future UI work.
+- **Challenge Levels**: Each intensity lives as its own JSON file in `data/challengelevels/` (`supportive.json`, `direct.json`, `critical.json`). Fields cover tone styles, behavior rules, use-case awareness, and output requirements. These files are read by `src/lib/challengeLevels.ts`, and `/api/challenge-levels` exposes them. Caching happens only in production so changes are picked up automatically during local dev.
+- **API**: `/api/stress-test` accepts `{ personaType, challengeLevelId, idea, goal, evaluationFocus }`. It loads persona context plus the selected challenge-level metadata, then builds a system prompt describing tone, behavior, persona integration, and question style. Responses include summary, strengths, gaps, improvements, follow-up questions, tone label, confidence, and echo back the challenge metadata.

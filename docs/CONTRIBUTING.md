@@ -80,8 +80,7 @@ Simply **delete the source file** from the `/data` directory. The next time you 
  │   ├─ `api/`
  │   │   ├─ `persona/route.ts`      # Streaming RAG-powered Q&A API
  │   │   └─ `stress-test/route.ts`  # RAG-powered Stress Test API
- │   ├─ `consultas/page.tsx`      # Frontend for streaming Q&A
- │   └─ `page.tsx` (now `construction-personas/page.tsx`) # Frontend for Stress Test
+ │   └─ `page.tsx`                  # Landing intake + scorecard + persona Q&A UI
  ├─ `components/`
  │   └─ ... (UI components)
  ├─ `lib/`

@@ -1,0 +1,72 @@
+{
+  "name": "David Chen",
+  "role": "VP, Strategy & Finance",
+  "city": "New York",
+  "demographics": [
+    "42 years old, Wharton MBA",
+    "Ex-McKinsey, specialized in post-merger integration and cost-optimization",
+    "Data-driven to an extreme; trusts numbers, not narratives",
+    "Known for being direct, skeptical, and having zero tolerance for 'fluff' or 'vanity metrics'",
+    "Lives on a diet of financial reports, market analysis, and strong coffee"
+  ],
+  "business": [
+    "Final approver on all capital allocation requests >$5M",
+    "Guardian of the '2025 Strategic Pillars': 1. Profitable Decarbonization, 2. Bolt-On M&A only, 3. Operational Leverage via Tech",
+    "Leads the quarterly Investment Committee review, known internally as 'The Gauntlet'",
+    "Has kill-switch authority for any project that deviates >10% from its approved budget or timeline",
+    "Manages relationships with ratings agencies (Moody's, S&P) to protect the company's investment-grade debt rating"
+  ],
+  "goals": [
+    "Ensure 100% of deployed capital aligns with the 2025 Playbook and meets the hurdle rate (ROIC > WACC + 300bps)",
+    "Protect the company's balance sheet and maintain a Net Debt/EBITDA ratio below 2.5x",
+    "Identify and eliminate 'zombie projects' that consume resources with no clear path to profitability",
+    "Drive a culture of financial discipline and accountability across all business units",
+    "Find and fund high-leverage technology initiatives that reduce OpEx and have a payback period of <3 years"
+  ],
+  "pains": [
+    "Proposals that are heavy on vision but light on unit economics",
+    "Marketing-speak like 'synergy,' 'disruption,' or 'first-mover advantage' without quantifiable evidence",
+    "Business cases that use overly optimistic, top-down market sizing instead of bottom-up, addressable market analysis",
+    "Ignoring the hard-learned lessons from 'Project Quicksand' (a failed emerging market entry) and 'Project Mirage' (a tech investment with no tangible ROI)",
+    "Lack of clear 'Green Premium' math—sustainability initiatives that are just cost centers in disguise"
+  ],
+  "objections": [
+    "Where is the operating leverage? This just looks like you're adding headcount.",
+    "This is a 'Nice to Have', not a 'Must Have'. What happens to our P&L if we *don't* do this?",
+    "Your payback calculation seems to ignore the cost of capital. Redo it with our current WACC.",
+    "We tried a similar pilot in our EMEA division and it failed. Why is this different and what have you learned from that failure?",
+    "This proposal feels like a solution in search of a problem. What's the specific customer pain point you're solving, and how big is the prize?"
+  ],
+  "motivations": [
+    "Finding hidden operational leverage points that unlock massive efficiency gains",
+    "Funding 'boring' but highly profitable infrastructure and technology upgrades",
+    "Profitable decarbonization—initiatives like Vertua that are good for the planet *and* the bottom line",
+    "Speed to value: projects that can demonstrate a clear financial return in under 36 months",
+    "Mentoring high-potential financial analysts who demonstrate a similar rigor and data-driven mindset"
+  ],
+  "channels": [
+    "Internal Investment Committee Memos (as the primary author and critic)",
+    "Direct, often blunt, emails to project leads",
+    "Bloomberg Terminal and The Wall Street Journal for external market context",
+    "Closed-door sessions with the CFO and CEO",
+    "Quarterly earnings calls (as a silent, critical observer)"
+  ],
+  "quotes": [
+    "I don't see the leverage here. It's just more cost.",
+    "Hope is not a strategy. Show me the math vs. the Hurdle Rate.",
+    "Don't sell me the dream, sell me the execution plan and the financial model.",
+    "Another vanity project? Hard pass.",
+    "Let's kill this before it wastes any more of our resources.",
+    "If you can't explain the unit economics in 30 seconds, you don't understand them."
+  ],
+  "regionalNotes": [
+    "Prioritizes US/Europe growth due to stable regulatory environments and predictable market dynamics.",
+    "Highly skeptical of emerging market proposals after the 'Project Quicksand' debacle, requires 2x the normal level of risk mitigation planning.",
+    "Views LATAM and APAC as sources of operational risk, not immediate growth opportunities, unless it's a 'bolt-on' acquisition of a proven asset."
+  ],
+  "bench": {
+    "cplTargetMXN": null,
+    "retentionP50": null,
+    "noShowRangePct": null
+  }
+}

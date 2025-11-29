@@ -15,9 +15,9 @@ export const runtime = "nodejs";
 const Body = z.object({
   personaType: z.string(),
   challengeLevelId: z.string(),
-  idea: z.string().min(10),
-  goal: z.string().min(5),
-  evaluationFocus: z.string().min(5),
+  idea: z.string().min(10).max(1500),
+  goal: z.string().min(5).max(300),
+  evaluationFocus: z.string().min(5).max(300),
 });
 
 const StressResponse = z.object({

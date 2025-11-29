@@ -13,6 +13,7 @@ export type Bench = {
 export type Persona = {
   id: string;
   name: string;
+  role?: string;
   profile?: {
     goals?: string[];
     pains?: string[];
@@ -27,27 +28,17 @@ export type Persona = {
 const DATA_DIR = path.join(process.cwd(), "data", "personas");
 
 async function readPersonaFile(id: string): Promise<Persona | null> {
-  const attempts = [
-    path.join(DATA_DIR, `${id}.json`),
-    path.join(DATA_DIR, `${id}.md`),
-    path.join(DATA_DIR, id),
-  ];
-  let raw: string | null = null;
+  const personaDir = path.join(DATA_DIR, id);
+  const personaFile = path.join(personaDir, 'persona.json');
+
   try {
-    for (const candidate of attempts) {
-      try {
-        raw = await fs.readFile(candidate, "utf8");
-        break;
-      } catch {
-        // keep trying other paths
-      }
-    }
-    if (!raw) return null;
+    const raw = await fs.readFile(personaFile, "utf8");
     const trimmed = raw.trim();
 
     if (trimmed.startsWith("{")) {
       const j = JSON.parse(trimmed);
       const name: string = j.name ?? id;
+      const role: string | undefined = j.role;
       const bench: Bench | undefined = j.bench
         ? {
             cplTargetMXN: [Number(j.bench.cplTargetMXN?.[0] ?? 0), Number(j.bench.cplTargetMXN?.[1] ?? 0)] as [number, number],
@@ -75,6 +66,7 @@ async function readPersonaFile(id: string): Promise<Persona | null> {
       return {
         id,
         name,
+        role,
         profile: {
           goals: j.goals ?? [],
           pains: j.pains ?? [],
@@ -91,6 +83,7 @@ async function readPersonaFile(id: string): Promise<Persona | null> {
     return {
       id: data.id ?? id,
       name: data.name ?? id,
+      role: data.role,
       profile: data.profile,
       locale: data.locale,
       context: (content ?? "").trim(),
@@ -101,47 +94,60 @@ async function readPersonaFile(id: string): Promise<Persona | null> {
   }
 }
 
-const FALLBACK: Record<string, Persona> = {
-  nutriologa: {
-    id: "nutriologa",
-    name: "Nutrióloga",
-    profile: { goals: ["Aumentar consultas"], pains: ["No-shows"], channels: ["Instagram"], ethics: [] },
-    locale: "es-MX",
-    context: "Contexto breve por defecto.",
-  },
-};
-
 export async function getPersona(id: string, userQuery: string): Promise<Persona | null> {
   const file = await readPersonaFile(id);
-  const base = file ?? FALLBACK[id] ?? null;
-  if (!base) return null;
+  if (!file) return null;
 
   // Use the user's query for hybrid search to get relevant context
   const searchResults = await hybridSearch(userQuery, id);
   const ragContext = searchResults.map(r => r.content).join("\n\n");
 
   // Combine the dynamic RAG context with the static context from the persona file
-  const context = [ragContext, base.context].filter(Boolean).join("\n\n");
+  const context = [ragContext, file.context].filter(Boolean).join("\n\n");
 
-  return { ...base, context };
+  return { ...file, context };
 }
 
-export async function listPersonas(): Promise<{ id: string; name: string }[]> {
+async function findPersonaFiles(dir: string): Promise<string[]> {
+    const entries = await fs.readdir(dir, { withFileTypes: true });
+    let files: string[] = [];
+    for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+            files = files.concat(await findPersonaFiles(fullPath));
+        } else if (entry.name === 'persona.json') {
+            files.push(fullPath);
+        }
+    }
+    return files;
+}
+
+export async function listPersonas(): Promise<{ id: string; name: string; role?: string }[]> {
+    try {
+        const personaFiles = await findPersonaFiles(DATA_DIR);
+        const metas = await Promise.all(
+            personaFiles.map(async (file) => {
+                const id = path.dirname(file).substring(DATA_DIR.length + 1);
+                const p = await readPersonaFile(id);
+                return p ? { id: p.id, name: p.name, role: p.role } : null;
+            })
+        );
+
+        const existing = metas.filter(Boolean) as { id: string; name: string; role?: string }[];
+        
+        return existing;
+    } catch (err) {
+        console.error("Failed to list personas", err);
+        return []; // Return empty array if error occurs
+    }
+}
+
+export async function getPersonaKnowledgeFiles(personaId: string): Promise<string[]> {
+  const knowledgeDir = path.join(DATA_DIR, personaId, 'knowledge');
   try {
-    const entries = await fs.readdir(DATA_DIR);
-    const ids = entries
-      .filter(e => e.endsWith(".json") || e.endsWith(".md"))
-      .map(e => e.replace(/\.(json|md)$/, ""));
-    const metas = await Promise.all(ids.map(async pid => {
-      const p = await readPersonaFile(pid);
-      return p ? { id: p.id, name: p.name } : null;
-    }));
-    const existing = metas.filter(Boolean) as { id: string; name: string }[];
-    const fallbacks = Object.values(FALLBACK)
-      .filter(p => !existing.find(e => e.id === p.id))
-      .map(p => ({ id: p.id, name: p.name }));
-    return [...existing, ...fallbacks];
-  } catch {
-    return Object.values(FALLBACK).map(p => ({ id: p.id, name: p.name }));
+    const files = await fs.readdir(knowledgeDir);
+    return files.map(file => path.basename(file));
+  } catch (error) {
+    return [];
   }
 }

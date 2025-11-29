@@ -1,4 +1,4 @@
-// src/app/page.tsx
+// src/app/construction-personas/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -34,10 +34,10 @@ type PersonaOption = {
     name:string;
 };
 
-const FIELD_LIMITS = {
-    idea: { min: 10, max: 1500 },
-    goal: { min: 5, max: 300 },
-    evaluationFocus: { min: 5, max: 300 },
+const MIN_LENGTHS = {
+    idea: 10,
+    goal: 5,
+    evaluationFocus: 5,
 };
 
 export default function ConstructionPersonasPage() {
@@ -120,12 +120,9 @@ export default function ConstructionPersonasPage() {
         };
     }, []);
 
-    const isFormValid = idea.trim().length >= FIELD_LIMITS.idea.min &&
-                        idea.trim().length <= FIELD_LIMITS.idea.max &&
-                        goal.trim().length >= FIELD_LIMITS.goal.min &&
-                        goal.trim().length <= FIELD_LIMITS.goal.max &&
-                        evaluationFocus.trim().length >= FIELD_LIMITS.evaluationFocus.min &&
-                        evaluationFocus.trim().length <= FIELD_LIMITS.evaluationFocus.max &&
+    const isFormValid = idea.trim().length >= MIN_LENGTHS.idea &&
+                        goal.trim().length >= MIN_LENGTHS.goal &&
+                        evaluationFocus.trim().length >= MIN_LENGTHS.evaluationFocus &&
                         personaType &&
                         challengeLevelId;
 
@@ -230,6 +227,12 @@ export default function ConstructionPersonasPage() {
                             <label className="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa]">
                                 Idea
                             </label>
+                            <span className={clsx(
+                                "text-xs",
+                                idea.length < MIN_LENGTHS.idea ? "text-red-400" : "text-green-400"
+                            )}>
+                                {idea.length}/{MIN_LENGTHS.idea}
+                            </span>
                         </div>
                         <textarea
                             value={idea}
@@ -239,20 +242,19 @@ export default function ConstructionPersonasPage() {
                             rows={6}
                             className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent transition-all resize-none"
                         />
-                        <span className={clsx(
-                            "block text-xs text-right mt-1",
-                            idea.length < FIELD_LIMITS.idea.min || idea.length > FIELD_LIMITS.idea.max ? "text-red-400" : "text-gray-400"
-                        )}>
-                            {idea.length}/{FIELD_LIMITS.idea.max}
-                        </span>
                     </div>
-                    
 
                     <div>
                         <div className="flex justify-between items-center mb-2">
                             <label className="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa]">
                                 Goal
                             </label>
+                            <span className={clsx(
+                                "text-xs",
+                                goal.length < MIN_LENGTHS.goal ? "text-red-400" : "text-green-400"
+                            )}>
+                                {goal.length}/{MIN_LENGTHS.goal}
+                            </span>
                         </div>
                         <textarea
                             value={goal}
@@ -262,12 +264,6 @@ export default function ConstructionPersonasPage() {
                             rows={3}
                             className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent transition-all resize-none"
                         />
-                        <span className={clsx(
-                            "block text-xs text-right mt-1",
-                            goal.length < FIELD_LIMITS.goal.min || goal.length > FIELD_LIMITS.goal.max ? "text-red-400" : "text-gray-400"
-                        )}>
-                            {goal.length}/{FIELD_LIMITS.goal.max}
-                        </span>
                     </div>
 
                     <div>
@@ -275,6 +271,12 @@ export default function ConstructionPersonasPage() {
                             <label className="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa]">
                                 Focus
                             </label>
+                            <span className={clsx(
+                                "text-xs",
+                                evaluationFocus.length < MIN_LENGTHS.evaluationFocus ? "text-red-400" : "text-green-400"
+                            )}>
+                                {evaluationFocus.length}/{MIN_LENGTHS.evaluationFocus}
+                            </span>
                         </div>
                         <div className="relative">
                             <textarea
@@ -285,12 +287,6 @@ export default function ConstructionPersonasPage() {
                                 rows={2}
                                 className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-lg px-4 py-3 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent transition-all resize-none"
                             />
-                            <span className={clsx(
-                                "block text-xs text-right mt-1",
-                                evaluationFocus.length < FIELD_LIMITS.evaluationFocus.min || evaluationFocus.length > FIELD_LIMITS.evaluationFocus.max ? "text-red-400" : "text-gray-400"
-                            )}>
-                                {evaluationFocus.length}/{FIELD_LIMITS.evaluationFocus.max}
-                            </span>
                             <button
                                 type="button"
                                 aria-label="Auto-detect risks"

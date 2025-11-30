@@ -167,6 +167,45 @@ export default function ConstructionPersonasPage() {
     };
     
     const selectedPersonaName = personas.find(p => p.id === personaType)?.name.split('—')[0].trim() || 'Persona';
+    const analysis = result
+        ? {
+            confidenceScore: result.confidence,
+            verdict: result.summary,
+            strengths: result.strengths,
+            gaps: result.gaps,
+            actionPlan: result.improvements,
+            followUpQuestions: result.questions,
+        }
+        : null;
+
+    const handleExport = () => {
+        if (!analysis) return;
+        const date = new Date().toLocaleDateString();
+        const report = `IDEA STRESS TEST REPORT
+Generated: ${date}
+[ THE IDEA ] ${idea}
+
+========================================
+
+[ THE VERDICT ] Confidence Score: ${analysis.confidenceScore}/100 Summary: ${analysis.verdict}
+
+[ STRENGTHS ] ${analysis.strengths.map((s: string) => `+ ${s}`).join('\n')}
+
+[ GAPS ] ${analysis.gaps.map((g: string) => `- ${g}`).join('\n')}
+
+[ ACTION PLAN ] ${analysis.actionPlan.map((step: string, i: number) => `${i + 1}. ${step}`).join('\n')}
+
+[ FOLLOW-UP QUESTIONS ] ${analysis.followUpQuestions.map((q: string) => `? ${q}`).join('\n')} `;
+
+        const blob = new Blob([report], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `stress-test-${new Date().toISOString().slice(0, 10)}.txt`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
 
     return (
         <div className="min-h-screen bg-[#0a0a0a] text-[#ededed] px-4 py-12">
@@ -474,6 +513,16 @@ export default function ConstructionPersonasPage() {
                                     ))}
                                 </div>
                             </div>
+                        </div>
+
+                        <div className="mt-10 pt-6 border-t border-gray-100 flex justify-end pb-12">
+                            <button
+                                onClick={handleExport}
+                                className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-[#ededed] bg-gradient-to-br from-[#171717] to-[#0f0f0f] border border-[rgba(255,255,255,0.15)] rounded-lg transition-all shadow-lg shadow-black/30 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/40 hover:bg-[rgba(255,255,255,0.05)] hover:-translate-y-0.5 hover:border-[#4F46E5]/40 hover:shadow-[#4F46E5]/20 active:translate-y-[1px] active:scale-[0.99] active:border-[#4F46E5]/50"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-500"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                Download Analysis (.txt)
+                            </button>
                         </div>
                     </div>
                 )}

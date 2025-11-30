@@ -54,6 +54,7 @@ export default function ConstructionPersonasPage() {
     const [error, setError] = useState<string | null>(null);
     const [result, setResult] = useState<StressResult | null>(null);
 
+
     useEffect(() => {
         let cancelled = false;
 
@@ -476,6 +477,8 @@ export default function ConstructionPersonasPage() {
                         </div>
                     </div>
                 )}
+
+
             </div>
         </div>
     );

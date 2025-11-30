@@ -69,7 +69,6 @@ Your response MUST be a valid JSON object with this exact structure:
 CRITICAL: Return ONLY the JSON object. No markdown formatting, no code blocks.`;
 }
 
-
 const MODEL = process.env.OPENAI_MODEL || "gpt-4o-mini";
 
 export async function POST(req: Request) {
@@ -135,7 +134,7 @@ export async function POST(req: Request) {
     const confidenceScore = Math.min(100, Math.max(1, parsed.data.confidenceScore || 50));
 
     // Map new schema to old response structure for frontend compatibility
-    return NextResponse.json({
+    const responsePayload = {
       persona: persona.name,
       challengeLevel: challengeLevel.intensity,
       challengeLevelId: challengeLevel.id,
@@ -149,7 +148,25 @@ export async function POST(req: Request) {
       questions: parsed.data.followUpQuestions,
       confidence: confidenceScore,
       // tone is part of prompt now, not response
-    });
+    };
+
+    // Non-blocking usage log to Vercel runtime logs
+    console.log(
+      JSON.stringify(
+        {
+          event: "stress_test_completed",
+          timestamp: new Date().toISOString(),
+          persona: persona.name,
+          confidence_score: confidenceScore,
+          input_idea: body.idea,
+          verdict: parsed.data.verdict,
+        },
+        null,
+        2
+      )
+    );
+
+    return NextResponse.json(responsePayload);
   } catch (err) {
     const message = err instanceof Error ? err.message : "Failed to evaluate";
     console.error("[stress-test] error", err);

@@ -1,0 +1,71 @@
+{
+  "id": "facebook_group_post",
+  "platform_id": "facebook",
+  "name": "Facebook Group Post",
+  "includes_formats": [
+    "group_text_post",
+    "group_image_post",
+    "group_video_post",
+    "group_poll_post"
+  ],
+  "content_type_group": "community_feed",
+  "primary_goal_vibe": "Peer-to-peer interaction, community support, and topic-focused discussion inside a group.",
+  "tone_preference": "Peer-level, conversational, and inclusive. Less brand-broadcast, more member-to-member dialogue.",
+  "copy_guidelines": {
+    "copy_best_practices": "Write as if speaking directly to fellow members. Use questions, prompts, and scenarios to trigger replies. Avoid one-way announcements; aim for back-and-forth discussion.",
+    "caption_structure_hint": "Line 1: clear question, statement, or scenario. Lines 2–3: minimal context or explanation. Final line: direct question or prompt for input.",
+    "recommended_caption_length": "Short to medium, focused on sparking replies.",
+    "cta_examples": [
+      "What would you do in this situation",
+      "Share your experience in the comments",
+      "Show us your version in a photo",
+      "Vote in the poll and tell us why",
+      "Drop your tips below"
+    ]
+  },
+  "sub_format_emphasis_rules": {
+    "group_text_post": {
+      "caption_role": "Core content. The text itself is the conversation starter.",
+      "cta_focus": "Replies and comment threads."
+    },
+    "group_image_post": {
+      "caption_role": "Explain or contextualize the image, then invite members to react or share their own.",
+      "cta_focus": "Comments, image replies, and engagement."
+    },
+    "group_video_post": {
+      "caption_role": "Summarize what the video shows and what feedback or stories you want from members.",
+      "cta_focus": "Watch behavior and comments."
+    },
+    "group_poll_post": {
+      "caption_role": "Frame the poll question clearly and explain why it matters to the group.",
+      "cta_focus": "Votes and follow-up comments."
+    }
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "Generally not required inside Groups.",
+    "hashtag_strategy": "Use only if the group culture uses specific tags for topics or threads.",
+    "mention_strategy": "Tag members or admins when their input is particularly relevant, but avoid over-tagging."
+  },
+  "technical_constraints": {
+    "feed_context": "Posts appear in the Group feed and may surface in member home feeds based on engagement.",
+    "visibility_note": "Group privacy settings determine external visibility.",
+    "media_support": "Supports text, images, video, links, and polls."
+  },
+  "required_elements": [
+    "Clear question, prompt, or scenario",
+    "Community-relevant context",
+    "Explicit invitation to comment or participate"
+  ],
+  "output_fields": [
+    "Caption",
+    "Poll_Options_Optional",
+    "Media_Optional",
+    "Tagged_Accounts_Optional"
+  ],
+  "disallowed_practices": [
+    "Brand-style announcements with no invitation to engage",
+    "Off-topic posts unrelated to the group’s purpose",
+    "Overly promotional or self-serving content",
+    "Dense text without breaks"
+  ]
+}

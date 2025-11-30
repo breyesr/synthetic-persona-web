@@ -1,0 +1,60 @@
+{
+  "id": "linkedin_poll",
+  "platform_id": "linkedin",
+  "name": "LinkedIn Poll",
+  "includes_formats": [
+    "single_question_poll"
+  ],
+  "content_type_group": "poll",
+  "primary_goal_vibe": "Insight gathering, engagement, and conversation-starting around a focused question.",
+  "tone_preference": "Clear, neutral to slightly opinionated, and professional. Designed to spark thoughtful responses, not just clicks.",
+  "copy_guidelines": {
+    "copy_best_practices": "Ask one specific, non-ambiguous question. Provide answer options that are mutually exclusive and collectively sensible. Use the post text to frame why the question matters, and invite comments to deepen the discussion.",
+    "caption_structure_hint": "Line 1: the core question or a short setup. Body: 1–3 lines explaining why this matters or what you are trying to understand. Final line: explicit invitation to vote and comment.",
+    "recommended_caption_length": "Short. Focused on clarity and context.",
+    "cta_examples": [
+      "Vote and share your reasoning in the comments",
+      "Curious how others handle this, cast your vote",
+      "Choose the option that best reflects your reality",
+      "Add a comment if your answer is ‘it depends’"
+    ]
+  },
+  "poll_structure_guidelines": {
+    "primary_role": "Turn a real strategic or operational question into structured input from your network.",
+    "best_practices": [
+      "Keep 2–4 answer options",
+      "Avoid overlapping choices",
+      "Avoid leading or biased wording",
+      "Ensure each option is understandable at a glance"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "2–4 topic or role-based hashtags.",
+    "hashtag_strategy": "Use tags connected to the audience you want to hear from.",
+    "mention_strategy": "Optionally tag a small number of relevant experts or colleagues to kick-start engagement."
+  },
+  "technical_constraints": {
+    "max_options": 4,
+    "poll_duration_recommendation": "3–7 days depending on audience size.",
+    "visibility_note": "Polls can be boosted by early engagement, so initial responses are important."
+  },
+  "required_elements": [
+    "Single clear question",
+    "Answer options that are mutually exclusive",
+    "Context for why the question matters",
+    "CTA inviting votes and comments"
+  ],
+  "output_fields": [
+    "Poll_Question",
+    "Poll_Options",
+    "Caption",
+    "Hashtags_Optional",
+    "Tagged_Accounts_Optional"
+  ],
+  "disallowed_practices": [
+    "Overly vague or broad questions",
+    "Joke answers that make results unusable for insight (unless the poll is explicitly playful)",
+    "More than one question embedded in the caption",
+    "Options that overlap or confuse respondents"
+  ]
+}

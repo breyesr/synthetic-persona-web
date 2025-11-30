@@ -1,0 +1,63 @@
+{
+  "id": "tiktok_series",
+  "platform_id": "tiktok",
+  "name": "TikTok Series / Playlists",
+  "includes_formats": [
+    "content_series",
+    "educational_playlist"
+  ],
+  "content_type_group": "series",
+  "primary_goal_vibe": "Episodic learning or storytelling that encourages binge-watching and recurring viewing.",
+  "tone_preference": "Consistent, educational, and focused. Still delivered with TikTok’s direct, fast style.",
+  "copy_guidelines": {
+    "copy_best_practices": "Each episode should clearly reference where it fits in the series (for example part 1, part 2). The caption should be consistent across episodes in structure and mention the series name or tag. Encourage viewers to watch previous or next parts.",
+    "caption_structure_hint": "Line 1: series name or part indicator. Line 2: what this specific episode covers. Final line: CTA to watch other parts or follow the series.",
+    "recommended_caption_length": "Short and consistent from episode to episode.",
+    "cta_examples": [
+      "Watch part one on my profile",
+      "Save this series to follow all steps",
+      "Follow to get the next episode",
+      "Comment which part you want next",
+      "Check the playlist for all episodes"
+    ]
+  },
+  "series_structure_guidelines": {
+    "primary_role": "Deliver a multi-part narrative or framework across several videos.",
+    "best_practices": [
+      "Define a clear outcome for the full series",
+      "Keep episodes focused on one subtopic each",
+      "Use consistent visual and copy patterns",
+      "Include a series tag or naming convention"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "Include at least one consistent series hashtag, plus 2–4 topical hashtags.",
+    "hashtag_strategy": "Series hashtag acts as a unifier; topical hashtags still support discovery.",
+    "mention_strategy": "Tag collaborators or recurring guests if the series includes them."
+  },
+  "technical_constraints": {
+    "episode_duration_recommendation": "10–45 seconds per episode for most topics.",
+    "visual_consistency_note": "Maintain similar framing, styling, or intro pattern to build recognizability.",
+    "playlist_usage": "Group related videos into a playlist so viewers can watch in order."
+  },
+  "required_elements": [
+    "Series name or tag",
+    "Part indicator (for example Part 1, Part 2)",
+    "Single focused topic per episode",
+    "CTA pointing to other episodes or future parts"
+  ],
+  "output_fields": [
+    "Series_Name",
+    "Episode_Number_Label",
+    "Caption",
+    "Series_Hashtag",
+    "Hashtags",
+    "Tagged_Accounts_Optional"
+  ],
+  "disallowed_practices": [
+    "Random, unconnected videos labeled as a series",
+    "Changing series naming style mid-way",
+    "Episodes that cover too many topics at once",
+    "No guidance on where to start or what to watch next"
+  ]
+}

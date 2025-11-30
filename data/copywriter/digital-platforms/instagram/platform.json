@@ -1,0 +1,17 @@
+{
+  "id": "instagram",
+  "name": "Instagram",
+  "icon": "InstagramIcon",
+  "platform_purpose": "Visual discovery, lifestyle positioning, and short-form storytelling.",
+  "core_voice": "Consistent brand personality across platforms; clear, human, and visually oriented.",
+  "tone_adaptation": "Inspirational, aspirational, and conversational. Content should feel native, human, and visually driven.",
+  "copy_guidelines_summary": "Lead with a strong hook in the first 125 characters. For Reels, on-screen text and visual hook are more important than the caption. Use concise, benefit-led language and always include a clear call-to-action.",
+  "global_guidelines": {
+    "max_chars_caption": 2200,
+    "recommended_caption_length": "50–150 words for educational posts; shorter for Reels and lightweight content.",
+    "max_hashtags": 30,
+    "recommended_hashtags": "3–8 highly relevant hashtags, mixing niche and topic-based tags.",
+    "emoji_policy": "Allowed but optional. Use sparingly and only if aligned with the brand personality.",
+    "line_breaks_recommended": true
+  }
+}

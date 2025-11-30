@@ -1,0 +1,64 @@
+{
+  "id": "tiktok_standard_video",
+  "platform_id": "tiktok",
+  "name": "TikTok Standard Video",
+  "includes_formats": [
+    "regular_feed_video",
+    "duet",
+    "stitch"
+  ],
+  "content_type_group": "short_video",
+  "primary_goal_vibe": "Discovery, entertainment, and fast micro-education driven by the For You page.",
+  "tone_preference": "Direct, human, and energetic. Informal but clear. Hook- and retention-first.",
+  "copy_guidelines": {
+    "copy_best_practices": "The visual and on-screen text in the first 1–3 seconds must communicate the hook. The caption is secondary and should give minimal context, keywords, and a clear CTA. Avoid long paragraphs; focus on one idea per video.",
+    "caption_structure_hint": "Line 1: reinforce the hook or promise. Line 2: short context or key detail. Final line: CTA.",
+    "recommended_caption_length": "1–3 short lines.",
+    "cta_examples": [
+      "Follow for part two",
+      "Save this for later",
+      "Comment your question",
+      "Share this with a friend",
+      "Tell me if you agree"
+    ]
+  },
+  "on_screen_text_guidelines": {
+    "primary_role": "Carry the main message and hook, especially for sound-off viewers.",
+    "best_practices": [
+      "State the promise or problem in the first seconds",
+      "Use large, readable text",
+      "Avoid full-sentence paragraphs on screen",
+      "Time text changes with scene changes"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "3–6 highly relevant hashtags.",
+    "hashtag_strategy": "Mix topic, niche, and audience-intent tags (for example industry + problem + audience). Avoid irrelevant trending tags.",
+    "mention_strategy": "Tag creators or brands only if they are contextually involved or referenced in the video."
+  },
+  "technical_constraints": {
+    "recommended_aspect_ratio": "9:16",
+    "recommended_resolution": "1080x1920",
+    "recommended_duration": "6–30 seconds for most content; up to 60–90 seconds for deeper explanations.",
+    "subtitles_recommended": true,
+    "safe_area_note": "Keep faces and text away from top and bottom edges to avoid UI overlays."
+  },
+  "required_elements": [
+    "Clear visual hook in the first 1–3 seconds",
+    "On-screen text or subtitles for sound-off viewing",
+    "Single, focused idea per video",
+    "At least one CTA in caption or spoken"
+  ],
+  "output_fields": [
+    "Onscreen_Hook_Text",
+    "Caption",
+    "Hashtags",
+    "Tagged_Accounts"
+  ],
+  "disallowed_practices": [
+    "Slow intros or logo animations before value",
+    "Overloaded on-screen text blocks",
+    "Captions that explain multiple unrelated ideas",
+    "Clickbait hooks unrelated to the content"
+  ]
+}

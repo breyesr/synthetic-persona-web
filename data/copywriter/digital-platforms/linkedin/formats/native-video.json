@@ -1,0 +1,67 @@
+{
+  "id": "linkedin_native_video",
+  "platform_id": "linkedin",
+  "name": "LinkedIn Native Video",
+  "includes_formats": [
+    "talking_head_video",
+    "screen_recording",
+    "presentation_video"
+  ],
+  "content_type_group": "video",
+  "primary_goal_vibe": "Authority building, education, leadership presence, and professional storytelling through motion.",
+  "tone_preference": "Clear, structured, and professional. Confident without being promotional.",
+  "copy_guidelines": {
+    "copy_best_practices": "Open the video with the business problem, question, or learning in the first 2 seconds. Subtitles are mandatory for retention. The caption should summarize the key takeaway and set expectation for the viewer.",
+    "caption_structure_hint": "Line 1–2: problem or promise. Body: what the viewer will learn. Final line: outcome-oriented CTA.",
+    "recommended_caption_length": "Short to medium. Focused on framing, not repeating the video.",
+    "cta_examples": [
+      "Watch until the end for the key insight",
+      "Comment if this matches your experience",
+      "Share this with your team",
+      "Follow for more breakdowns"
+    ]
+  },
+  "on_screen_text_guidelines": {
+    "primary_role": "Ensure comprehension in sound-off viewing and reinforce the main point.",
+    "best_practices": [
+      "Always use subtitles",
+      "Highlight key phrases visually",
+      "Avoid dense paragraph overlays",
+      "Sync text with the spoken message"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "3–5 relevant hashtags at the end of the caption.",
+    "hashtag_strategy": "Use professional and role-based tags.",
+    "mention_strategy": "Tag speakers, companies, or partners visible in the video."
+  },
+  "technical_constraints": {
+    "recommended_aspect_ratios": [
+      "1:1",
+      "4:5",
+      "16:9"
+    ],
+    "min_resolution": "1080p",
+    "recommended_duration": "30–120 seconds for most business use cases.",
+    "subtitles_required": true,
+    "safe_area_note": "Keep faces and text centered to avoid cropping in preview views."
+  },
+  "required_elements": [
+    "Clear verbal hook in the first seconds",
+    "Subtitles for accessibility and retention",
+    "Explicit business takeaway",
+    "At least one CTA"
+  ],
+  "output_fields": [
+    "Video_Title_Optional",
+    "Caption",
+    "Hashtags",
+    "Tagged_Accounts"
+  ],
+  "disallowed_practices": [
+    "Starting with long personal intros",
+    "No subtitles",
+    "Repeating the full script in the caption",
+    "Using horizontal-only visuals with unreadable text"
+  ]
+}

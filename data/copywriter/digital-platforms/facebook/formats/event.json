@@ -1,0 +1,69 @@
+{
+  "id": "facebook_event",
+  "platform_id": "facebook",
+  "name": "Facebook Event",
+  "includes_formats": [
+    "online_event",
+    "in_person_event",
+    "hybrid_event"
+  ],
+  "content_type_group": "event",
+  "primary_goal_vibe": "Drive responses (Interested/Going), inform attendees, and centralize all details for an occurrence in time.",
+  "tone_preference": "Clear, practical, and benefit-driven. Friendly but logistical. Focused on who, what, when, where, and why it matters.",
+  "copy_guidelines": {
+    "copy_best_practices": "The event name should be short, descriptive, and benefit-oriented. The description must clearly explain what the event is, who it is for, what will happen, and what attendees gain. Include logistics, requirements, and one main CTA (RSVP, register, or join).",
+    "caption_structure_hint": "Title: specific and recognizable. Short intro: 1–2 lines about the purpose. Details section: agenda, speakers, logistics. Final lines: clear CTA and any deadlines.",
+    "recommended_caption_length": "Medium. Enough to answer most questions without becoming overwhelming.",
+    "cta_examples": [
+      "Click Interested or Going to get updates",
+      "Register using the link above",
+      "Invite a friend who would enjoy this",
+      "Add this to your calendar",
+      "Join us live at the scheduled time"
+    ]
+  },
+  "event_details_guidelines": {
+    "primary_role": "Remove uncertainty about logistics and value.",
+    "best_practices": [
+      "Include date, time, and timezone clearly",
+      "Specify whether it is online, in person, or hybrid",
+      "Mention any cost or registration requirements",
+      "Highlight key speakers or segments",
+      "Set expectations for duration and format"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "Optional. Use 1–3 if the event is part of a larger campaign or series.",
+    "hashtag_strategy": "Hashtags help connect posts about the event, but are not core to the Event object itself.",
+    "mention_strategy": "Tag speakers, hosts, and partner organizations in the event description and related feed posts."
+  },
+  "technical_constraints": {
+    "time_fields_required": [
+      "start_time",
+      "end_time"
+    ],
+    "location_behavior": "For online events, provide a link or platform name. For in-person, provide full address and any access notes.",
+    "reminder_behavior": "Attendees may receive notifications closer to the event time.",
+    "visibility_note": "Event visibility depends on privacy settings and host page/group."
+  },
+  "required_elements": [
+    "Clear event name",
+    "Date, time, and format (online/in-person/hybrid)",
+    "Description of what will happen and value for attendees",
+    "Primary CTA (Interested/Going/Register)"
+  ],
+  "output_fields": [
+    "Event_Name",
+    "Event_Description",
+    "Location_Or_Link",
+    "Date_Time_Block",
+    "Hashtags_Optional",
+    "Tagged_Accounts"
+  ],
+  "disallowed_practices": [
+    "Vague or generic event titles",
+    "Missing logistics or unclear time information",
+    "Hiding costs or requirements until late in the copy",
+    "Overly promotional language with no concrete value"
+  ]
+}

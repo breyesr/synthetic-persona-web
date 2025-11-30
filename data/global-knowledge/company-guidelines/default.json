@@ -1,0 +1,44 @@
+{
+  "company_name": "Default Brand",
+  "brand_voice": "Clear, confident, and human. Avoid jargon and keep sentences tight. Speak as a trusted expert who is easy to understand.",
+  "tone": "Optimistic, helpful, and direct. Skews professional but never stiff.",
+  "audience": "Digitally savvy professionals and consumers who value practicality and credibility. Assume limited attention spans—front-load value.",
+  "value_props": [
+    "Practical guidance that saves time or reduces risk",
+    "Evidence-backed claims with real outcomes",
+    "Customer-centric framing that respects reader intelligence"
+  ],
+  "must_include": [
+    "A clear outcome or benefit",
+    "A specific next step or CTA",
+    "Concise phrasing; avoid filler"
+  ],
+  "banned_phrases": [
+    "cutting-edge",
+    "revolutionary",
+    "disruptive",
+    "best-in-class",
+    "synergy",
+    "leverage (as a verb)",
+    "game-changing"
+  ],
+  "style_rules": {
+    "sentence_length": "Prefer short to medium sentences; break up long clauses.",
+    "structure": "Lead with the hook/value, support with one to two proof points, close with CTA.",
+    "jargon_policy": "Avoid buzzwords and internal acronyms unless explained.",
+    "punctuation": "Use plain punctuation; avoid excessive exclamation points."
+  },
+  "legal_compliance": {
+    "claims_policy": "No unverifiable or absolute claims. Avoid health/financial guarantees.",
+    "privacy_policy": "Do not imply misuse of customer data; avoid referencing private customer details.",
+    "disclaimer_hint": "If promising results, include a brief qualifier such as 'results may vary'."
+  },
+  "links_policy": "Use links only when necessary for conversion or proof; avoid multiple links in the same post.",
+  "hashtag_policy": "Use only relevant tags that aid discovery; avoid clutter.",
+  "cta_examples": [
+    "See how it works",
+    "Get the full details",
+    "Talk to our team",
+    "Start your trial"
+  ]
+}

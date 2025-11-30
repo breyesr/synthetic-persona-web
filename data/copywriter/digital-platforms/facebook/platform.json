@@ -1,0 +1,17 @@
+{
+  "id": "facebook",
+  "name": "Facebook",
+  "icon": "FacebookIcon",
+  "platform_purpose": "Community building, conversation, and relationship depth across Pages and Groups. Mix of updates, stories, events, and longer comment threads.",
+  "core_voice": "Trust-driven and consistent with the brand across other channels. Clear, human, and oriented to dialogue rather than one-way announcements.",
+  "tone_adaptation": "Warm, narrative, and community-first. More conversational than LinkedIn, less purely visual than Instagram, and less hyper-fast than TikTok. Focused on stories, questions, and comments.",
+  "copy_guidelines_summary": "Design posts to trigger comments and meaningful interactions, not just reactions. Hooks must appear before the 'see more' cut. Use clear, story-based copy with questions and CTAs that invite participation. Avoid overloading with links or hard-sell messaging.",
+  "global_guidelines": {
+    "max_chars_caption": 63206,
+    "recommended_caption_length": "Short to medium. Enough to tell a story or give context, but front-loaded so key info appears before the 'see more' cut.",
+    "max_hashtags": 30,
+    "recommended_hashtags": "Hashtags are optional. Use a small number of contextual or campaign-related tags only when they add clarity.",
+    "emoji_policy": "Optional and moderate. Use only if they support tone and readability.",
+    "line_breaks_recommended": true
+  }
+}

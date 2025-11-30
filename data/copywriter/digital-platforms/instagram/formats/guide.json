@@ -1,0 +1,63 @@
+{
+  "id": "instagram_guide",
+  "platform_id": "instagram",
+  "name": "Instagram Guide",
+  "includes_formats": [
+    "post_guide",
+    "product_guide",
+    "place_guide"
+  ],
+  "content_type_group": "longform_curated",
+  "primary_goal_vibe": "Curated education, evergreen discovery, and structured storytelling through collections of existing posts.",
+  "tone_preference": "Helpful, authoritative, and clearly structured. More editorial than conversational, but still accessible.",
+  "copy_guidelines": {
+    "copy_best_practices": "The guide title must clearly communicate the benefit or outcome. The introduction should set expectations about what the user will learn or find inside. Each entry should add context to the original post rather than repeat it.",
+    "caption_structure_hint": "Title: benefit-driven and explicit. Intro: 2–4 short lines explaining what the guide includes and who it is for. Entry descriptions: 1–2 concise lines adding context or takeaway.",
+    "recommended_caption_length": "Medium. Enough to establish authority without overwhelming.",
+    "cta_examples": [
+      "Save this guide for later",
+      "Explore all the steps inside",
+      "Share this guide with your team",
+      "Follow the guide from start to finish",
+      "Use this as your reference"
+    ]
+  },
+  "entry_description_guidelines": {
+    "primary_role": "Frame each included post with added meaning, sequence, or practical application.",
+    "best_practices": [
+      "One clear takeaway per entry",
+      "Avoid repeating the original caption verbatim",
+      "Explain why this post is included in the guide",
+      "Maintain a logical progression across entries"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "Minimal. Use only 2–4 category-level hashtags if needed.",
+    "hashtag_strategy": "Guides are not primarily discovery-driven via hashtags. Rely more on profile traffic and cross-promotion.",
+    "mention_strategy": "Tag creators, partners, or brands only when they are central to the guide’s content."
+  },
+  "technical_constraints": {
+    "entry_limit_behavior": "Guides are built from existing posts; performance depends on the quality and relevance of those assets.",
+    "cover_image_behavior": "The guide cover should be visually clean and clearly reflect the guide topic.",
+    "update_note": "Guides can be edited and expanded over time to stay evergreen."
+  },
+  "required_elements": [
+    "Clear guide title with a defined outcome",
+    "Introductory description setting expectations",
+    "Logical sequence of posts",
+    "At least one clear CTA to save or follow"
+  ],
+  "output_fields": [
+    "Guide_Title",
+    "Guide_Intro",
+    "Entry_Descriptions",
+    "Hashtags_Optional",
+    "Tagged_Accounts"
+  ],
+  "disallowed_practices": [
+    "Vague or generic guide titles",
+    "Unstructured post collections with no narrative logic",
+    "Repeating original captions without added context",
+    "Overloading the guide with unrelated topics"
+  ]
+}

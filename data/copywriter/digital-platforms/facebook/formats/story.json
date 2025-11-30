@@ -1,0 +1,75 @@
+{
+  "id": "facebook_story",
+  "platform_id": "facebook",
+  "name": "Facebook Story",
+  "includes_formats": [
+    "image_story",
+    "video_story",
+    "interactive_story",
+    "link_sticker_story"
+  ],
+  "content_type_group": "story",
+  "primary_goal_vibe": "Daily presence, quick touchpoints, behind-the-scenes access, and low-friction interaction.",
+  "tone_preference": "Casual, direct, and community-oriented. Feels immediate and informal.",
+  "copy_guidelines": {
+    "copy_best_practices": "Use only essential on-screen text. Each story should drive one simple action. Avoid dense explanations or multiple ideas per screen.",
+    "caption_structure_hint": "If text is used, keep it to a single short sentence per slide.",
+    "recommended_caption_length": "Minimal. Visual and sticker-driven.",
+    "cta_examples": [
+      "Vote here",
+      "Tap to reply",
+      "See more",
+      "Send us your answer",
+      "Tap the link"
+    ]
+  },
+  "on_screen_text_guidelines": {
+    "primary_role": "Instantly clarify the action or context.",
+    "best_practices": [
+      "One message per screen",
+      "High contrast for readability",
+      "Text placed within safe zones",
+      "Visual-first, text-second hierarchy"
+    ]
+  },
+  "stickers_interaction": {
+    "recommended_stickers": [
+      "Poll",
+      "Question",
+      "Quiz",
+      "Slider",
+      "Link"
+    ],
+    "sticker_strategy": "Whenever possible, include one interactive sticker to boost engagement.",
+    "link_usage": "Use links only when there is clear, immediate user value."
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "Not recommended as a primary tactic.",
+    "hashtag_strategy": "Stories do not depend on hashtags for discovery.",
+    "mention_strategy": "Tag people or pages when it increases relevance or encourages resharing."
+  },
+  "technical_constraints": {
+    "recommended_aspect_ratio": "9:16",
+    "recommended_resolution": "1080x1920",
+    "max_duration_per_story": "15 seconds per slide",
+    "safe_area_note": "Avoid placing text or stickers near the very top or bottom of the frame.",
+    "sound_optional": true
+  },
+  "required_elements": [
+    "Clear visual focus",
+    "One micro-action prompt",
+    "Legible on-screen text if used"
+  ],
+  "output_fields": [
+    "Onscreen_Text",
+    "Sticker_Type",
+    "Link_Optional",
+    "Tagged_Accounts"
+  ],
+  "disallowed_practices": [
+    "Long paragraph text on screen",
+    "Multiple CTAs in one slide",
+    "Low-contrast text over complex backgrounds",
+    "Using Stories only for static announcements without interaction"
+  ]
+}

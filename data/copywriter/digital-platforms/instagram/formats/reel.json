@@ -1,0 +1,62 @@
+{
+  "id": "instagram_reel",
+  "platform_id": "instagram",
+  "name": "Instagram Reel",
+  "includes_formats": [
+    "short_form_vertical_video"
+  ],
+  "content_type_group": "short_video",
+  "primary_goal_vibe": "High organic reach, rapid discovery, entertainment, and fast education through motion and sound.",
+  "tone_preference": "Dynamic, direct, and visually driven. Human, fast-paced, and attention-first.",
+  "copy_guidelines": {
+    "copy_best_practices": "The visual hook in the first 1–3 seconds is the primary driver of performance. The caption plays a secondary role and should provide context, reinforce the promise, and deliver a clear CTA. Use concise, value-led language.",
+    "caption_structure_hint": "Line 1: reinforce the visual hook or promise. Lines 2–3: supporting context or clarification. Final line: strong CTA tied to interaction or follow behavior.",
+    "recommended_caption_length": "Very short to short. Brevity outperforms long-form captions for Reels.",
+    "cta_examples": [
+      "Follow for part two",
+      "Save this for later",
+      "Comment if you agree",
+      "Share this with your team",
+      "Watch until the end"
+    ]
+  },
+  "on_screen_text_guidelines": {
+    "primary_role": "On-screen text carries the main message and hook, not the caption.",
+    "best_practices": [
+      "State the core promise in the first seconds",
+      "Use large, legible typography",
+      "Avoid dense paragraphs",
+      "Sync text with visual beats"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "5–10 relevant hashtags combining niche, topic, and community.",
+    "hashtag_strategy": "Prioritize relevance and intent over volume. Avoid trend hijacking if it is not contextually aligned.",
+    "mention_strategy": "Tag creators, collaborators, or featured accounts when they appear in the video."
+  },
+  "technical_constraints": {
+    "recommended_aspect_ratio": "9:16",
+    "recommended_resolution": "1080x1920",
+    "recommended_duration": "5–45 seconds for optimal retention, although longer is supported.",
+    "subtitles_required": true,
+    "safe_area_note": "Keep critical text and subjects within the central vertical safe zone to avoid UI overlays."
+  },
+  "required_elements": [
+    "Strong visual hook in the first 1–3 seconds",
+    "Clear on-screen value statement or promise",
+    "Subtitles or on-screen text for sound-off viewing",
+    "At least one explicit CTA"
+  ],
+  "output_fields": [
+    "Onscreen_Hook_Text",
+    "Caption",
+    "Hashtags",
+    "Tagged_Accounts"
+  ],
+  "disallowed_practices": [
+    "Slow intros with no immediate value",
+    "Dense text blocks on screen",
+    "Misalignment between visual hook and actual content",
+    "Reusing feed-style static copy without adaptation"
+  ]
+}

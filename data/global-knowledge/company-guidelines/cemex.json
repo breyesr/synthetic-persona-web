@@ -1,0 +1,190 @@
+{
+  "company_name": "Cemex",
+  "brand_idea": "Building a better future",
+  "purpose": "To help the world reach the next frontier of sustainable living",
+  "positioning": "Cemex drives innovation further to sustainably solve the world’s construction challenges",
+
+  "brand_voice": "Inspiring, committed, and approachable. Confident without arrogance. Human, optimistic, and forward-looking.",
+  "tone": "Visionary but grounded. Positive, reliable, and action-oriented. Never cold, never inflated.",
+  "personality_traits": [
+    "Smart and imaginative",
+    "Agile and entrepreneurial",
+    "Passionate and collaborative",
+    "Resilient",
+    "Future-focused"
+  ],
+
+  "audience_model": {
+    "default_stance": "Speak as a global leader with local sensitivity. Adapt tone by audience but never change the core voice.",
+    "primary_audiences": [
+      "Collaborators",
+      "Investors and financial stakeholders",
+      "Distributors",
+      "Industrial manufacturers",
+      "Builders and developers",
+      "Government",
+      "End consumers"
+    ]
+  },
+
+  "core_message_pillars": [
+    "Solutions",
+    "Collaboration",
+    "Innovation",
+    "Sustainability"
+  ],
+
+  "pillar_definitions": {
+    "solutions": [
+      "Technical excellence",
+      "End-to-end logistics",
+      "Scalability",
+      "Security",
+      "Advising and training",
+      "Customer orientation"
+    ],
+    "collaboration": [
+      "Accessibility",
+      "Availability",
+      "Local-global connection",
+      "Strategic alliances",
+      "Diversity and inclusion",
+      "Genuine support"
+    ],
+    "innovation": [
+      "Research and development",
+      "Digital evolution",
+      "Process efficiency",
+      "Adaptability",
+      "Technology as an enabler"
+    ],
+    "sustainability": [
+      "Smart building solutions",
+      "Environmental responsibility",
+      "Long-term impact",
+      "Connection with new generations",
+      "Efficiency and optimization"
+    ]
+  },
+
+  "voice_mechanics": {
+    "pronouns": {
+      "primary": "We",
+      "secondary": "You",
+      "restricted": "They (used sparingly)"
+    },
+    "perspective": "Collective leadership speaking directly to people",
+    "future_orientation": "Always forward-looking, never nostalgic"
+  },
+
+  "style_rules": {
+    "sentence_length": "Medium length preferred. Short for emphasis. Avoid compound chains.",
+    "structure": "Lead with purpose or impact, support with capability or proof, close with progress or invitation.",
+    "energy_level": "Optimistic and active",
+    "clarity": "High. Never abstract for the sake of sounding intelligent.",
+    "language_register": "Professional, human, and accessible",
+    "punctuation": "Clean punctuation. No excessive exclamation marks.",
+    "metaphor_policy": "Allowed only when tied to construction, progress, or movement"
+  },
+
+  "must_include": [
+    "Progress or improvement",
+    "Human or societal impact",
+    "Technology or capability as an enabler (not the hero)",
+    "Forward motion"
+  ],
+
+  "banned_phrases": [
+    "best in the world",
+    "number one",
+    "guaranteed results",
+    "effortless success",
+    "magic solution",
+    "overnight transformation",
+    "disruptive (as hype)",
+    "cutting-edge (as filler)"
+  ],
+
+  "content_drivers": {
+    "collaborators": [
+      "Growth",
+      "Belonging",
+      "Safety",
+      "Purpose",
+      "Pride"
+    ],
+    "financial_audiences": [
+      "Trust",
+      "Transparency",
+      "Sustained value",
+      "Strategic expansion"
+    ],
+    "distributors": [
+      "Business growth",
+      "Professional support",
+      "Financing",
+      "Commercial competitiveness"
+    ],
+    "industrial_manufacturers": [
+      "Precision",
+      "Consistency",
+      "Innovation",
+      "Performance"
+    ],
+    "builders_and_developers": [
+      "Efficiency",
+      "Financial optimization",
+      "Expert backing",
+      "Execution certainty"
+    ],
+    "government": [
+      "Reliability",
+      "Coverage",
+      "Compliance",
+      "Social impact"
+    ],
+    "end_consumers": [
+      "Progress",
+      "Ease",
+      "Confidence",
+      "Home well-being"
+    ]
+  },
+
+  "legal_compliance": {
+    "claims_policy": "No absolute leadership or performance claims. All outcomes must be framed as goals, efforts, or progress.",
+    "sustainability_policy": "Environmental language must reflect real commitment, not marketing inflation.",
+    "financial_policy": "No promises of returns, savings, or investment guarantees.",
+    "disclaimer_hint": "Use qualifiers such as 'we work to', 'we aim to', 'designed to', 'focused on'."
+  },
+
+  "emotional_framework": [
+    "Progress",
+    "Pride",
+    "Trust",
+    "Resilience",
+    "Collective future"
+  ],
+
+  "cta_style": {
+    "tone": "Invitational, not transactional",
+    "pressure_level": "Low pressure",
+    "examples": [
+      "Build with us",
+      "Let’s move forward",
+      "Discover how",
+      "See what’s next",
+      "Explore our solutions"
+    ]
+  },
+
+  "links_policy": "Use links only when they enable deeper understanding or conversion. Never stack links.",
+  "hashtag_policy": "Only when necessary for topical relevance. Never as decoration.",
+  "copy_validation_filter": [
+    "Does this project progress forward?",
+    "Does it feel human?",
+    "Does it reinforce trust?",
+    "Does it avoid inflated promises?",
+    "Would this sound credible if spoken out loud by a leader?"
+  ]
+}

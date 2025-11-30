@@ -1,0 +1,67 @@
+{
+  "id": "linkedin_live_event",
+  "platform_id": "linkedin",
+  "name": "LinkedIn Live / Event",
+  "includes_formats": [
+    "linkedin_live",
+    "linkedin_scheduled_event"
+  ],
+  "content_type_group": "live_event",
+  "primary_goal_vibe": "Thoughtful live sessions, webinars, and professional events designed to deliver value and drive attendance, leads, or relationship-building.",
+  "tone_preference": "Professional, structured, and outcome-focused. Friendly enough to encourage participation.",
+  "copy_guidelines": {
+    "copy_best_practices": "Use a clear, benefit-driven event title. The description must explain what the session covers, who it is for, and what attendees will gain. Include logistics such as time, format, and how to join. Highlight speakers or hosts.",
+    "caption_structure_hint": "Title: benefit and topic. Short intro: 1–2 lines about why this session matters now. Details: bullet points for agenda, speakers, and key takeaways. Final lines: direct CTA to register or attend live.",
+    "recommended_caption_length": "Short to medium, with heavy use of bullets for clarity.",
+    "cta_examples": [
+      "Register to get notified when we go live",
+      "Click Attend to save your spot",
+      "Invite colleagues who would benefit",
+      "Add this to your calendar",
+      "Join us live for the Q&A"
+    ]
+  },
+  "event_structure_guidelines": {
+    "primary_role": "Set expectations and remove friction for attendance.",
+    "best_practices": [
+      "Include time and timezone clearly",
+      "Clarify if the session will be recorded",
+      "Highlight the main learning outcomes in bullet points",
+      "Mention speakers, roles, and companies"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "2–4 role, industry, or topic-based hashtags.",
+    "hashtag_strategy": "Use the same tags across event promotions to keep them connected.",
+    "mention_strategy": "Tag speakers, co-hosts, and partner companies in the event description and promotional posts."
+  },
+  "technical_constraints": {
+    "time_fields_required": [
+      "start_time",
+      "end_time"
+    ],
+    "format_note": "Specify whether it is a LinkedIn Live or an external platform link.",
+    "reminder_behavior": "Attendees receive notifications as the event approaches.",
+    "replay_note": "Indicate if replay will be available."
+  },
+  "required_elements": [
+    "Benefit-driven event title",
+    "Clear explanation of topic and audience",
+    "Time, date, and format details",
+    "Primary CTA (Attend/Notify/Register)"
+  ],
+  "output_fields": [
+    "Event_Title",
+    "Event_Description",
+    "Agenda_Bullets",
+    "Speakers_List",
+    "Hashtags_Optional",
+    "Tagged_Accounts"
+  ],
+  "disallowed_practices": [
+    "Vague event titles with no clear topic",
+    "Missing or unclear time and date",
+    "Overly promotional copy without value explanation",
+    "Not stating who the event is for"
+  ]
+}

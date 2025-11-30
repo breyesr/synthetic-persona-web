@@ -1,0 +1,63 @@
+{
+  "id": "linkedin_longform",
+  "platform_id": "linkedin",
+  "name": "LinkedIn Longform (Articles & Newsletters)",
+  "includes_formats": [
+    "article",
+    "newsletter_issue"
+  ],
+  "content_type_group": "longform",
+  "primary_goal_vibe": "Deep expertise, thought leadership, and long-form storytelling that goes beyond a single feed post.",
+  "tone_preference": "Expert, structured, and reflective. Still practical and outcome-oriented, not academic.",
+  "copy_guidelines": {
+    "copy_best_practices": "The headline must carry a clear promise or topic. The introduction should quickly explain why the piece matters now and who it is for. Use subheadings, short sections, and examples. Close with a clear takeaway or action.",
+    "caption_structure_hint": "Headline: clear and benefit-driven. Intro: 2–4 short paragraphs establishing problem, context, and relevance. Body: structured with subheadings and examples. Conclusion: summary plus next steps or questions.",
+    "recommended_caption_length": "Medium to long, but broken into highly scannable sections.",
+    "cta_examples": [
+      "Comment with your experience",
+      "Share this with your team",
+      "Subscribe to the newsletter for future issues",
+      "Save this for your next planning session",
+      "Tell me which part you disagree with"
+    ]
+  },
+  "article_structure_guidelines": {
+    "primary_role": "Deliver deeper context, frameworks, and case studies than a standard feed post.",
+    "best_practices": [
+      "Use a clear structure: problem, insight, framework, examples, conclusion",
+      "Include concrete data points or cases where relevant",
+      "Avoid long unbroken text blocks",
+      "Use bullet points for lists and frameworks"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "2–4 targeted hashtags at the end of the article or in its promotional post.",
+    "hashtag_strategy": "Use specific topic and industry hashtags, not broad generic ones.",
+    "mention_strategy": "Mention companies, tools, or people only when they are relevant to the story, not as reach hacks."
+  },
+  "technical_constraints": {
+    "title_max_length_recommendation": "60–80 characters for the headline for readability.",
+    "reading_time_target": "3–7 minutes for most readers.",
+    "formatting_note": "Use headings, bold for emphasis, and bullet points to improve scanning on mobile."
+  },
+  "required_elements": [
+    "Clear, benefit-oriented headline",
+    "Intro that explains why this matters now",
+    "Logical structure with subheadings",
+    "Actionable or reflective conclusion"
+  ],
+  "output_fields": [
+    "Article_Title",
+    "Article_Intro",
+    "Article_Outline",
+    "Article_Body",
+    "Hashtags_Optional",
+    "Tagged_Accounts_Optional"
+  ],
+  "disallowed_practices": [
+    "Clickbait titles that do not match content",
+    "Pure opinion with no structure or evidence",
+    "Huge text blocks without spacing or headings",
+    "Heavy promotional tone without value"
+  ]
+}

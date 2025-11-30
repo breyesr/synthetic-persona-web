@@ -1,0 +1,63 @@
+{
+  "id": "instagram_live",
+  "platform_id": "instagram",
+  "name": "Instagram Live",
+  "includes_formats": [
+    "solo_live",
+    "collab_live"
+  ],
+  "content_type_group": "live",
+  "primary_goal_vibe": "Real-time connection, Q&A, launches, and deepening trust through unedited interaction.",
+  "tone_preference": "Human, direct, and responsive. Less polished than feed content but still on-brand and intentional.",
+  "copy_guidelines": {
+    "copy_best_practices": "Title and description should clearly state the topic, who it is for, and what viewers will gain. Keep the description concise and outcome-focused. During the Live, repeat the key value proposition and CTA regularly for people who join late.",
+    "caption_structure_hint": "Title: clear and specific topic. Description: 2–3 short lines covering what, who, and why now. Include 1 main CTA (follow, visit profile, tap link).",
+    "recommended_caption_length": "Short. The focus is on spoken content; text only frames expectations.",
+    "cta_examples": [
+      "Follow for future Lives",
+      "Send your questions in the chat",
+      "Tap the link in bio for details",
+      "Save this Live replay",
+      "Share this Live with someone who needs it"
+    ]
+  },
+  "on_screen_text_guidelines": {
+    "primary_role": "Support context for joiners and highlight key moments.",
+    "best_practices": [
+      "Use pinned comments to restate topic and CTA",
+      "Use occasional on-screen text overlays for key points if using external tools",
+      "Keep any text short and immediately understandable"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "Use a small set of relevant hashtags in the Live announcement posts or Stories, not inside the Live itself.",
+    "hashtag_strategy": "Focus on topic and series consistency. Do not overuse broad, generic tags.",
+    "mention_strategy": "Tag co-hosts, guests, or brands in the announcement and recap posts to amplify reach."
+  },
+  "technical_constraints": {
+    "recommended_aspect_ratio": "9:16",
+    "recommended_orientation": "Vertical",
+    "recommended_duration": "15–60 minutes depending on topic depth and audience retention.",
+    "connection_note": "Stable connection is critical; test audio and video before going Live.",
+    "safe_area_note": "Keep faces and any props in the central area to avoid being obscured by interface elements and comments."
+  },
+  "required_elements": [
+    "Clear Live title and topic",
+    "Single main CTA repeated throughout the session",
+    "Active interaction with chat (questions, shout-outs, answers)",
+    "Opening hook explaining what viewers will get from staying"
+  ],
+  "output_fields": [
+    "Live_Title",
+    "Live_Description",
+    "Pinned_Comment_Text",
+    "Hashtags_For_Announcement",
+    "Tagged_Accounts"
+  ],
+  "disallowed_practices": [
+    "Starting the Live without explaining the topic",
+    "Long silent or idle periods",
+    "Ignoring comments and questions entirely",
+    "Clickbait titles that are not aligned with the actual content"
+  ]
+}

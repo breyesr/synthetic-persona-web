@@ -1,0 +1,75 @@
+{
+  "id": "instagram_story",
+  "platform_id": "instagram",
+  "name": "Instagram Story",
+  "includes_formats": [
+    "image_story",
+    "video_story",
+    "interactive_story",
+    "link_sticker_story"
+  ],
+  "content_type_group": "story",
+  "primary_goal_vibe": "Immediate engagement, real-time presence, behind-the-scenes access, and low-friction interaction.",
+  "tone_preference": "Casual, direct, and action-oriented. Feels spontaneous but intentional.",
+  "copy_guidelines": {
+    "copy_best_practices": "Text should live primarily on-screen, not in a caption. Keep copy extremely short and punchy. Every story should guide one clear micro-action through a sticker or tap behavior.",
+    "caption_structure_hint": "If text is used, it should be broken into 1 short sentence per screen. Avoid dense explanations.",
+    "recommended_caption_length": "Minimal. Stories are driven by visuals and stickers, not paragraphs.",
+    "cta_examples": [
+      "Tap to vote",
+      "Reply with your answer",
+      "Swipe to learn more",
+      "Tap for details",
+      "Send us your question"
+    ]
+  },
+  "on_screen_text_guidelines": {
+    "primary_role": "Drive the action and clarify context instantly.",
+    "best_practices": [
+      "One idea per screen",
+      "Large, high-contrast typography",
+      "Position text away from UI edges",
+      "Visual-first, text-second hierarchy"
+    ]
+  },
+  "stickers_interaction": {
+    "recommended_stickers": [
+      "Poll",
+      "Question",
+      "Quiz",
+      "Slider",
+      "Link"
+    ],
+    "sticker_strategy": "Use at least one interactive sticker in most story sequences to maximize engagement signals.",
+    "link_usage": "Use link stickers only when there is clear immediate value for the user."
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "Optional and minimal. Only when they add direct context.",
+    "hashtag_strategy": "Do not rely on hashtags for discovery in Stories.",
+    "mention_strategy": "Tag people or brands when relevant to encourage resharing and secondary reach."
+  },
+  "technical_constraints": {
+    "recommended_aspect_ratio": "9:16",
+    "recommended_resolution": "1080x1920",
+    "max_duration_per_story": "15 seconds per slide",
+    "safe_area_note": "Keep text and stickers within the central vertical safe zone to avoid UI overlays.",
+    "sound_optional": true
+  },
+  "required_elements": [
+    "At least one clear visual focus",
+    "One micro-action prompt (sticker or tap behavior)",
+    "Readable on-screen text if used"
+  ],
+  "output_fields": [
+    "Onscreen_Text",
+    "Sticker_Type",
+    "Link_Optional",
+    "Tagged_Accounts"
+  ],
+  "disallowed_practices": [
+    "Long paragraph text on screen",
+    "Multiple competing CTAs in a single story",
+    "Low-contrast text over busy backgrounds",
+    "Using stories as static announcement boards without interaction"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "id": "linkedin_document_post",
+  "platform_id": "linkedin",
+  "name": "LinkedIn Document Post",
+  "includes_formats": [
+    "pdf_carousel",
+    "slide_deck"
+  ],
+  "content_type_group": "document_carousel",
+  "primary_goal_vibe": "Deep education, frameworks, playbooks, and structured professional knowledge sharing.",
+  "tone_preference": "Expert, structured, and highly actionable. Clear and outcome-focused.",
+  "copy_guidelines": {
+    "copy_best_practices": "The first slide must clearly state the outcome or promise. The caption should summarize the value in one short paragraph and clarify who the document is for. Encourage saving and sharing.",
+    "caption_structure_hint": "Line 1: promise or outcome. Body: what the document covers and who it benefits. Final line: save/share CTA.",
+    "recommended_caption_length": "Short to medium. Enough to frame the document without repeating it.",
+    "cta_examples": [
+      "Save this for later",
+      "Share this with your team",
+      "Swipe through the full framework",
+      "Use this as a reference"
+    ]
+  },
+  "document_structure_guidelines": {
+    "primary_role": "Deliver structured knowledge in a skimmable, slide-based format.",
+    "best_practices": [
+      "Strong cover slide with clear promise",
+      "One concept per slide",
+      "Readable typography at mobile size",
+      "Logical progression from problem to solution"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "3–5 professional and topic-specific hashtags.",
+    "hashtag_strategy": "Use tags that match the role, discipline, and industry.",
+    "mention_strategy": "Tag collaborators, sources, or companies referenced when appropriate."
+  },
+  "technical_constraints": {
+    "max_pages_recommended": "8–15 slides for optimal completion rate.",
+    "file_type": "PDF preferred",
+    "mobile_readability_note": "All text must be legible on small screens."
+  },
+  "required_elements": [
+    "Clear document promise on first slide",
+    "Logical internal structure",
+    "Caption that explains who this is for",
+    "Save/share-oriented CTA"
+  ],
+  "output_fields": [
+    "Document_Title",
+    "Caption",
+    "Hashtags",
+    "Tagged_Accounts"
+  ],
+  "disallowed_practices": [
+    "Overloaded slides with dense text",
+    "Vague document titles",
+    "Repeating the entire document content in the caption",
+    "Uploading low-resolution images as slides"
+  ]
+}

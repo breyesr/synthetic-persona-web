@@ -1,0 +1,17 @@
+{
+  "id": "linkedin",
+  "name": "LinkedIn",
+  "icon": "LinkedinIcon",
+  "platform_purpose": "Professional credibility, hiring, partnerships, and B2B influence. The feed is optimized for expert insights, industry news, business outcomes, and career-focused content.",
+  "core_voice": "Clear, authoritative, and grounded in real experience and results. Professional but human, avoiding both corporate jargon and casual slang.",
+  "tone_adaptation": "Confident, analytical, and value-driven. Posts focus on learnings, frameworks, case studies, and data-backed opinions. The tone is more structured and precise than on other platforms, with emphasis on clarity, expertise, and usefulness to the reader.",
+  "copy_guidelines_summary": "The first two lines must communicate the core insight, tension, or question to earn the click on 'see more'. Use short paragraphs, concrete examples, and explicit business outcomes. Avoid vague motivational content. Always provide a clear takeaway or next step for the reader.",
+  "global_guidelines": {
+    "max_chars_caption": 3000,
+    "recommended_caption_length": "50–200 words for feed posts; concise but substantial enough to deliver a clear idea or story.",
+    "max_hashtags": 10,
+    "recommended_hashtags": "3–5 targeted hashtags focusing on industry, role, and topic (for example #b2bmarketing, #saas, #leadership).",
+    "emoji_policy": "Minimal or none. Use only if they enhance clarity or structure, not as decoration.",
+    "line_breaks_recommended": true
+  }
+}

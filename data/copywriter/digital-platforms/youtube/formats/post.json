@@ -1,0 +1,72 @@
+{
+  "id": "youtube_post",
+  "platform_id": "youtube",
+  "name": "YouTube Community Post",
+  "includes_formats": [
+    "text_post",
+    "image_post",
+    "poll_post",
+    "gif_post",
+    "video_snippet_post"
+  ],
+  "content_type_group": "community_feed",
+  "primary_goal_vibe": "Lightweight touchpoints between uploads: updates, conversation starters, and quick engagement with subscribers.",
+  "tone_preference": "Conversational, concise, and creator-like. Feels direct and personal, not like a formal announcement.",
+  "copy_guidelines": {
+    "copy_best_practices": "Keep posts short and focused on a single idea. Use questions, prompts, or simple updates to drive comments and reactions. Avoid long paragraphs; community posts should be scannable.",
+    "caption_structure_hint": "Line 1: core update or question. Optional line 2–3: short context or detail. Final line: simple CTA to comment, vote, or watch something.",
+    "recommended_caption_length": "1–4 short lines.",
+    "cta_examples": [
+      "What do you want to see next",
+      "Comment your choice below",
+      "Check out the new video on the channel",
+      "Vote in the poll and tell me why",
+      "Save this for later"
+    ]
+  },
+  "sub_format_emphasis_rules": {
+    "text_post": {
+      "caption_role": "Primary content. The text itself is the message.",
+      "cta_focus": "Comments and likes."
+    },
+    "image_post": {
+      "caption_role": "Explain or contextualize the image and invite feedback or ideas.",
+      "cta_focus": "Comments and reactions."
+    },
+    "poll_post": {
+      "caption_role": "Frame the poll question and why it matters.",
+      "cta_focus": "Votes and follow-up comments."
+    },
+    "video_snippet_post": {
+      "caption_role": "Direct attention to the full video or tease what is inside.",
+      "cta_focus": "Clicks to watch the full video."
+    }
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "Optional and minimal. Use 0–3 hashtags if they add clarity.",
+    "hashtag_strategy": "Community posts are not primarily discovery tools; use hashtags sparingly.",
+    "mention_strategy": "Mention collaborators or channels when cross-promoting content."
+  },
+  "technical_constraints": {
+    "visibility_note": "Community posts are primarily shown to subscribers and active viewers.",
+    "media_support": "Supports text, images, GIFs, polls, and video links.",
+    "frequency_recommendation": "Low to moderate frequency. 1–4 posts per week depending on channel size."
+  },
+  "required_elements": [
+    "Single clear idea or update",
+    "Simple and direct language",
+    "At least one question or CTA for engagement"
+  ],
+  "output_fields": [
+    "Post_Text",
+    "Media_Optional",
+    "Poll_Options_Optional",
+    "Hashtags_Optional"
+  ],
+  "disallowed_practices": [
+    "Long, dense text blocks",
+    "Posting only promotional links with no context",
+    "Multiple unrelated ideas in one post",
+    "Overposting to the point of feed fatigue"
+  ]
+}

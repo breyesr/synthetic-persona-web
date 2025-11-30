@@ -1,0 +1,71 @@
+{
+  "id": "youtube_longform_video",
+  "platform_id": "youtube",
+  "name": "YouTube Longform Video",
+  "includes_formats": [
+    "educational_video",
+    "tutorial",
+    "vlog",
+    "interview",
+    "case_study",
+    "explainer"
+  ],
+  "content_type_group": "longform_video",
+  "primary_goal_vibe": "Evergreen discovery, education, authority building, and long-term audience growth through search and suggested videos.",
+  "tone_preference": "Educational, confident, structured, and value-first. Human and clear, but not improvised or trend-driven.",
+  "copy_guidelines": {
+    "copy_best_practices": "The title carries the main CTR responsibility and must state the key outcome or benefit clearly. The first two lines of the description must summarize what the viewer will learn or gain. The rest of the description expands with context, resources, timestamps, and CTAs.",
+    "caption_structure_hint": "Title: clear promise and topic. Description lines 1–2: value summary. Body: context, steps, resources, links, timestamps. Final lines: CTA and hashtags.",
+    "recommended_caption_length": "150–500 words depending on topic depth.",
+    "cta_examples": [
+      "Subscribe for more weekly breakdowns",
+      "Watch the next video in this playlist",
+      "Download the resource in the description",
+      "Comment your biggest takeaway",
+      "Share this with your team"
+    ]
+  },
+  "on_screen_text_guidelines": {
+    "primary_role": "Support clarity, labeling, and retention without replacing spoken content.",
+    "best_practices": [
+      "Use lower thirds for key concepts and names",
+      "Avoid full paragraph overlays",
+      "Use chapter labels when shifting topics",
+      "Ensure legibility at all resolutions"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "3–8 relevant hashtags placed at the end of the description.",
+    "hashtag_strategy": "Use topic, industry, and outcome-based hashtags rather than generic trending tags.",
+    "mention_strategy": "Mention collaborators, tools, or guests in the description when contextually relevant."
+  },
+  "technical_constraints": {
+    "recommended_aspect_ratio": "16:9",
+    "recommended_resolution": "1080p minimum, 4K recommended when possible.",
+    "recommended_duration": "6–20 minutes for most educational and business use cases.",
+    "chapters_recommended": true,
+    "subtitles_recommended": true,
+    "thumbnail_note": "High-contrast thumbnail with 1 clear concept and minimal text is required for strong CTR."
+  },
+  "required_elements": [
+    "Clear benefit-driven title",
+    "Value summary in the first two lines of the description",
+    "Structured content with logical sections",
+    "At least one explicit CTA",
+    "Optimized thumbnail"
+  ],
+  "output_fields": [
+    "Video_Title",
+    "Description",
+    "Timestamps_Optional",
+    "Hashtags",
+    "Tagged_Accounts_Optional",
+    "Thumbnail_Text"
+  ],
+  "disallowed_practices": [
+    "Vague or curiosity-only titles with no clear outcome",
+    "Unstructured talking without clear sections",
+    "Clickbait thumbnails that do not match the content",
+    "Burying the main CTA at the very end only"
+  ]
+}

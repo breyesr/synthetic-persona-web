@@ -1,0 +1,63 @@
+{
+  "id": "youtube_short",
+  "platform_id": "youtube",
+  "name": "YouTube Short",
+  "includes_formats": [
+    "vertical_short_video"
+  ],
+  "content_type_group": "short_video",
+  "primary_goal_vibe": "Fast discovery, reach expansion, and top-of-funnel growth through short-form vertical video.",
+  "tone_preference": "Fast, direct, energetic, and hook-driven. Less explanatory, more immediate.",
+  "copy_guidelines": {
+    "copy_best_practices": "The first 1–2 seconds of the video must communicate the hook visually or verbally. The title should reinforce the main idea or curiosity. Description is optional and minimal.",
+    "caption_structure_hint": "Title: short hook or statement. Optional description: 1–2 short lines of context or CTA.",
+    "recommended_caption_length": "Title under 50 characters. Description minimal or omitted.",
+    "cta_examples": [
+      "Follow for more",
+      "Watch the full video on the channel",
+      "Save this tip",
+      "Comment if this helped",
+      "Share this with someone who needs it"
+    ]
+  },
+  "on_screen_text_guidelines": {
+    "primary_role": "Deliver the hook, context, and clarity immediately for sound-off viewing.",
+    "best_practices": [
+      "Hook text in the first second",
+      "Large, bold typography",
+      "One idea per short",
+      "Sync text with speech and cuts"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "3–5 relevant hashtags including #Shorts.",
+    "hashtag_strategy": "Use topic and niche hashtags. Avoid unrelated trend tags.",
+    "mention_strategy": "Tag collaborators only if they appear in the Short."
+  },
+  "technical_constraints": {
+    "recommended_aspect_ratio": "9:16",
+    "recommended_resolution": "1080x1920",
+    "max_duration": "60 seconds",
+    "subtitles_recommended": true,
+    "safe_area_note": "Keep text and subjects centered to avoid interface overlays."
+  },
+  "required_elements": [
+    "Immediate visual or verbal hook",
+    "Single focused idea",
+    "On-screen text or subtitles",
+    "At least one CTA"
+  ],
+  "output_fields": [
+    "Short_Title",
+    "Description_Optional",
+    "Hashtags",
+    "Tagged_Accounts_Optional",
+    "Onscreen_Hook_Text"
+  ],
+  "disallowed_practices": [
+    "Slow intros with logos before the hook",
+    "Trying to cover multiple topics in one Short",
+    "Reposting horizontal clips without vertical optimization",
+    "Clickbait hooks unrelated to the actual content"
+  ]
+}

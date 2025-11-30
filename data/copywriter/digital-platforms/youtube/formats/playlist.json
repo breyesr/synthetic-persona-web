@@ -1,0 +1,62 @@
+{
+  "id": "youtube_playlist",
+  "platform_id": "youtube",
+  "name": "YouTube Playlist",
+  "includes_formats": [
+    "thematic_playlist",
+    "series_playlist",
+    "evergreen_reference_playlist"
+  ],
+  "content_type_group": "collection",
+  "primary_goal_vibe": "Organize videos into structured collections that drive binge-watching, topic depth, and evergreen discoverability.",
+  "tone_preference": "Clear, organized, and outcome-focused. More like a course index or resource library than a promo.",
+  "copy_guidelines": {
+    "copy_best_practices": "The playlist title should clearly state the topic, use case, or series name. The description should explain what the viewer will get by watching the playlist in order, who it is for, and whether there is a recommended starting point.",
+    "caption_structure_hint": "Title: topic or series name with clear outcome. Description line 1–2: what the playlist covers and for whom. Body: recommended viewing order notes, links to key videos, or extra resources. Final lines: CTA to save the playlist.",
+    "recommended_caption_length": "Short to medium, with high clarity.",
+    "cta_examples": [
+      "Save this playlist to complete the series",
+      "Start from the first video for the full experience",
+      "Use this playlist as your reference",
+      "Share this with your team or classmates",
+      "Bookmark this for your next deep dive"
+    ]
+  },
+  "playlist_structure_guidelines": {
+    "primary_role": "Create a guided path or logical grouping of videos for a specific topic or need.",
+    "best_practices": [
+      "Arrange videos in a logical order (foundations first, advanced later)",
+      "Keep the theme tight; avoid mixing unrelated topics",
+      "Update playlists to keep them relevant and prune outdated videos",
+      "Use consistent naming for series-based playlists"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "Optional. 0–3 topical hashtags in the playlist description if used.",
+    "hashtag_strategy": "Hashtags are secondary for playlists; clear titles and metadata matter more.",
+    "mention_strategy": "Mention collaborators or featured channels if the playlist includes their content."
+  },
+  "technical_constraints": {
+    "playlist_visibility": "Playlists can be public, unlisted, or private.",
+    "ideal_playlist_size": "4–20 videos depending on depth and topic complexity.",
+    "thumbnail_behavior": "The playlist thumbnail is usually taken from one of the videos; choose a representative video as the first item."
+  },
+  "required_elements": [
+    "Playlist title with clear topic or outcome",
+    "Description that explains what the playlist is for",
+    "Logical order of included videos",
+    "CTA to save or bookmark the playlist"
+  ],
+  "output_fields": [
+    "Playlist_Title",
+    "Playlist_Description",
+    "Recommended_Ordering_Notes_Optional",
+    "Hashtags_Optional"
+  ],
+  "disallowed_practices": [
+    "Vague playlist titles like Misc or Other",
+    "Mixing unrelated topics into one playlist",
+    "No description or explanation of the playlist’s purpose",
+    "Random ordering that confuses first-time viewers"
+  ]
+}

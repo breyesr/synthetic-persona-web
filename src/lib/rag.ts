@@ -9,7 +9,7 @@ export interface SearchResult {
     content: string;
     metadata: {
         source_file: string;
-        persona_id: string;
+        persona_ids: string[];
     };
     score: number;
 }
@@ -36,7 +36,7 @@ export async function hybridSearch(
         const keywordQuery = `
             SELECT id, content, metadata, ts_rank(content_tsvector, websearch_to_tsquery('english', $1)) AS score
             FROM documents
-            WHERE metadata->>'persona_id' = $2
+            WHERE (metadata->'persona_ids' @> '["*"]' OR metadata->'persona_ids' @> to_jsonb($2::text))
             AND content_tsvector @@ websearch_to_tsquery('english', $1)
             ORDER BY score DESC
             LIMIT $3;
@@ -47,7 +47,7 @@ export async function hybridSearch(
         const vectorQuery = `
             SELECT id, content, metadata, 1 - (embedding <=> $1) AS score
             FROM documents
-            WHERE metadata->>'persona_id' = $2
+            WHERE (metadata->'persona_ids' @> '["*"]' OR metadata->'persona_ids' @> to_jsonb($2::text))
             ORDER BY score DESC
             LIMIT $3;
         `;

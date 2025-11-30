@@ -1,4 +1,4 @@
-// src/app/construction-personas/page.tsx
+// src/app/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -31,7 +31,13 @@ type ChallengeLevelOption = {
 
 type PersonaOption = {
     id: string;
-    name: string;
+    name:string;
+};
+
+const FIELD_LIMITS = {
+    idea: { min: 10, max: 1500 },
+    goal: { min: 5, max: 300 },
+    evaluationFocus: { min: 5, max: 300 },
 };
 
 export default function ConstructionPersonasPage() {
@@ -54,7 +60,7 @@ export default function ConstructionPersonasPage() {
         const loadInitialData = async () => {
             try {
                 const [personasRes, levelsRes] = await Promise.all([
-                    fetch("/api/personas/construction", { cache: "no-store" }),
+                    fetch("/api/personas", { cache: "no-store" }),
                     fetch("/api/challenge-levels", { cache: "no-store" })
                 ]);
 
@@ -114,7 +120,14 @@ export default function ConstructionPersonasPage() {
         };
     }, []);
 
-    const isFormValid = idea.trim() && goal.trim() && evaluationFocus.trim() && personaType && challengeLevelId;
+    const isFormValid = idea.trim().length >= FIELD_LIMITS.idea.min &&
+                        idea.trim().length <= FIELD_LIMITS.idea.max &&
+                        goal.trim().length >= FIELD_LIMITS.goal.min &&
+                        goal.trim().length <= FIELD_LIMITS.goal.max &&
+                        evaluationFocus.trim().length >= FIELD_LIMITS.evaluationFocus.min &&
+                        evaluationFocus.trim().length <= FIELD_LIMITS.evaluationFocus.max &&
+                        personaType &&
+                        challengeLevelId;
 
     const handleSubmit = async () => {
         if (!isFormValid || loading) return;
@@ -213,9 +226,11 @@ export default function ConstructionPersonasPage() {
 
                 <div className="space-y-4 mb-6">
                     <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-2">
-                            Idea
-                        </label>
+                        <div className="flex justify-between items-center mb-2">
+                            <label className="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa]">
+                                Idea
+                            </label>
+                        </div>
                         <textarea
                             value={idea}
                             onChange={(e) => setIdea(e.target.value)}
@@ -224,12 +239,21 @@ export default function ConstructionPersonasPage() {
                             rows={6}
                             className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent transition-all resize-none"
                         />
+                        <span className={clsx(
+                            "block text-xs text-right mt-1",
+                            idea.length < FIELD_LIMITS.idea.min || idea.length > FIELD_LIMITS.idea.max ? "text-red-400" : "text-gray-400"
+                        )}>
+                            {idea.length}/{FIELD_LIMITS.idea.max}
+                        </span>
                     </div>
+                    
 
                     <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-2">
-                            Goal
-                        </label>
+                        <div className="flex justify-between items-center mb-2">
+                            <label className="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa]">
+                                Goal
+                            </label>
+                        </div>
                         <textarea
                             value={goal}
                             onChange={(e) => setGoal(e.target.value)}
@@ -238,12 +262,20 @@ export default function ConstructionPersonasPage() {
                             rows={3}
                             className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent transition-all resize-none"
                         />
+                        <span className={clsx(
+                            "block text-xs text-right mt-1",
+                            goal.length < FIELD_LIMITS.goal.min || goal.length > FIELD_LIMITS.goal.max ? "text-red-400" : "text-gray-400"
+                        )}>
+                            {goal.length}/{FIELD_LIMITS.goal.max}
+                        </span>
                     </div>
 
                     <div>
-                        <label className="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa] mb-2">
-                            Focus
-                        </label>
+                        <div className="flex justify-between items-center mb-2">
+                            <label className="block text-xs font-semibold uppercase tracking-wider text-[#a1a1aa]">
+                                Focus
+                            </label>
+                        </div>
                         <div className="relative">
                             <textarea
                                 value={evaluationFocus}
@@ -253,6 +285,12 @@ export default function ConstructionPersonasPage() {
                                 rows={2}
                                 className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-lg px-4 py-3 pr-12 text-sm focus:outline-none focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent transition-all resize-none"
                             />
+                            <span className={clsx(
+                                "block text-xs text-right mt-1",
+                                evaluationFocus.length < FIELD_LIMITS.evaluationFocus.min || evaluationFocus.length > FIELD_LIMITS.evaluationFocus.max ? "text-red-400" : "text-gray-400"
+                            )}>
+                                {evaluationFocus.length}/{FIELD_LIMITS.evaluationFocus.max}
+                            </span>
                             <button
                                 type="button"
                                 aria-label="Auto-detect risks"

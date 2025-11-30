@@ -56,20 +56,33 @@ The application will be available at `http://localhost:3000`.
 
 ## ✍️ Managing Content (Ingestion Runbook)
 
-The vector database is not automatically updated. You must re-run the ingestion script when you change the source content.
+The vector database follows a "Convention over Configuration" model based on the file system. You no longer need to manually edit JSON files to associate knowledge. To add, update, or remove content, simply modify the files in the `/data` directory and re-run the ingestion script.
 
-#### How to Add New Content
-Place new JSON persona files (or PDFs in the future) into the `/data` directory or its subdirectories.
+### Directory Structure
 
-#### How to Index New Content
-After adding or modifying files, run the `embed` script from your terminal:
-```bash
-npm run embed
-```
-The script will find your new files, create embeddings, and add them to the database.
+*   `data/global-knowledge/`: Any file placed here will be accessible to **all** personas.
+*   `data/personas/<persona_id>/knowledge/`: Any file placed here will be accessible **only** to the persona with the matching `<persona_id>`.
 
-#### How to Delete Old Content
-Simply **delete the source file** from the `/data` directory. The next time you run `npm run embed`, the script's cleanup process will automatically find and delete all chunks associated with that missing file from the database.
+The `<persona_id>` is determined by the folder name inside `data/personas/`.
+
+### How to Add or Update Content
+
+1.  **Global Knowledge**: Place any file (e.g., `.pdf`, `.docx`, `.txt`) into the `data/global-knowledge/` directory.
+2.  **Persona-Specific Knowledge**:
+    *   Navigate to the correct persona's folder (e.g., `data/personas/david_chen/`).
+    *   Place the file inside the `knowledge/` subdirectory.
+3.  **Run the Ingestion Script**: After adding or changing files, run the script to update the database:
+    ```bash
+    npm run embed
+    ```
+
+### How to Delete Content
+
+1.  **Delete the source file** from its directory (e.g., remove `data/global-knowledge/Old_Policy.pdf`).
+2.  **Run the Ingestion Script**: The script will automatically detect the missing file and remove its associated content from the database.
+    ```bash
+    npm run embed
+    ```
 
 ---
 
@@ -89,8 +102,11 @@ Simply **delete the source file** from the `/data` directory. The next time you 
  │   ├─ `personaProvider.ts`      # Reads persona files and enriches with RAG context
  │   ├─ ... (other providers)
  └─ `data/`
-     ├─ `personas/`               # Source documents for persona data
-     └─ ... (other source data)
+    ├── `global-knowledge/`         # PDFs, DOCX, etc. accessible to all personas
+    └── `personas/`
+        └── `<persona_id>/`
+            ├── `persona.json`      # The persona's core definition
+            └── `knowledge/`        # PDFs, DOCX, etc. for this persona only
 
 ---
 

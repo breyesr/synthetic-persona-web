@@ -1,0 +1,62 @@
+{
+  "id": "youtube_premiere",
+  "platform_id": "youtube",
+  "name": "YouTube Premiere",
+  "includes_formats": [
+    "scheduled_premiere_video"
+  ],
+  "content_type_group": "event_video",
+  "primary_goal_vibe": "Create an event around a new video release with scheduled viewing, live chat, and anticipation.",
+  "tone_preference": "Excited, clear, and value-focused. Combines the structure of long-form with the urgency of a live event.",
+  "copy_guidelines": {
+    "copy_best_practices": "The title and thumbnail must work like a strong long-form video hook. The description and promotional copy should emphasize the premiere time, why it is special, and what viewers gain by watching live. Include clear details and a main CTA to set reminders.",
+    "caption_structure_hint": "Title: same as long-form, outcome-driven. Top of description: premiere date and time plus key benefit. Body: context, what the video covers, who it is for, and links. Final lines: CTA to set reminder, share, and watch live.",
+    "recommended_caption_length": "Similar to long-form videos: 150–500 words if needed.",
+    "cta_examples": [
+      "Set a reminder to join the premiere",
+      "Be there live and join the chat",
+      "Share this premiere with a friend",
+      "Subscribe and turn on notifications",
+      "Watch live to ask questions in real time"
+    ]
+  },
+  "on_screen_text_guidelines": {
+    "primary_role": "Promotional assets should highlight premiere date, time, and main hook.",
+    "best_practices": [
+      "Add premiere time to overlays and posts when promoting",
+      "Keep on-screen text short and clear",
+      "Align the visual hook of the premiere with the long-form video content"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "3–8 relevant hashtags in the description and any promotional community posts.",
+    "hashtag_strategy": "Use topic and series hashtags consistently across all premiere promotions.",
+    "mention_strategy": "Mention guests, collaborators, or sponsors in the description and in promotional content."
+  },
+  "technical_constraints": {
+    "recommended_aspect_ratio": "16:9",
+    "recommended_resolution": "1080p minimum, 4K recommended when possible.",
+    "premiere_setup_note": "Video must be uploaded and scheduled as a premiere with date and time set in advance.",
+    "live_chat_behavior": "Live chat will be active during the premiere, then comments take over afterward."
+  },
+  "required_elements": [
+    "Benefit-driven title and thumbnail",
+    "Clear premiere date and time in description",
+    "Main CTA to set a reminder and attend live",
+    "Description that clarifies what is special about the premiere"
+  ],
+  "output_fields": [
+    "Video_Title",
+    "Description",
+    "Premiere_DateTime",
+    "Hashtags",
+    "Tagged_Accounts_Optional",
+    "Thumbnail_Text"
+  ],
+  "disallowed_practices": [
+    "Scheduling premieres with vague or generic titles",
+    "Not mentioning the premiere time in copy",
+    "Treating a premiere like a normal upload with no event framing",
+    "Clickbait promises that the actual video does not deliver"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "id": "youtube_live",
+  "platform_id": "youtube",
+  "name": "YouTube Live",
+  "includes_formats": [
+    "solo_live",
+    "interview_live",
+    "webinar_live",
+    "event_stream"
+  ],
+  "content_type_group": "live",
+  "primary_goal_vibe": "Real-time education, launches, Q&A, community interaction, and long-form relationship building.",
+  "tone_preference": "Professional, direct, and interactive. Less polished than edited content, more conversational.",
+  "copy_guidelines": {
+    "copy_best_practices": "The live title must clearly state the topic and benefit. The description should explain what will happen, who it is for, and what viewers gain by staying. Use pinned messages and verbal reminders for CTAs throughout the session.",
+    "caption_structure_hint": "Title: topic plus outcome. Description: short overview, agenda bullets, guest info, and main CTA. End with links and hashtags.",
+    "recommended_caption_length": "Short to medium. Enough to remove uncertainty and drive attendance.",
+    "cta_examples": [
+      "Set a reminder for the live session",
+      "Ask your questions in the chat",
+      "Subscribe to get notified next time",
+      "Download the resource in the description",
+      "Stay until the end for Q&A"
+    ]
+  },
+  "on_screen_text_guidelines": {
+    "primary_role": "Guide viewers through the session and reinforce context.",
+    "best_practices": [
+      "Use pinned chat messages for topic and CTA",
+      "Display speaker names and segments when relevant",
+      "Avoid cluttered overlays"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "3–6 relevant hashtags in the description.",
+    "hashtag_strategy": "Use consistent series or topic hashtags across live sessions.",
+    "mention_strategy": "Mention guests, partners, or sponsors in the description."
+  },
+  "technical_constraints": {
+    "recommended_aspect_ratio": "16:9",
+    "recommended_resolution": "1080p minimum",
+    "recommended_duration": "30–90 minutes depending on topic and audience size.",
+    "connection_note": "Wired connection recommended. Test audio, lighting, and framing before going live.",
+    "replay_behavior": "Live recordings remain available as regular videos unless disabled."
+  },
+  "required_elements": [
+    "Clear benefit-driven title",
+    "Description with agenda or session flow",
+    "Primary CTA repeated during the live",
+    "Active interaction with chat",
+    "Post-live replay optimization"
+  ],
+  "output_fields": [
+    "Live_Title",
+    "Live_Description",
+    "Agenda_Bullets_Optional",
+    "Pinned_Message_Text",
+    "Hashtags",
+    "Tagged_Accounts_Optional"
+  ],
+  "disallowed_practices": [
+    "Starting without explaining the session purpose",
+    "Long idle time before content begins",
+    "Ignoring chat and questions",
+    "Vague live titles with no clear benefit"
+  ]
+}

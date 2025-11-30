@@ -1,0 +1,19 @@
+{
+  "id": "youtube",
+  "name": "YouTube",
+  "icon": "YouTubeIcon",
+  "platform_purpose": "Long-form video discovery, search-driven education, entertainment, and evergreen content consumption. YouTube functions as both a social platform and the world’s second-largest search engine.",
+  "core_voice": "Clear, structured, and value-first. Still human and approachable, but more deliberate and explanatory than short-form platforms.",
+  "tone_adaptation": "Educational, confident, and utility-driven. Tone prioritizes clarity, usefulness, and credibility over speed or trends. More structured than TikTok and more durable than Instagram or Facebook.",
+  "copy_guidelines_summary": "Titles carry the main discovery and click-through responsibility. The first two lines of the description must summarize the value proposition and outcome. Retention and watch time drive distribution more than likes or comments. CTAs must be intentional and placed strategically within the video and description.",
+  "global_guidelines": {
+    "max_chars_title": 100,
+    "recommended_title_length": "50–70 characters for optimal readability and CTR.",
+    "max_chars_description": 5000,
+    "recommended_description_length": "150–500 words for long-form content, shorter for Shorts.",
+    "max_hashtags": 15,
+    "recommended_hashtags": "3–8 relevant hashtags placed at the end of the description.",
+    "emoji_policy": "Minimal. Use only if they improve clarity or scannability. Avoid decorative use.",
+    "line_breaks_recommended": true
+  }
+}

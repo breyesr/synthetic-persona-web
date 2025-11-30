@@ -1,0 +1,62 @@
+{
+  "id": "facebook_reel",
+  "platform_id": "facebook",
+  "name": "Facebook Reel",
+  "includes_formats": [
+    "short_form_vertical_video"
+  ],
+  "content_type_group": "short_video",
+  "primary_goal_vibe": "Organic reach expansion, fast discovery, entertainment, and lightweight education inside the Facebook ecosystem.",
+  "tone_preference": "Dynamic, direct, and engaging. Lighter than feed posts, but still community-oriented.",
+  "copy_guidelines": {
+    "copy_best_practices": "The visual hook is the primary performance driver. The caption should briefly reinforce what the viewer is about to see and clearly state why it matters. Avoid long explanations.",
+    "caption_structure_hint": "Line 1: reinforce the visual hook. Line 2: micro-context or benefit. Final line: short CTA.",
+    "recommended_caption_length": "Very short to short.",
+    "cta_examples": [
+      "Watch until the end",
+      "Share this with someone who needs it",
+      "Tell us what you think",
+      "Follow for more",
+      "Save this tip"
+    ]
+  },
+  "on_screen_text_guidelines": {
+    "primary_role": "Carry the main message and hook for sound-off viewing.",
+    "best_practices": [
+      "Hook in the first 1–3 seconds",
+      "Large, readable typography",
+      "One idea per screen",
+      "Text synced with visual pacing"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "0–5 relevant hashtags, used only if they add topical clarity.",
+    "hashtag_strategy": "Hashtags play a secondary role. Engagement behavior drives distribution.",
+    "mention_strategy": "Tag creators, collaborators, or featured pages when applicable."
+  },
+  "technical_constraints": {
+    "recommended_aspect_ratio": "9:16",
+    "recommended_resolution": "1080x1920",
+    "recommended_duration": "5–45 seconds for optimal retention.",
+    "subtitles_required": true,
+    "safe_area_note": "Keep critical text and subjects away from top and bottom UI overlays."
+  },
+  "required_elements": [
+    "Strong visual hook in the first seconds",
+    "Clear value or promise on screen",
+    "Subtitles for sound-off viewing",
+    "At least one CTA"
+  ],
+  "output_fields": [
+    "Onscreen_Hook_Text",
+    "Caption",
+    "Hashtags_Optional",
+    "Tagged_Accounts"
+  ],
+  "disallowed_practices": [
+    "Slow intros with no immediate value",
+    "Overloaded on-screen text",
+    "Reusing feed copy without adaptation",
+    "Clickbait hooks that do not match the content"
+  ]
+}

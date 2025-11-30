@@ -1,0 +1,63 @@
+{
+  "id": "tiktok_live",
+  "platform_id": "tiktok",
+  "name": "TikTok LIVE",
+  "includes_formats": [
+    "solo_live",
+    "cohost_live",
+    "guest_live"
+  ],
+  "content_type_group": "live",
+  "primary_goal_vibe": "Real-time connection, Q&A, community building, and deeper engagement with followers.",
+  "tone_preference": "Unfiltered, responsive, and energetic. Still aligned with brand, but more conversational and improvisational.",
+  "copy_guidelines": {
+    "copy_best_practices": "The Live title and description must clearly state the topic and why viewers should join now. Keep the description short and benefit-focused. During the Live, repeat the main value and CTA often as new viewers join.",
+    "caption_structure_hint": "Title: topic and benefit. Description: 1–3 lines explaining what will happen and who it is for. Include a single main CTA (follow, visit profile, or ask questions).",
+    "recommended_caption_length": "Short.",
+    "cta_examples": [
+      "Follow so you do not miss the next LIVE",
+      "Ask your questions in the chat",
+      "Tap follow and stay until the end",
+      "Share this LIVE with someone who needs it",
+      "Check the link in bio for details"
+    ]
+  },
+  "on_screen_text_guidelines": {
+    "primary_role": "Support late joiners and keep the topic clear.",
+    "best_practices": [
+      "Use pinned comments to restate topic and CTA",
+      "Avoid cluttering the screen with overlays",
+      "If using text overlays, keep them short and clear"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "Use a few relevant hashtags in the Live announcement posts, not inside the Live itself.",
+    "hashtag_strategy": "Focus on topic consistency and series tags.",
+    "mention_strategy": "Tag co-hosts or guests in the announcement content."
+  },
+  "technical_constraints": {
+    "recommended_orientation": "Vertical 9:16",
+    "recommended_duration": "20–60 minutes depending on audience size and topic.",
+    "connection_note": "Test connection, lighting, and audio before going live.",
+    "safe_area_note": "Ensure faces and key visuals are not obscured by comments or UI."
+  },
+  "required_elements": [
+    "Clear Live title and topic",
+    "Single primary CTA repeated during the session",
+    "Active interaction with chat",
+    "Opening hook that explains what viewers gain by staying"
+  ],
+  "output_fields": [
+    "Live_Title",
+    "Live_Description",
+    "Pinned_Comment_Text",
+    "Hashtags_For_Announcement",
+    "Tagged_Accounts"
+  ],
+  "disallowed_practices": [
+    "Starting without explaining the topic",
+    "Long silent periods or idle time",
+    "Ignoring chat and questions",
+    "Misleading titles or topics"
+  ]
+}

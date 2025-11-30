@@ -1,0 +1,68 @@
+{
+  "id": "instagram_feed_post",
+  "platform_id": "instagram",
+  "name": "Instagram Feed Post",
+  "includes_formats": [
+    "single_photo",
+    "single_video",
+    "carousel"
+  ],
+  "content_type_group": "feed",
+  "primary_goal_vibe": "Visual storytelling, brand positioning, education, and engagement through static or swipeable content.",
+  "tone_preference": "Inspirational, aspirational, and conversational. Native, human, and visually driven.",
+  "copy_guidelines": {
+    "copy_best_practices": "Front-load the hook or key value in the first line due to caption truncation. Use short, scannable paragraphs. Let the visual do part of the storytelling and use the caption to add meaning, context, or structure.",
+    "caption_structure_hint": "Line 1: hook, promise, or tension. Lines 2–4: context, story, or explanation. Final line: clear and specific CTA.",
+    "recommended_caption_length": "Short to medium length. Enough to add depth without overshadowing the visual.",
+    "cta_examples": [
+      "Save this for later",
+      "Share this with someone who needs it",
+      "Comment your take",
+      "Tell us if this happened to you",
+      "Check the link in bio"
+    ]
+  },
+  "sub_format_emphasis_rules": {
+    "single_photo": {
+      "caption_role": "Narrative-driven. The caption carries the emotional or brand meaning behind the static visual.",
+      "cta_focus": "Comments, saves, and shares."
+    },
+    "single_video": {
+      "caption_role": "Expectation-setting. The caption frames what the viewer is about to watch and why it matters.",
+      "cta_focus": "Watch behavior and comments."
+    },
+    "carousel": {
+      "caption_role": "Behavior-engineering. The caption must drive the swipe and frame the structure of the content.",
+      "cta_focus": "Swipes, saves, and shares."
+    }
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "3–8 highly relevant hashtags placed at the end of the caption or in the first comment.",
+    "hashtag_strategy": "Mix niche, topic-based, and brand hashtags. Avoid generic or high-noise tags.",
+    "mention_strategy": "Tag people, brands, or collaborators only when they are directly relevant and visible in the content."
+  },
+  "technical_constraints": {
+    "recommended_aspect_ratios": [
+      "1:1",
+      "4:5"
+    ],
+    "min_resolution": "1080x1080 for square images, 1080x1350 for vertical feed images.",
+    "safe_area_note": "Avoid placing critical subjects or text near the extreme edges to prevent cropping in different feed views.",
+    "max_file_size_behavior": "Heavier videos may compress and lose quality."
+  },
+  "required_elements": [
+    "Hook in the first line of the caption",
+    "At least one clear CTA",
+    "Visual that clearly communicates the main idea"
+  ],
+  "output_fields": [
+    "Caption",
+    "Hashtags",
+    "Tagged_Accounts"
+  ],
+  "disallowed_practices": [
+    "Keyword-stuffed hashtags",
+    "Overly long, dense caption blocks",
+    "Misleading hooks that do not match the visual"
+  ]
+}

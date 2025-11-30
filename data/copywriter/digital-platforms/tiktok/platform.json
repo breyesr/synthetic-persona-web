@@ -1,0 +1,17 @@
+{
+  "id": "tiktok",
+  "name": "TikTok",
+  "icon": "TikTokIcon",
+  "platform_purpose": "Short-form, algorithm-driven video platform focused on rapid discovery, entertainment, and fast, snackable education.",
+  "core_voice": "Same brand identity as other channels, but delivered in a simpler, more direct, and highly human way. Less corporate, more conversational and real.",
+  "tone_adaptation": "Direct, fast, and attention-first. Tone is informal, energetic, and hook-driven, with an emphasis on clarity, authenticity, and quick value rather than polished brand speak.",
+  "copy_guidelines_summary": "The first 1–3 seconds of the video (visual and on-screen text) are more important than the caption. Retention and watch time drive performance. Captions are short and support context, keywords, and a clear CTA. Avoid long explanations in the caption; show, do not tell.",
+  "global_guidelines": {
+    "max_chars_caption": 2200,
+    "recommended_caption_length": "1–3 short lines focused on context, hook reinforcement, and CTA.",
+    "max_hashtags": 30,
+    "recommended_hashtags": "3–6 highly relevant hashtags mixing topic, niche, and audience intent.",
+    "emoji_policy": "Optional and moderate. Use only if they support clarity and tone.",
+    "line_breaks_recommended": false
+  }
+}

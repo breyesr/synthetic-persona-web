@@ -9,6 +9,7 @@ import mammoth from 'mammoth';
 
 // --- CONFIGURATION ---
 const GLOBAL_KNOWLEDGE_DIR = path.join(process.cwd(), 'data', 'global-knowledge');
+const COPYWRITER_DIR = path.join(process.cwd(), 'data', 'copywriter');
 const PERSONAS_DIR = path.join(process.cwd(), 'data', 'personas');
 const EMBEDDING_MODEL = 'text-embedding-3-small';
 const CHUNK_SIZE = 500;
@@ -152,6 +153,14 @@ async function embedAllData() {
         const globalFiles = await findAllFiles(GLOBAL_KNOWLEDGE_DIR);
         console.log(`Found ${globalFiles.length} global knowledge files.`);
         for (const filePath of globalFiles) {
+            await embedFile(filePath, ['*']);
+        }
+
+        // 1b. Process Copywriter Knowledge (shared/global)
+        console.log('\n--- Processing Copywriter Knowledge ---');
+        const copywriterFiles = await findAllFiles(COPYWRITER_DIR);
+        console.log(`Found ${copywriterFiles.length} copywriter files.`);
+        for (const filePath of copywriterFiles) {
             await embedFile(filePath, ['*']);
         }
 

@@ -1,0 +1,82 @@
+{
+  "id": "facebook_feed_post",
+  "platform_id": "facebook",
+  "name": "Facebook Feed Post",
+  "includes_formats": [
+    "text_post",
+    "single_image",
+    "multi_image",
+    "album",
+    "native_video",
+    "link_post"
+  ],
+  "content_type_group": "feed",
+  "primary_goal_vibe": "Community interaction, storytelling, conversation, and relationship-building through flexible post formats.",
+  "tone_preference": "Warm, narrative, and community-first. Clear, human, and dialog-oriented.",
+  "copy_guidelines": {
+    "copy_best_practices": "The first line must trigger curiosity or relevance before the 'see more' cut. Use short paragraphs, natural language, and conversational framing. Prioritize questions, stories, or relatable moments over announcements.",
+    "caption_structure_hint": "Line 1: hook or tension. Lines 2–4: story, context, or explanation. Final line: direct question or participation-driven CTA.",
+    "recommended_caption_length": "Short to medium. Enough to tell a story without becoming dense.",
+    "cta_examples": [
+      "What do you think about this",
+      "Tell us your experience in the comments",
+      "Tag someone who should see this",
+      "Share this with your community",
+      "Join the conversation below"
+    ]
+  },
+  "sub_format_emphasis_rules": {
+    "text_post": {
+      "caption_role": "Conversation-first. The copy itself is the content.",
+      "cta_focus": "Replies and discussion."
+    },
+    "single_image": {
+      "caption_role": "Narrative framing. The caption explains the story or moment behind the visual.",
+      "cta_focus": "Comments, reactions, and shares."
+    },
+    "multi_image_album": {
+      "caption_role": "Story overview. The caption sets up what the viewer is about to scroll through and why it matters.",
+      "cta_focus": "Scroll-through, tagging, and sharing."
+    },
+    "native_video": {
+      "caption_role": "Expectation-setting. The caption must clearly explain why the video is worth watching.",
+      "cta_focus": "Watch behavior and comments."
+    },
+    "link_post": {
+      "caption_role": "Value justification. The caption must clearly state the benefit of clicking.",
+      "cta_focus": "Link clicks and discussion."
+    }
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "Optional and minimal. Use 0–3 context-specific hashtags only when they add clarity.",
+    "hashtag_strategy": "Do not rely on hashtags for reach. Discovery is driven by engagement signals.",
+    "mention_strategy": "Tag people, partners, or locations only when relevant to the content to stimulate replies and secondary visibility."
+  },
+  "technical_constraints": {
+    "recommended_aspect_ratios": [
+      "1:1",
+      "4:5",
+      "16:9"
+    ],
+    "min_resolution_images": "1080x1080 for square images.",
+    "video_behavior_note": "Subtitles are strongly recommended. Many users watch with sound off.",
+    "safe_area_note": "Avoid placing key subjects or text near the edges to prevent cropping in feed previews and shared views."
+  },
+  "required_elements": [
+    "Hook before the 'see more' cut",
+    "At least one participation-driven CTA",
+    "Clear narrative or conversational angle"
+  ],
+  "output_fields": [
+    "Caption",
+    "Hashtags_Optional",
+    "Tagged_Accounts",
+    "Link_Optional"
+  ],
+  "disallowed_practices": [
+    "Overly promotional or ad-like language",
+    "Posting links with no context",
+    "Long, dense text blocks with no spacing",
+    "Using hashtags as a primary discovery tactic"
+  ]
+}

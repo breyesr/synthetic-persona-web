@@ -1,0 +1,75 @@
+{
+  "id": "linkedin_feed_post",
+  "platform_id": "linkedin",
+  "name": "LinkedIn Feed Post",
+  "includes_formats": [
+    "text_post",
+    "single_image",
+    "multi_image",
+    "link_post"
+  ],
+  "content_type_group": "feed",
+  "primary_goal_vibe": "Thought leadership, industry credibility, conversation, and professional visibility.",
+  "tone_preference": "Professional, analytical, confident, and value-driven. Human but not casual.",
+  "copy_guidelines": {
+    "copy_best_practices": "The first one to two lines must communicate the core insight or tension to earn the 'see more' click. Use short paragraphs. Anchor ideas in real experience, data, or explicit learning. Avoid generic motivational language.",
+    "caption_structure_hint": "Line 1–2: core insight, tension, or question. Body: explanation, context, or mini-case. Final line: direct business-oriented CTA.",
+    "recommended_caption_length": "50–200 words for optimal engagement.",
+    "cta_examples": [
+      "What is your experience with this",
+      "How are you handling this in your team",
+      "Comment with your take",
+      "Share this with your network",
+      "Follow for more insights"
+    ]
+  },
+  "sub_format_emphasis_rules": {
+    "text_post": {
+      "caption_role": "Primary content carrier. Text is the full message.",
+      "cta_focus": "Comments and discussion."
+    },
+    "single_image": {
+      "caption_role": "Contextual framing. The caption must explain the relevance of the visual to a business outcome.",
+      "cta_focus": "Comments and shares."
+    },
+    "multi_image": {
+      "caption_role": "Structured storytelling. The caption introduces the narrative or sequence of insight.",
+      "cta_focus": "Scroll-through, saves, and discussion."
+    },
+    "link_post": {
+      "caption_role": "Value justification. The caption must explain why the external content is worth the reader’s time.",
+      "cta_focus": "Link clicks and comments."
+    }
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "3–5 targeted hashtags at the end of the post.",
+    "hashtag_strategy": "Focus on industry, role, and topic specificity. Avoid broad general tags.",
+    "mention_strategy": "Tag people or companies only when they are directly involved or referenced."
+  },
+  "technical_constraints": {
+    "recommended_aspect_ratios": [
+      "1:1",
+      "4:5"
+    ],
+    "image_min_resolution": "1080x1080",
+    "link_preview_behavior": "The first link generates the preview. Edit text to avoid redundancy.",
+    "safe_area_note": "Avoid placing key text too close to edges in images."
+  },
+  "required_elements": [
+    "Clear insight or question in the first two lines",
+    "Business relevance or takeaway",
+    "At least one direct CTA"
+  ],
+  "output_fields": [
+    "Caption",
+    "Hashtags",
+    "Tagged_Accounts",
+    "Link_Optional"
+  ],
+  "disallowed_practices": [
+    "Vague inspirational quotes with no business context",
+    "Hashtag-heavy blocks inside the main text",
+    "Tagging irrelevant people for reach",
+    "Long unbroken text walls"
+  ]
+}

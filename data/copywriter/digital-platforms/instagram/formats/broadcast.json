@@ -1,0 +1,63 @@
+{
+  "id": "instagram_broadcast",
+  "platform_id": "instagram",
+  "name": "Instagram Broadcast Channel",
+  "includes_formats": [
+    "text_update",
+    "image_update",
+    "voice_note",
+    "video_update",
+    "poll_update"
+  ],
+  "content_type_group": "one_to_many_channel",
+  "primary_goal_vibe": "Direct distribution, community updates, exclusive drops, and high-signal communication with followers who opted in.",
+  "tone_preference": "Direct, personal, and concise. Feels like a founder or brand insider speaking, not a marketing broadcast.",
+  "copy_guidelines": {
+    "copy_best_practices": "Keep messages short and high-value. Each message should communicate one update, one announcement, or one insight. Avoid long-form storytelling. Prioritize clarity and immediacy.",
+    "message_structure_hint": "Line 1: What this is about. Line 2: Why it matters now. Optional final line: single clear CTA.",
+    "recommended_message_length": "Very short to short. Designed for quick scanning inside DMs.",
+    "cta_examples": [
+      "Reply with your vote",
+      "Tap to see the update",
+      "Save this date",
+      "Watch the full post",
+      "Turn on notifications"
+    ]
+  },
+  "interaction_guidelines": {
+    "primary_role": "Drive passive consumption first, lightweight interaction second (polls, reactions).",
+    "best_practices": [
+      "Use polls to validate interest before launching content",
+      "Use voice notes sparingly for high-trust moments",
+      "Link out to feed posts, Reels, or Lives instead of duplicating full content"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "Not applicable. Hashtags do not play a discovery role in Broadcast Channels.",
+    "hashtag_strategy": "Do not use hashtags.",
+    "mention_strategy": "Mentions can be used sparingly to highlight collaborators or featured creators."
+  },
+  "technical_constraints": {
+    "delivery_context": "Messages appear inside follower inboxes who opted into the channel.",
+    "frequency_recommendation": "Low to moderate frequency. 2–5 updates per week is a sustainable range.",
+    "content_persistence": "Messages remain inside the channel history and can be revisited.",
+    "media_support": "Supports text, images, short videos, voice notes, and polls."
+  },
+  "required_elements": [
+    "Clear update or announcement",
+    "Single, focused CTA when applicable",
+    "High relevance to the follower base"
+  ],
+  "output_fields": [
+    "Message_Text",
+    "Attached_Media_Optional",
+    "Poll_Options_Optional",
+    "Tagged_Accounts_Optional"
+  ],
+  "disallowed_practices": [
+    "Posting full-length captions from feed posts without adaptation",
+    "Using the channel as a high-frequency promo dump",
+    "Unclear announcements with no context",
+    "Multiple competing CTAs in a single update"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "tiktok_photo_mode",
+  "platform_id": "tiktok",
+  "name": "TikTok Photo Mode",
+  "includes_formats": [
+    "photo_carousel_with_music"
+  ],
+  "content_type_group": "carousel",
+  "primary_goal_vibe": "Sequential visual storytelling and breakdowns using images instead of continuous video.",
+  "tone_preference": "Narrative and clear, still fast and concise. Each frame should feel like a chapter.",
+  "copy_guidelines": {
+    "copy_best_practices": "Use the caption to explain the story or structure behind the images. Each photo should be understandable on its own, but stronger as a sequence. Keep the caption focused on context, key takeaway, and CTA.",
+    "caption_structure_hint": "Line 1: explain what the carousel is (guide, breakdown, before/after). Body: 1–3 short lines of context or key points. Final line: CTA (save, share, or follow).",
+    "recommended_caption_length": "Short to medium, but skimmable.",
+    "cta_examples": [
+      "Swipe through all the steps",
+      "Save this for your next project",
+      "Share this with your team",
+      "Comment which slide helped you most",
+      "Follow for part two"
+    ]
+  },
+  "on_screen_text_guidelines": {
+    "primary_role": "Clarify each frame’s idea and help viewers follow the sequence.",
+    "best_practices": [
+      "One main message per image",
+      "Big, legible text that fits mobile screens",
+      "Visual hierarchy: headline > detail",
+      "Number slides if sequence matters"
+    ]
+  },
+  "hashtags_mentions": {
+    "recommended_hashtags": "3–6 relevant hashtags.",
+    "hashtag_strategy": "Use tags for topic, format (for example tips, tutorial), and audience.",
+    "mention_strategy": "Tag collaborators or featured brands if they appear in the images."
+  },
+  "technical_constraints": {
+    "recommended_aspect_ratio": "9:16 preferred; 4:5 possible but less native.",
+    "recommended_resolution": "1080x1920 or equivalent high-resolution vertical images.",
+    "frame_count_recommendation": "3–10 images for best completion.",
+    "safe_area_note": "Keep text away from extreme edges to avoid cropping."
+  },
+  "required_elements": [
+    "Clear theme or topic for the sequence",
+    "Readable text on each image if used",
+    "Logical progression from first to last frame",
+    "CTA encouraging saves or shares"
+  ],
+  "output_fields": [
+    "Caption",
+    "Frame_Headlines_Optional",
+    "Hashtags",
+    "Tagged_Accounts"
+  ],
+  "disallowed_practices": [
+    "Random, unconnected images with no clear story",
+    "Dense text blocks that are hard to read",
+    "No explanation in the caption for complex sequences",
+    "Too many frames with minimal variation"
+  ]
+}

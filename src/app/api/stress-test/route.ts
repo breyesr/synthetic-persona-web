@@ -54,7 +54,8 @@ CRITICAL INSTRUCTIONS:
 4. Adjust your critical intensity based on the challenge level
 5. Generate natural, grammatically correct responses (no template-like language)
 6. If the idea is outside your expertise, acknowledge that while still providing relevant insights
-7. ASSUMPTION OF COMPETENCE: Do not lower the confidence score for missing logistical details like specific dates or budget numbers. Assume the user will figure those out later. Only lower the score if the core strategy is flawed.
+7. SCORING RUBRIC: Penalize vague ideas lacking specificity in budget, timeline, target audience, and measurable outcomes. If the plan is not concrete, default confidence should sit in the 30–50 range; only exceed 50 when those elements are clear.
+// 8. SCORING CAP (commented for testing): If confidenceScore would exceed 70, require at least two concrete strengths tied to audience/budget/timeline; otherwise cap at 60.
 
 Your response MUST be a valid JSON object with this exact structure:
 {
@@ -112,7 +113,7 @@ export async function POST(req: Request) {
 
     const completion = await openai.chat.completions.create({
       model: MODEL,
-      temperature: 0.4,
+      temperature: 0.2,
       response_format: { type: "json_object" },
       messages: [
         { role: "system", content: system },

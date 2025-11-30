@@ -53,8 +53,6 @@ export default function ConstructionPersonasPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [result, setResult] = useState<StressResult | null>(null);
-    const [analysis, setAnalysis] = useState<any | null>(null); // For the glass box
-    const [isAnalysisVisible, setIsAnalysisVisible] = useState(false);
 
 
     useEffect(() => {
@@ -138,8 +136,6 @@ export default function ConstructionPersonasPage() {
         setLoading(true);
         setResult(null);
         setError(null);
-        setAnalysis(null);
-        setIsAnalysisVisible(false);
 
         try {
             const res = await fetch("/api/stress-test", {
@@ -156,7 +152,6 @@ export default function ConstructionPersonasPage() {
             if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             const json = await res.json();
             setResult(json as StressResult);
-            setAnalysis(json);
         } catch (err) {
             const message = err instanceof Error ? err.message : "Could not get a response.";
             setError(message);
@@ -483,26 +478,7 @@ export default function ConstructionPersonasPage() {
                     </div>
                 )}
 
-                {analysis && (
-                    <div className="mt-8">
-                        <button
-                            onClick={() => setIsAnalysisVisible(!isAnalysisVisible)}
-                            className="w-full flex items-center justify-between p-4 bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-lg text-sm font-semibold hover:bg-[rgba(255,255,255,0.1)] transition-colors"
-                        >
-                            <span className="flex items-center gap-2">
-                                🔍 View Analysis Logic
-                            </span>
-                            <span>{isAnalysisVisible ? 'Hide' : 'Show'}</span>
-                        </button>
-                        {isAnalysisVisible && (
-                            <div className="mt-2 p-4 bg-[#1c1c1c] border border-[rgba(255,255,255,0.1)] rounded-lg">
-                                <pre className="text-xs text-[#a1a1aa] whitespace-pre-wrap break-all">
-                                    <code>{JSON.stringify(analysis, null, 2)}</code>
-                                </pre>
-                            </div>
-                        )}
-                    </div>
-                )}
+
             </div>
         </div>
     );

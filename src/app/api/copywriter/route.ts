@@ -5,6 +5,8 @@ import OpenAI from "openai";
 import fs from "fs/promises";
 import path from "path";
 import { getPersona } from "@/lib/personaProvider";
+import { randomUUID } from "crypto";
+import { db } from "@/lib/clients";
 
 export const runtime = "nodejs";
 
@@ -78,6 +80,34 @@ const OutputSchema = z.object({
     })
   ),
 });
+
+async function logUsageToDb(payload: {
+  event: string;
+  persona: string;
+  platforms: string[];
+  formats: string[];
+  goal: string;
+  message: string;
+  context?: string;
+}) {
+  try {
+    const id = randomUUID();
+    await db.query(
+      `INSERT INTO usage_logs (id, event, persona_name, confidence_score, input_idea, goal, verdict, payload)
+       VALUES ($1, $2, $3, NULL, $4, $5, NULL, $6::jsonb)`,
+      [
+        id,
+        payload.event,
+        payload.persona,
+        payload.message,
+        payload.goal,
+        JSON.stringify(payload),
+      ]
+    );
+  } catch (err) {
+    console.error("[copywriter] log insert error", err);
+  }
+}
 
 async function readJson<T>(filePath: string): Promise<T | null> {
   try {
@@ -406,6 +436,17 @@ export async function POST(req: Request) {
         2
       )
     );
+
+    // Persist usage log (best-effort, non-blocking)
+    logUsageToDb({
+      event: "copywriter_generated",
+      persona: persona.name,
+      platforms: platformIds,
+      formats,
+      goal,
+      message,
+      context,
+    }).catch(() => {});
 
     return NextResponse.json({
       persona: persona.name,

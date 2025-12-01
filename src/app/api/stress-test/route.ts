@@ -2,9 +2,11 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import OpenAI from "openai";
+import { randomUUID } from "crypto";
 import { getPersona, Persona } from "@/lib/personaProvider";
 import { getChallengeLevel, ChallengeLevel } from "@/lib/challengeLevels";
 import { buildStressUserMessage, describeFocus } from "./prompt";
+import { db } from "@/lib/clients";
 
 export const runtime = "nodejs";
 
@@ -71,6 +73,35 @@ CRITICAL: Return ONLY the JSON object. No markdown formatting, no code blocks.`;
 }
 
 const MODEL = process.env.OPENAI_MODEL || "gpt-4o-mini";
+
+async function logUsageToDb(payload: {
+  event: string;
+  persona: string;
+  confidence: number;
+  idea: string;
+  goal: string;
+  verdict: string;
+}) {
+  try {
+    const id = randomUUID();
+    await db.query(
+      `INSERT INTO usage_logs (id, event, persona_name, confidence_score, input_idea, goal, verdict, payload)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8::jsonb)`,
+      [
+        id,
+        payload.event,
+        payload.persona,
+        payload.confidence,
+        payload.idea,
+        payload.goal,
+        payload.verdict,
+        JSON.stringify(payload),
+      ]
+    );
+  } catch (err) {
+    console.error("[stress-test] log insert error", err);
+  }
+}
 
 export async function POST(req: Request) {
   const apiKey = process.env.OPENAI_API_KEY;
@@ -166,6 +197,16 @@ export async function POST(req: Request) {
         2
       )
     );
+
+    // Persist usage log (best-effort, non-blocking)
+    logUsageToDb({
+      event: "stress_test_completed",
+      persona: persona.name,
+      confidence: confidenceScore,
+      idea: body.idea,
+      goal: body.goal,
+      verdict: parsed.data.verdict,
+    }).catch(() => {});
 
     return NextResponse.json(responsePayload);
   } catch (err) {
